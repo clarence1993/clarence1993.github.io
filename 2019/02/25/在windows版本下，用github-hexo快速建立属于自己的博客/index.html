@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Hexo</title>
+  <title>在windows版本下，用github+hexo快速建立属于自己的博客 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="第一章 搭配环境1.1 安装Git1.2 安装node.js  下载地址：http://nodejs.org/download/     由于我的笔记本是windows，所以选择的版本是node-v0.10.33-x64.msi 直接一直按下一步就可以了  第二章 配置GitHub1.1 登陆gitHub.com 注册登陆你的用户1.2 并在github处，建立自己的仓库，repository，（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在windows版本下，用github+hexo快速建立属于自己的博客">
+<meta property="og:url" content="http://yoursite.com/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第一章 搭配环境1.1 安装Git1.2 安装node.js  下载地址：http://nodejs.org/download/     由于我的笔记本是windows，所以选择的版本是node-v0.10.33-x64.msi 直接一直按下一步就可以了  第二章 配置GitHub1.1 登陆gitHub.com 注册登陆你的用户1.2 并在github处，建立自己的仓库，repository，（">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-25T03:17:55.378Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="在windows版本下，用github+hexo快速建立属于自己的博客">
+<meta name="twitter:description" content="第一章 搭配环境1.1 安装Git1.2 安装node.js  下载地址：http://nodejs.org/download/     由于我的笔记本是windows，所以选择的版本是node-v0.10.33-x64.msi 直接一直按下一步就可以了  第二章 配置GitHub1.1 登陆gitHub.com 注册登陆你的用户1.2 并在github处，建立自己的仓库，repository，（">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,76 +154,174 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-在windows版本下，用github-hexo快速建立属于自己的博客" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      在windows版本下，用github+hexo快速建立属于自己的博客
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
+
+        
+        <a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
   	<time datetime="2019-02-25T02:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">在windows版本下，用github+hexo快速建立属于自己的博客</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一章-搭配环境"><a href="#第一章-搭配环境" class="headerlink" title="第一章 搭配环境"></a>第一章 搭配环境</h2><p>1.1 安装Git<br>1.2 安装node.js  下载地址：<a href="http://nodejs.org/download/" target="_blank" rel="noopener">http://nodejs.org/download/</a><br>     由于我的笔记本是windows，所以选择的版本是node-v0.10.33-x64.msi</p>
+<pre><code>直接一直按下一步就可以了
+</code></pre><hr>
+<h2 id="第二章-配置GitHub"><a href="#第二章-配置GitHub" class="headerlink" title="第二章 配置GitHub"></a>第二章 配置GitHub</h2><p>1.1 登陆gitHub.com 注册登陆你的用户<br>1.2 并在github处，建立自己的仓库，repository，（位置在右上角）<br>     注意：：：建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io<br>1.3  配置SSH-Key<br>     首先必须确保有用户名及邮箱 git config –global user.name ‘xxxxx’<br>                                git config –global user.email ‘<a href="mailto:xxx@xx.xxx" target="_blank" rel="noopener">xxx@xx.xxx</a>’<br>     生成密钥：ssh-keygen -t rsa -C ‘上面的邮箱’<br>     然后连续按三个回车，此时我们会看到在三个回车的里面我们生成了<br>     .ssh目录下得到了两个文件：id_rsa（私有秘钥）和id_rsa.pub（公有密钥）<br>     登陆GitHub，进入你的Settings<br>     会看到左边这些目录，点击SSH and GPG keys</p>
+<pre><code>创建New SSH key，title可写可不写，key为私有key带邮箱的
+</code></pre><hr>
+<h2 id="第三章-安装Hexo"><a href="#第三章-安装Hexo" class="headerlink" title="第三章 安装Hexo"></a>第三章 安装Hexo</h2><p>  1.1 $ npm install -g hexo<br>  1.2 在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
+<p>  $ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
+<p>   npm install</p>
+<p>   1.3 可以云hexo server來測試一下當前是否創建成功<br>   1.4 創建新聞中 hexo n ‘文章名字’<br>   1.5 執行hexo +g可以生成動態網頁<br>   1.6部署到github<br>     1.6.1 首先要到hexo文件夾中找到配置_config.yml文件<br>     修改為：</p>
+<pre><code># Deployment
+</code></pre><h2 id="Docs-http-hexo-io-docs-deployment-html"><a href="#Docs-http-hexo-io-docs-deployment-html" class="headerlink" title="Docs: http://hexo.io/docs/deployment.html"></a>Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: github<br>  repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:github用戶名/github用戶名.github.io.git<br>  branch: master</p>
+<p>  保存退出 ：wq<br>  1.7 發佈<br>      hexo d<br>   1.8總結</p>
+<h2 id="每次部署可以按照-hexo-clean-hexo-g-hexo-d"><a href="#每次部署可以按照-hexo-clean-hexo-g-hexo-d" class="headerlink" title="   每次部署可以按照 hexo clean hexo g hexo d"></a>   每次部署可以按照 hexo clean hexo g hexo d</h2><h2 id="第四章-安裝主題"><a href="#第四章-安裝主題" class="headerlink" title="第四章  安裝主題"></a>第四章  安裝主題</h2><p>   1.1将Git Shell 切到/D/Hexo目录下，然后执行下面的命令，将pacman下载到 themes/pacman 目录下。<br>   $ git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="noopener">https://github.com/A-limon/pacman.git</a> themes/pacman<br>   1.2 修改你的博客根目录/D/Hexo下的config.yml配置文件中的theme属性，将其设置为pacman。<br>   1.3 評論框 静态博客要使用第三方评论系统，pacman配置了多说评论系统（/themes/pacman/_config.yml），默认关闭，只要将其打开即可:false-&gt;true。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说，即可发表平评论。</p>
+<h4 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h4><p>duoshuo:<br>  enable: true  ## duoshuo.com<br>  short_name:    ## duoshuo short name.</p>
+<p>  1.4 404頁面<br>    Hexo/source目录下。<br>    <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script></p>
+<pre><code>1.5 安裝插件
+4.4.1 sitemap插件
+</code></pre><hr>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-24T19:22:44.330Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/25/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -242,8 +344,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
