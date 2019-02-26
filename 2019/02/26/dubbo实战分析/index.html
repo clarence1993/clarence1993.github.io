@@ -8,13 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="title: dubbo实战分析date: 2019-02-25 20:48:55tags: #iframe">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/dubbo实战分析/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title: dubbo实战分析date: 2019-02-25 20:48:55tags: #iframe">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/dubbo实战分析/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/dubbo实战分析/1.jpg">
+<meta property="og:updated_time" content="2019-02-25T16:31:01.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="title: dubbo实战分析date: 2019-02-25 20:48:55tags: #iframe">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/26/dubbo实战分析/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -151,83 +158,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-sso单点登陆技术详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/sso单点登陆技术详解/">sso单点登陆技术详解</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/26/sso单点登陆技术详解/" class="archive-article-date">
-  	<time datetime="2019-02-26T02:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一节</p>
-<p>cookie</p>
-<p>1.客户端存值技术 字符串<br> 1.1 存储位置 客户端浏览器<br> 1.2作业：存值<br> 1.3：只能存字符串</p>
-<p>2.cookie运行原理：<br> 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）<br>   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取到cookie的内容。<br> 2.2服务器内可以产生cookie内容，需要放入到响应对象中 相应给客户端浏览器，要求跳转类型为重定向，客户端浏览器接收相应内容后会把cookie内容存储到指定文件夹内容。<br> 怎么产生cookie和调用cookie<br>request.setMaxAge（）cookie存在最大时长，单位：秒<br>request.setPath（）控制哪些路径能访问cookies<br>request.setDomain（localhost）控制哪些域名</p>
-<p>3.产生cookie<br>4.产生获取cookies</p>
-<p>HttpSessionn 运行原理<br>1.当客户端浏览器访问服务器是，服务器接收请求后会判断请求中是否存在cookie包含jsessionid<br>2.如果包含jessionid把对应值取出，作为key从全局MapString,session&gt;对象往出取session对象<br>  2.1-1如果没有对应的key，执行新建session步骤 会执行新建session<br>  2.1-2如果有对应的可以，把session对象取出。根据自己的业务添加操作。<br>3.tomcat会新建一个session对象，同时会产生一个uuid，作为map的可以，新建的session对象作为value，还会把uuid放入到cookie作为value，对应的key是jsesssionid</p>
-<p>使用redis+cookie模拟session步骤<br>1.流程<br> 1.1 第一次请求时，cookie中没有token<br> 1.2 产生一个uuid，同视把token字符串作为cookie的key，uuid作为cookie的Value<br> 1.3如果希望类似往session存储内容，直接把uuid当作redis的key，把需要存储的内容作为value<br>1.4 把cookie对象相应给客户浏览器</p>
-<hr>
-<p>##第二章<br>登陆退出需求业务分析<br>1.通过网页首页，点击登陆按钮进行登陆<br>2.加入购车车，结算之前，跳转到登陆页面，里面可以通过扫一扫和输入登陆用户信息或者密码<br>3.通过referer，当用户输入登陆成功之后，跳转回之前的页面。<br>4.7天内登陆，免登陆信息<br>5.登陆完成后，在登陆页面的信息中改变为当前用户信息。<br>6.退出用户功能。</p>
-<hr>
-<p>##第三章<br>实现登陆功能<br>运行环境：eclipse linux zookeeper redis dubbo spring springMVC Mybatic<br>dubbo 提供的方法：<br>需求1：在demo passport中，创建在dubbo写好的登陆方法，调用此方法，导入用户输入的信息。若有，返回用户信息类型。若无，返回null。<br>判断用户是否为null，成功则按照前端的ajax，返回相应数据，这里返回的是“200”<br>否则返回，输入一段data，用户名或密码有误，请重新登陆。<br>控制器：返回类型：结果类（如下）。<br>根据前端的信息，封装一个结果类，创建这个结果类。待会会把相关参数注入再这个结果类，返回给浏览器。<br>需求3：重点：获取请求头，放入url中。在显示登陆页面控制器方法中，加入@RequestHeader（“Referer”） String url，Model model。补充知识：model，springframework.ui。存放url。发送给浏览器让浏览器接收到url，当登陆成功后，返回原来的页面。<br>需求5：接收cookie，当用户登陆成功后，把用户信息放入到redis中，产生一个cookie<br>       调用cookieUtil工具包，setcookie。<br>jedisdao，参考redis章节。value：存放用户信息，注意要把用户信息转换为json格式，所以要加入JsonUtil.ObjectToJson（用户信息），key：uuid<br>需求4：设置cookie有效时间，在缓存redis中添加expire（key，time）（过期时间方法），单位秒。<br>需求6：退出用户，调用工具类cookieutil进行删除，参数根据前端文档的参数调整。</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/sso单点登陆技术详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dubbo实战分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-dubbo实战分析" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
@@ -238,6 +169,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -245,16 +197,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/dubbo实战分析/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/26/dubbo实战分析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/02/26/sso单点登陆技术详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          sso单点登陆技术详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/25/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -274,160 +294,14 @@
 
 
 
-
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
   
 
-        
-        <a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-25T14:47:55.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-在windows版本下，用github-hexo快速建立属于自己的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">在windows版本下，用github+hexo快速建立属于自己的博客</a>
-    </h1>
   
 
-        
-        <a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
-  	<time datetime="2019-02-25T02:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第一章-搭配环境"><a href="#第一章-搭配环境" class="headerlink" title="第一章 搭配环境"></a>第一章 搭配环境</h2><p>1.1 安装Git<br>1.2 安装node.js  下载地址：<a href="http://nodejs.org/download/" target="_blank" rel="noopener">http://nodejs.org/download/</a><br>     由于我的笔记本是windows，所以选择的版本是node-v0.10.33-x64.msi</p>
-<pre><code>直接一直按下一步就可以了
-</code></pre><hr>
-<h2 id="第二章-配置GitHub"><a href="#第二章-配置GitHub" class="headerlink" title="第二章 配置GitHub"></a>第二章 配置GitHub</h2><p>1.1 登陆gitHub.com 注册登陆你的用户<br>1.2 并在github处，建立自己的仓库，repository，（位置在右上角）<br>     注意：：：建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io<br>1.3  配置SSH-Key<br>     首先必须确保有用户名及邮箱 git config –global user.name ‘xxxxx’<br>                                git config –global user.email ‘<a href="mailto:xxx@xx.xxx" target="_blank" rel="noopener">xxx@xx.xxx</a>’<br>     生成密钥：ssh-keygen -t rsa -C ‘上面的邮箱’<br>     然后连续按三个回车，此时我们会看到在三个回车的里面我们生成了<br>     .ssh目录下得到了两个文件：id_rsa（私有秘钥）和id_rsa.pub（公有密钥）<br>     登陆GitHub，进入你的Settings<br>     会看到左边这些目录，点击SSH and GPG keys</p>
-<pre><code>创建New SSH key，title可写可不写，key为私有key带邮箱的
-</code></pre><hr>
-<h2 id="第三章-安装Hexo"><a href="#第三章-安装Hexo" class="headerlink" title="第三章 安装Hexo"></a>第三章 安装Hexo</h2><p>  1.1 $ npm install -g hexo<br>  1.2 在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
-<p>  $ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
-<p>   npm install</p>
-<p>   1.3 可以云hexo server來測試一下當前是否創建成功<br>   1.4 創建新聞中 hexo n ‘文章名字’<br>   1.5 執行hexo +g可以生成動態網頁<br>   1.6部署到github<br>     1.6.1 首先要到hexo文件夾中找到配置_config.yml文件<br>     修改為：</p>
-<pre><code># Deployment
-</code></pre><h2 id="Docs-http-hexo-io-docs-deployment-html"><a href="#Docs-http-hexo-io-docs-deployment-html" class="headerlink" title="Docs: http://hexo.io/docs/deployment.html"></a>Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: github<br>  repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:github用戶名/github用戶名.github.io.git<br>  branch: master</p>
-<p>  保存退出 ：wq<br>  1.7 發佈<br>      hexo d<br>   1.8總結</p>
-<h2 id="每次部署可以按照-hexo-clean-hexo-g-hexo-d"><a href="#每次部署可以按照-hexo-clean-hexo-g-hexo-d" class="headerlink" title="   每次部署可以按照 hexo clean hexo g hexo d"></a>   每次部署可以按照 hexo clean hexo g hexo d</h2><h2 id="第四章-安裝主題"><a href="#第四章-安裝主題" class="headerlink" title="第四章  安裝主題"></a>第四章  安裝主題</h2><p>   1.1将Git Shell 切到/D/Hexo目录下，然后执行下面的命令，将pacman下载到 themes/pacman 目录下。<br>   $ git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="noopener">https://github.com/A-limon/pacman.git</a> themes/pacman<br>   1.2 修改你的博客根目录/D/Hexo下的config.yml配置文件中的theme属性，将其设置为pacman。<br>   1.3 評論框 静态博客要使用第三方评论系统，pacman配置了多说评论系统（/themes/pacman/_config.yml），默认关闭，只要将其打开即可:false-&gt;true。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说，即可发表平评论。</p>
-<h4 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h4><p>duoshuo:<br>  enable: true  ## duoshuo.com<br>  short_name:    ## duoshuo short name.</p>
-<p>  1.4 404頁面<br>    Hexo/source目录下。<br>    <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script></p>
-<pre><code>1.5 安裝插件
-4.4.1 sitemap插件
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
+
   
 
 
@@ -452,8 +326,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
