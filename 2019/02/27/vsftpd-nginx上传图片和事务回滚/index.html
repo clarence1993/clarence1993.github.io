@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Hexo</title>
+  <title>vsftpd+nginx上传图片和事务回滚 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="效果图 linux：vsftpd+nginx必须要安装 插件：FtpUtil.java IDUtils其中FtpUtil中，FtpUtil的FtpClient里要导入common-nets包在maven中加入scope provided加入配置文件：commons.properties(里面是地址：端号 用户 密码 存入地址)利用spring的扫描属性文件功能扫描：&amp;lt;context:prop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vsftpd+nginx上传图片和事务回滚">
+<meta property="og:url" content="http://yoursite.com/2019/02/27/vsftpd-nginx上传图片和事务回滚/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="效果图 linux：vsftpd+nginx必须要安装 插件：FtpUtil.java IDUtils其中FtpUtil中，FtpUtil的FtpClient里要导入common-nets包在maven中加入scope provided加入配置文件：commons.properties(里面是地址：端号 用户 密码 存入地址)利用spring的扫描属性文件功能扫描：&amp;lt;context:prop">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/vsftpd-nginx上传图片和事务回滚/1.jpg">
+<meta property="og:updated_time" content="2019-02-27T08:01:41.907Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="vsftpd+nginx上传图片和事务回滚">
+<meta name="twitter:description" content="效果图 linux：vsftpd+nginx必须要安装 插件：FtpUtil.java IDUtils其中FtpUtil中，FtpUtil的FtpClient里要导入common-nets包在maven中加入scope provided加入配置文件：commons.properties(里面是地址：端号 用户 密码 存入地址)利用spring的扫描属性文件功能扫描：&amp;lt;context:prop">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/27/vsftpd-nginx上传图片和事务回滚/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -151,286 +157,213 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-vsftpd-nginx上传图片和事务回滚" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/27/新增商品内容至多表/" class="archive-article-date">
-  	<time datetime="2019-02-27T07:23:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/27/新增商品内容至多表/">新增商品内容至多表</a>
+    <h1 class="article-title" itemprop="name">
+      vsftpd+nginx上传图片和事务回滚
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/" class="archive-article-date">
+        
+        <a href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/" class="archive-article-date">
   	<time datetime="2019-02-27T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/">vsftpd+nginx上传图片和事务回滚</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>效果图</p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/vsftpd-nginx上传图片和事务回滚/1.jpg" alt="t1"></h2><p>linux：vsftpd+nginx必须要安装</p>
+<p>插件：FtpUtil.java IDUtils<br>其中FtpUtil中，FtpUtil的FtpClient里要导入common-nets包<br>在maven中加入scope provided<br>加入配置文件：commons.properties(里面是地址：端号 用户 密码 存入地址)<br>利用spring的扫描属性文件功能扫描：<br>&lt;context:property-placeholder location=”classpath<em>:</em>.properties”/&gt;</p>
+<h2 id="作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。"><a href="#作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。" class="headerlink" title="作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。"></a>作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。</h2><p>@Service<br>public class PicServiceImpl implements PicService {</p>
+<pre><code>@Value(&quot;${ftpclient.host}&quot;)
+private String host;
+</code></pre><p>@Value(“${ftpclient.port}”)<br>private int port;<br>@Value(“${ftpclient.username}”)<br>private String username;<br>@Value(“${ftpclient.password}”)<br>private String password;<br>@Value(“${ftpclient.basepath}”)<br>private String basepath;<br>@Value(“${ftpclient.filepath}”)<br>private String filepath;<br>/*</p>
+<ul>
+<li>调用ftp文件传输的类</li>
+<li>定义文件名称String fileimagename：</li>
+<li>调用FtpUtil.uploadFile上传图片的方法，返回一个boolean的类型来判断图片是否上传成功及返回上传内容给客户看，</li>
+<li>进行回溯功能返回给浏览器。</li>
+<li>*/<br> @Override<br> public Map&lt;String, Object&gt; upload(MultipartFile file) throws IOException {<pre><code>String fileimagename=IDUtils.genImageName()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(&quot;.&quot;));
+// TODO Auto-generated method stub
+boolean result = FtpUtil.uploadFile(host, port, username, password, basepath, filepath, fileimagename, file.getInputStream());
+Map&lt;String, Object&gt; map =new HashMap&lt;&gt;();
+if(result) {
+    map.put(&quot;error&quot;, 0);
+    map.put(&quot;url&quot;, &quot;http://&quot;+host+&quot;/&quot;+fileimagename);
+}else {
+    map.put(&quot;error&quot;, 1);
+    map.put(&quot;message&quot;, &quot;图片上传失败&quot;);
+}
+return map ;
+</code></pre> }</li>
+</ul>
+<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>@Controller<br>public class PicController {<br>    @Resource<br>    private PicService picServiceImpl;</p>
+<pre><code>/*
+ * 实现图片传输MultipartFile：是网络传输的springweb类，返回的是一个map类型
+ * */
+@RequestMapping(&quot;pic/upload&quot;)
+@ResponseBody
+public Map&lt;String,Object&gt; upload(MultipartFile uploadFile){
+     Map&lt;String,Object&gt; map =null;
+    try {
+ map =    picServiceImpl.upload(uploadFile);
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    return map;
+}
+</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>事务回滚：<br>将两个表的增删改除信息封装到一个方法。在dubbo方法里面封装信息。用try cathch判断是否新增成功。<br>在spring中tx：advice加入rollback-for=java.lang.exception</p>
+<pre><code>int index = 0;
 
-        <div class="article-info info-on-right">
-          
-          
+index = tbItemDubboServiceImpl.insTbItemDesc(item, itemDesc);
+System.out.println(&quot;index:&quot; + index);
+return index;
+</code></pre><hr>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/27/vsftpd-nginx上传图片和事务回滚/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/27/动态查询及分页查询事例代码/" class="archive-article-date">
-  	<time datetime="2019-02-27T05:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/02/27/新增商品内容至多表/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          新增商品内容至多表
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/27/动态查询及分页查询事例代码/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动态查询及分页查询事例代码</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/27/动态查询及分页查询事例代码/">动态查询及分页查询事例代码</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/27/redis缓存技术/" class="archive-article-date">
-  	<time datetime="2019-02-27T04:20:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/27/redis缓存技术/">redis缓存技术</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/27/CMS系统/" class="archive-article-date">
-  	<time datetime="2019-02-27T01:09:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/27/CMS系统/">CMS系统</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/jsonp使用原理及应用/" class="archive-article-date">
-  	<time datetime="2019-02-26T15:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/jsonp使用原理及应用/">jsonp使用原理及应用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/sso单点登陆技术详解/" class="archive-article-date">
-  	<time datetime="2019-02-26T02:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/sso单点登陆技术详解/">sso单点登陆技术详解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/dubbo实战分析/" class="archive-article-date">
-  	<time datetime="2019-02-25T16:31:01.308Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-25T14:47:55.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
-  	<time datetime="2019-02-25T02:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">在windows版本下，用github+hexo快速建立属于自己的博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -455,8 +388,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

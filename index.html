@@ -153,6 +153,345 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-新增商品内容至多表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/新增商品内容至多表/">新增商品内容至多表</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/新增商品内容至多表/" class="archive-article-date">
+  	<time datetime="2019-02-27T07:23:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>/*</p>
+<pre><code> * TbItem item, String desc用来接浏览器返回来的数据，里面分成两部分一部分是TbItem item表里面的类型，
+ * 另外一个是desc
+ * 要补充TbItem所有缺少的数据，
+ * 同理下面的DESC也要补充相应数据才能实行sql语句
+ * */
+@Override
+public int save(TbItem item, String desc) {
+     long id = IDUtils.genItemId();
+     item.setId(id);
+     Date date = new Date();
+     item.setCreated(date);
+     item.setUpdated(date);
+     item.setStatus((byte)1);
+     int index = tbItemDubboServiceImpl.insTbItem(item);
+     if(index&gt;0){
+     TbItemDesc itemDesc = new TbItemDesc();
+     itemDesc.setItemDesc(desc);
+     itemDesc.setItemId(id);
+     itemDesc.setCreated(date);
+     itemDesc.setUpdated(date);
+     index+=tbItemDescDubboService.insDesc(itemDesc);
+     }
+     if(index==2){
+     return 1;
+     }
+     return 0;
+}
+</code></pre><hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/新增商品内容至多表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vsftpd-nginx上传图片和事务回滚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/">vsftpd+nginx上传图片和事务回滚</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/" class="archive-article-date">
+  	<time datetime="2019-02-27T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>效果图</p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/vsftpd-nginx上传图片和事务回滚/1.jpg" alt="t1"></h2><p>linux：vsftpd+nginx必须要安装</p>
+<p>插件：FtpUtil.java IDUtils<br>其中FtpUtil中，FtpUtil的FtpClient里要导入common-nets包<br>在maven中加入scope provided<br>加入配置文件：commons.properties(里面是地址：端号 用户 密码 存入地址)<br>利用spring的扫描属性文件功能扫描：<br>&lt;context:property-placeholder location=”classpath<em>:</em>.properties”/&gt;</p>
+<h2 id="作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。"><a href="#作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。" class="headerlink" title="作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。"></a>作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。</h2><p>@Service<br>public class PicServiceImpl implements PicService {</p>
+<pre><code>@Value(&quot;${ftpclient.host}&quot;)
+private String host;
+</code></pre><p>@Value(“${ftpclient.port}”)<br>private int port;<br>@Value(“${ftpclient.username}”)<br>private String username;<br>@Value(“${ftpclient.password}”)<br>private String password;<br>@Value(“${ftpclient.basepath}”)<br>private String basepath;<br>@Value(“${ftpclient.filepath}”)<br>private String filepath;<br>/*</p>
+<ul>
+<li>调用ftp文件传输的类</li>
+<li>定义文件名称String fileimagename：</li>
+<li>调用FtpUtil.uploadFile上传图片的方法，返回一个boolean的类型来判断图片是否上传成功及返回上传内容给客户看，</li>
+<li>进行回溯功能返回给浏览器。</li>
+<li>*/<br> @Override<br> public Map&lt;String, Object&gt; upload(MultipartFile file) throws IOException {<pre><code>String fileimagename=IDUtils.genImageName()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(&quot;.&quot;));
+// TODO Auto-generated method stub
+boolean result = FtpUtil.uploadFile(host, port, username, password, basepath, filepath, fileimagename, file.getInputStream());
+Map&lt;String, Object&gt; map =new HashMap&lt;&gt;();
+if(result) {
+    map.put(&quot;error&quot;, 0);
+    map.put(&quot;url&quot;, &quot;http://&quot;+host+&quot;/&quot;+fileimagename);
+}else {
+    map.put(&quot;error&quot;, 1);
+    map.put(&quot;message&quot;, &quot;图片上传失败&quot;);
+}
+return map ;
+</code></pre> }</li>
+</ul>
+<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>@Controller<br>public class PicController {<br>    @Resource<br>    private PicService picServiceImpl;</p>
+<pre><code>/*
+ * 实现图片传输MultipartFile：是网络传输的springweb类，返回的是一个map类型
+ * */
+@RequestMapping(&quot;pic/upload&quot;)
+@ResponseBody
+public Map&lt;String,Object&gt; upload(MultipartFile uploadFile){
+     Map&lt;String,Object&gt; map =null;
+    try {
+ map =    picServiceImpl.upload(uploadFile);
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    return map;
+}
+</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>事务回滚：<br>将两个表的增删改除信息封装到一个方法。在dubbo方法里面封装信息。用try cathch判断是否新增成功。<br>在spring中tx：advice加入rollback-for=java.lang.exception</p>
+<pre><code>int index = 0;
+
+index = tbItemDubboServiceImpl.insTbItemDesc(item, itemDesc);
+System.out.println(&quot;index:&quot; + index);
+return index;
+</code></pre><hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-动态查询及分页查询事例代码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/动态查询及分页查询事例代码/">动态查询及分页查询事例代码</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/动态查询及分页查询事例代码/" class="archive-article-date">
+  	<time datetime="2019-02-27T05:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先说一下需求效果：<br><img src="/2019/02/27/动态查询及分页查询事例代码/1.jpg" alt="t1"><br>dubbo方事例代码：<br>public class TbContentDubboServiceImpl implements TbContentDubboService {<br>    @Resource<br>    private TbContentMapper tbContentMapper;<br>    @Override<br>    public EasyUIDataGrid selContentByPage(long categoryId, int page, int rows) {<br>        PageHelper.startPage(page, rows);<br>        TbContentExample example = new TbContentExample();<br>        if(categoryId!=0){<br>            example.createCriteria().andCategoryIdEqualTo(categoryId);<br>        }<br>        List<tbcontent> list = tbContentMapper.selectByExampleWithBLOBs(example);</tbcontent></p>
+<pre><code>    PageInfo&lt;TbContent&gt; pi = new PageInfo&lt;&gt;(list);
+
+    EasyUIDataGrid datagrid = new EasyUIDataGrid();
+    datagrid.setRows(pi.getList());
+    datagrid.setTotal(pi.getTotal());
+    return datagrid;
+}
+</code></pre><hr>
+<p>分析上面的代码：<br>首先是定义要浏览器输出的内容<br><img src="/2019/02/27/动态查询及分页查询事例代码/2.jpg" alt="t2"><br>需求的是categoryId（内容类目id） page rows<br>所以我们第一行的参数是这么来的<br>然后利用分页插件的jar实行分页功能。<br>新创建内容管理的表内容。通过id来查询所有内容类目内容。<br>把内容存到数组中，利用分页查询的api—— PageInfo<tbcontent>，对象是内容类目的表pojo</tbcontent></p>
+<h2 id="最后把分页查询的内容加入到-EasyUIDataGrid实体类中"><a href="#最后把分页查询的内容加入到-EasyUIDataGrid实体类中" class="headerlink" title="最后把分页查询的内容加入到 EasyUIDataGrid实体类中"></a>最后把分页查询的内容加入到 EasyUIDataGrid实体类中</h2><h2 id="消费方：直接调用雷勇就行，记得类型一致。"><a href="#消费方：直接调用雷勇就行，记得类型一致。" class="headerlink" title="消费方：直接调用雷勇就行，记得类型一致。"></a>消费方：直接调用雷勇就行，记得类型一致。</h2><p>业务处理总结：<br>第一步：查找前端控制器的内容<br>第二部：再jsp中查询上述的内容（ctrl+h）<br>第三部：根据第二部的内容确定返回类型，（可自行创建封装）<br>第四部：写dubbo方的内容，根据需求写实现类<br>第五步：写消费方的代码，具体考虑如何传递给控制器相关数据。<br>第六步：写控制器语句</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/动态查询及分页查询事例代码/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-redis缓存技术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/redis缓存技术/">redis缓存技术</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/redis缓存技术/" class="archive-article-date">
+  	<time datetime="2019-02-27T04:20:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##第一章<br>效果图：</p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/redis缓存技术/1.jpg" alt="t1"></h2><p>:</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/redis缓存技术/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CMS系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
