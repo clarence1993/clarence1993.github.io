@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>jsonp使用原理及应用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="##第一章 jsonp原理1.ajax一个服务器访问另外一个服务器的js文件2.但不可以访问json数据及字符串  ##第二章 把控制器返回的结果伪装成js文件前端操作伪装步骤：1.request.setContentType(“application/x-javascript”)然后就可以新建request对象对其注入信息。注意：这里可以参考W3SCHOLL的webbuilding里面的MIME">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsonp使用原理及应用">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/jsonp使用原理及应用/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="##第一章 jsonp原理1.ajax一个服务器访问另外一个服务器的js文件2.但不可以访问json数据及字符串  ##第二章 把控制器返回的结果伪装成js文件前端操作伪装步骤：1.request.setContentType(“application/x-javascript”)然后就可以新建request对象对其注入信息。注意：这里可以参考W3SCHOLL的webbuilding里面的MIME">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-27T00:32:27.878Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="jsonp使用原理及应用">
+<meta name="twitter:description" content="##第一章 jsonp原理1.ajax一个服务器访问另外一个服务器的js文件2.但不可以访问json数据及字符串  ##第二章 把控制器返回的结果伪装成js文件前端操作伪装步骤：1.request.setContentType(“application/x-javascript”)然后就可以新建request对象对其注入信息。注意：这里可以参考W3SCHOLL的webbuilding里面的MIME">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -151,151 +155,194 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-jsonp使用原理及应用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      jsonp使用原理及应用
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/jsonp使用原理及应用/" class="archive-article-date">
+
+        
+        <a href="/2019/02/26/jsonp使用原理及应用/" class="archive-article-date">
   	<time datetime="2019-02-26T15:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/jsonp使用原理及应用/">jsonp使用原理及应用</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##第一章 jsonp原理<br>1.ajax一个服务器访问另外一个服务器的js文件<br>2.但不可以访问json数据及字符串</p>
+<hr>
+<p>##第二章 把控制器返回的结果伪装成js文件<br>前端操作<br>伪装步骤：<br>1.request.setContentType(“application/x-javascript”)<br>然后就可以新建request对象对其注入信息。<br>注意：这里可以参考W3SCHOLL的webbuilding里面的MIME类型<br>MINE是藐视消息内容类型的因特网标准<br>MINE 消息能包含文本图像 音频 视频以及其他应用程序专用的数据。<br>2.直接在ajax的文件中加入datatype：’jsonp’<br>                        jsonCallback:’a’ //a是参数值 回调方法相当于理解success<br>            回调函数名。重点！！！！<br>            jsonp:’b’  //b是参数名     b=a<br>            通常b是’callback’;<br>            function a（data）{} //函数在外面jsoncallback及json必须写—</p>
+<p>重点理解：：函数名（返回数据）</p>
+<hr>
+<p>3.控制器操作：<br>String a =req.getParamater(“callback”)  //获取前端的jsonp：callback，创建函数名<br>request.setContentType(“application/x-javascript”)<br>PrintWriter out =resp.getWriter();<br>out.print(a+”(123);”); //重点：函数名（上传数据），函数名在上述第一行。</p>
+<h2 id="当服务器调用callback-’callback的值’，"><a href="#当服务器调用callback-’callback的值’，" class="headerlink" title="当服务器调用callback=’callback的值’，"></a>当服务器调用callback=’callback的值’，</h2><p>下面我们用一个实例讲解一下如何使用jsonp：<br>@RequsetMapping（）<br>@responsebody<br>public MappingJacksonValue demo(String callback){<br>    people p =new people();<br>    p.set(); p.set();<br>    MappingJacksonValue mjv = new MappingJackValue(p);<br>    mjv.setJsonFunction(callback);<br>    return mjv;<br>// 我们可以看到，我们使用一个MappingJackValue的方法来帮我们简化操作。<br>// 我们只需要把想要回传的数据放入mjv方法，再用mjv调用setJsonFunction（callback）即可<br>// 由此我们可以联想，我们可以把一推数据返回页面。嘻嘻嘻嘻</p>
+<h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p>##最终章<br>实战练习，把商城的商品分类选择页面通过ajax返回。<br>1.确定数据类型（pojo）<br>从前端的文件，看出数据要返回的类型为：u  n  i（）<br>分别是String String List<object>类型<br>2.确定递归方法显示页面（service）<br> 2.1根据父类木id查询所有子类目 比如：通过电器类——电视 冰箱等等<br> 2.2查询类目id查询<br>3.具体实现类</object></p>
+<hr>
+<p>具体实现方法及解析<br>@Service<br>public class TbItemCatServiceImpl implements TbItemCatService {<br>    @Reference<br>    private TbItemCatDubboService tbItemCatDubboServiceImpl;<br>    @Override<br>    public PortalMenu showCatMenu() {<br>        //查询出所有一级菜单<br>        List<tbitemcat> list = tbItemCatDubboServiceImpl.show(0);<br>        PortalMenu pm =new PortalMenu();<br>        pm.setData(selAllMenu(list));<br>        return pm;<br>    }<br>    /**</tbitemcat></p>
+<pre><code> * 最终返回结果所有查询到的结果.
+ */
+public List&lt;Object&gt; selAllMenu(List&lt;TbItemCat&gt; list){
+    List&lt;Object&gt; listNode = new ArrayList&lt;&gt;();
+    for (TbItemCat tbItemCat : list) {
+        if(tbItemCat.getIsParent()){
+            PortalMenuNode pmd  = new PortalMenuNode();
+            pmd.setU(&quot;/products/&quot;+tbItemCat.getId()+&quot;.html&quot;);
+            pmd.setN(&quot;&lt;a href=&apos;/products/&quot;+tbItemCat.getId()+&quot;.html&apos;&gt;&quot;+tbItemCat.getName()+&quot;&lt;/a&gt;&quot;);
+            pmd.setI(selAllMenu(tbItemCatDubboServiceImpl.show(tbItemCat.getId())));
+            listNode.add(pmd);
+        }else{
+            listNode.add(&quot;/products/&quot;+tbItemCat.getId()+&quot;.html|&quot;+tbItemCat.getName());
+        }
+    }
+</code></pre><hr>
+<p>控制器写法：<br>@Controller<br>public class TbItemCatController {<br>    @Resource<br>    private TbItemCatService tbItemCatServiceImpl;<br>    /**</p>
+<pre><code> * 返回jsonp数据格式包含所有菜单信息
+ * @param callback
+ * @return
+ */
+@RequestMapping(&quot;rest/itemcat/all&quot;)
+@ResponseBody
+public MappingJacksonValue showMenu(String callback){
+    MappingJacksonValue mjv = new MappingJacksonValue(tbItemCatServiceImpl.showCatMenu());
+    mjv.setJsonpFunction(callback);
+    return mjv;
+}
+</code></pre><h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>最终显示效果:::<br>![显示效果]（1.PNG）</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/26/jsonp使用原理及应用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/sso单点登陆技术详解/" class="archive-article-date">
-  	<time datetime="2019-02-26T02:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/26/sso单点登陆技术详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sso单点登陆技术详解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/sso单点登陆技术详解/">sso单点登陆技术详解</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/dubbo实战分析/" class="archive-article-date">
-  	<time datetime="2019-02-25T16:31:01.308Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-25T14:47:55.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
-  	<time datetime="2019-02-25T02:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">在windows版本下，用github+hexo快速建立属于自己的博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -320,8 +367,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
