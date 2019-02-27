@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/2 | Hexo</title>
+  <title>CMS系统 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2019/02/index.html">
+  <meta name="description" content="CMS系统1.需求 内容分类管理2.需求 内容管理  ##第一章 把内容分类管理表中的信息以父节点插入到EasyUitree树状模型中。效果图1.显示一个tree。 List show();public List showCategory(long id) {        List listTree = new ArrayList();        List list = tbContentC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMS系统">
+<meta property="og:url" content="http://yoursite.com/2019/02/27/CMS系统/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CMS系统1.需求 内容分类管理2.需求 内容管理  ##第一章 把内容分类管理表中的信息以父节点插入到EasyUitree树状模型中。效果图1.显示一个tree。 List show();public List showCategory(long id) {        List listTree = new ArrayList();        List list = tbContentC">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/CMS系统/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/CMS系统/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/CMS系统/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/CMS系统/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/CMS系统/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/CMS系统/6.jpg">
+<meta property="og:updated_time" content="2019-02-27T04:16:50.402Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="CMS系统">
+<meta name="twitter:description" content="CMS系统1.需求 内容分类管理2.需求 内容管理  ##第一章 把内容分类管理表中的信息以父节点插入到EasyUitree树状模型中。效果图1.显示一个tree。 List show();public List showCategory(long id) {        List listTree = new ArrayList();        List list = tbContentC">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/27/CMS系统/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -151,178 +162,185 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-CMS系统" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      CMS系统
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/27/CMS系统/" class="archive-article-date">
+
+        
+        <a href="/2019/02/27/CMS系统/" class="archive-article-date">
   	<time datetime="2019-02-27T01:09:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/27/CMS系统/">CMS系统</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>CMS系统<br>1.需求 内容分类管理<br>2.需求 内容管理</p>
+<hr>
+<p>##第一章 把内容分类管理表中的信息以父节点插入到EasyUitree树状模型中。<br>效果图<br><img src="/2019/02/27/CMS系统/1.jpg" alt="t1"><br>1.显示一个tree。</p>
+<h2 id="List-show"><a href="#List-show" class="headerlink" title="List show();"></a>List<easyuitree> show();</easyuitree></h2><p>public List<easyuitree> showCategory(long id) {<br>        List<easyuitree> listTree = new ArrayList<easyuitree>();<br>        List<tbcontentcategory> list = tbContentCategoryDubboServiceImpl.selByPid(id);<br>        for (TbContentCategory cate : list) {<br>            EasyUiTree tree = new EasyUiTree();</tbcontentcategory></easyuitree></easyuitree></easyuitree></p>
+<pre><code>        tree.setId(cate.getId());
+        tree.setText(cate.getName());
+        tree.setState(cate.getIsParent()?&quot;closed&quot;:&quot;open&quot;);
 
-        <div class="article-info info-on-right">
-          
-          
+        listTree.add(tree);
+    }
+    return listTree;
+}
+</code></pre><hr>
+<p>public class TbContentCategoryDubboServiceImpl implements TbContentCategoryDubboService {<br>    @Resource<br>    private TbContentCategoryMapper tbContentCategoryMapper;</p>
+<pre><code>@Override
+public List&lt;TbContentCategory&gt; selByPid(long id) {
+    TbContentCategoryExample example = new TbContentCategoryExample();
+    example.createCriteria().andParentIdEqualTo(id).andStatusEqualTo(1);
+    return tbContentCategoryMapper.selectByExample(example);
+}
+</code></pre><hr>
+<p>需要说明的是<br>getIsParent()?”closed”:”open”为显示状态</p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/CMS系统/2.jpg" alt="t2"></h2><p>##第二章 新增 重命名 删除<br>前端文件：F12，寻找header，通过url，ctrl+f 查找jsp文件，发现位置<br>要注意：右键菜单事件：onContextMenu：function（e，node）//e事件类型 node节点<br>找到ajax的“success”方法，寻找大Menu方法，通过ctrl+f寻找div位置</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/2019/02/27/CMS系统/3.jpg" alt="t3"></h2><p>下面是新增内容<br>可以看到，我们后端要传给前端的参数值分别由status id<br>从From Data 可以看出浏览器要传给控制器由parentId 及name<br>查询（同上） 新增（参数 内容分类管理表） 修改功能（参数 内容分类管理表）</p>
+<p>在功能的service上，根据之前，浏览器的信息可知道，我们的参数parentId 及name，也可以封装到对象使用<br>然后在实现类里面补充封装对象属性，再调用dubbo方法。<br>若新增成功，把该新增的节点的父节点赋予父节点属性。就是把右键所中的id更新为父节点。<br>判断当前节点是否已经存在，通过遍历新增节点的名字与当前父节点所有的子节点名称。是否相同。<br>若相同，则返回当前对象<br>若不同，则新增ID<br>再控制器中，返回得到的对象。</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title></a><img src="/2019/02/27/CMS系统/4.jpg" alt="t4"></h2><p>修改内容<br>参数 status </p>
+<p>需求：有同名存在就修改失败，没有同名则成功。<br>创建：通过id查询内容类目所有子类目，返回的内容分类管理表。<br>首先第一步<br>查询当前节点信息 查询当前节点的父节点的所有子节点信息。遍历是否有重名。<br>进行重命名工作。返回前端需要的信息。封装。返回。<br><img src="/2019/02/27/CMS系统/5.jpg" alt="t5"></p>
+<hr>
+<p>删除内容<br>把想要删除的数据的status值变为0，判断当前节点为父节点还是子节点，若当前没有子节点，则当前父节点变为子节点。</p>
+<p>需求：把当前的文件删除。<br>相同套路，都是一样是传递对象。用对象封装浏览器所需要的信息。返回给浏览器。<br>第一步：把内容变为删除状态，再遍历当前节点的所有信息，查询父节点的<br>如果当前的父节点内容为空。（可以通过上述查询的子节点的数组长度判断）<br>新建一个对象，然后把当前父节点的id传递给新对象。新对象没有父节点。<br>若成功，则返回一个前端控制器成功的status。<br>否则返回当前对象。</p>
+<h2 id="-3"><a href="#-3" class="headerlink" title></a><img src="/2019/02/27/CMS系统/6.jpg" alt="t6"></h2>
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/27/CMS系统/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/jsonp使用原理及应用/" class="archive-article-date">
-  	<time datetime="2019-02-26T15:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/26/jsonp使用原理及应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">jsonp使用原理及应用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/jsonp使用原理及应用/">jsonp使用原理及应用</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/sso单点登陆技术详解/" class="archive-article-date">
-  	<time datetime="2019-02-26T02:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/26/sso单点登陆技术详解/">sso单点登陆技术详解</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/26/dubbo实战分析/" class="archive-article-date">
-  	<time datetime="2019-02-25T16:31:01.308Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-25T14:47:55.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
-  	<time datetime="2019-02-25T02:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">在windows版本下，用github+hexo快速建立属于自己的博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -347,8 +365,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
