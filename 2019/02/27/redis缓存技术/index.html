@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>redis缓存技术 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##第一章效果图： :">
+  <meta name="description" content="##第一章效果图： 配置redis集群;这部分忽略。如果有兴趣，我会在后面详细写。这篇文章主要写：怎么熟练运用redis技术环境：linux eclipse ##第一创建redis pom并导入applicationContext-jedis.xml &amp;lt;?xml version=”1.0” encoding=”UTF-8”?&amp;gt;     &amp;lt;context:component-sca">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis缓存技术">
 <meta property="og:url" content="http://yoursite.com/2019/02/27/redis缓存技术/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="##第一章效果图： :">
+<meta property="og:description" content="##第一章效果图： 配置redis集群;这部分忽略。如果有兴趣，我会在后面详细写。这篇文章主要写：怎么熟练运用redis技术环境：linux eclipse ##第一创建redis pom并导入applicationContext-jedis.xml &amp;lt;?xml version=”1.0” encoding=”UTF-8”?&amp;gt;     &amp;lt;context:component-sca">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/02/27/redis缓存技术/1.jpg">
-<meta property="og:updated_time" content="2019-02-27T06:57:06.305Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/redis缓存技术/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/27/redis缓存技术/4,jpg">
+<meta property="og:updated_time" content="2019-02-27T17:53:48.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis缓存技术">
-<meta name="twitter:description" content="##第一章效果图： :">
+<meta name="twitter:description" content="##第一章效果图： 配置redis集群;这部分忽略。如果有兴趣，我会在后面详细写。这篇文章主要写：怎么熟练运用redis技术环境：linux eclipse ##第一创建redis pom并导入applicationContext-jedis.xml &amp;lt;?xml version=”1.0” encoding=”UTF-8”?&amp;gt;     &amp;lt;context:component-sca">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/27/redis缓存技术/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -178,7 +180,181 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>##第一章<br>效果图：</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/redis缓存技术/1.jpg" alt="t1"></h2><p>:</p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/redis缓存技术/1.jpg" alt="t1"></h2><p>配置redis集群;这部分忽略。如果有兴趣，我会在后面详细写。<br>这篇文章主要写：怎么熟练运用redis技术<br>环境：linux eclipse</p>
+<p>##第一<br>创建redis pom<br>并导入applicationContext-jedis.xml</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
+<p><beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    "><br>    &lt;context:component-scan base-package=”com.ego.redis.dao.impl”&gt;&lt;/context:component-scan&gt;</beans></p>
+<pre><code>&lt;!-- 配置jedis连接池 --&gt;
+&lt;bean id=&quot;jedisPoolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;
+    &lt;!-- 最大连接数 --&gt;
+    &lt;property name=&quot;maxTotal&quot; value=&quot;30&quot; /&gt;
+    &lt;!-- 最大空闲连接数 --&gt;
+    &lt;property name=&quot;maxIdle&quot; value=&quot;10&quot; /&gt;
+    &lt;!-- 每次释放连接的最大数目 --&gt;
+    &lt;property name=&quot;numTestsPerEvictionRun&quot; value=&quot;1024&quot; /&gt;
+    &lt;!-- 释放连接的扫描间隔（毫秒） --&gt;
+    &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;30000&quot; /&gt;
+    &lt;!-- 连接最小空闲时间 --&gt;
+    &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;1800000&quot; /&gt;
+    &lt;!-- 连接空闲多久后释放, 当空闲时间&gt;该值 且 空闲连接&gt;最大空闲连接数 时直接释放 --&gt;
+    &lt;property name=&quot;softMinEvictableIdleTimeMillis&quot; value=&quot;10000&quot; /&gt;
+    &lt;!-- 获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 --&gt;
+    &lt;property name=&quot;maxWaitMillis&quot; value=&quot;1500&quot; /&gt;
+    &lt;!-- 在获取连接的时候检查有效性, 默认false --&gt;
+    &lt;property name=&quot;testOnBorrow&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 在空闲时检查有效性, 默认false --&gt;
+    &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true --&gt;
+    &lt;property name=&quot;blockWhenExhausted&quot; value=&quot;false&quot; /&gt;
+&lt;/bean&gt;
+
+
+
+&lt;!-- jedisCluster --&gt;
+&lt;bean id=&quot;jedisClients&quot; class=&quot;redis.clients.jedis.JedisCluster&quot;&gt;
+    &lt;constructor-arg name=&quot;poolConfig&quot; ref=&quot;jedisPoolConfig&quot;/&gt;
+    &lt;constructor-arg name=&quot;nodes&quot;&gt;
+        &lt;set&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7001&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7002&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7003&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7004&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7005&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7006&quot;/&gt;
+            &lt;/bean&gt;
+        &lt;/set&gt;
+    &lt;/constructor-arg&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="-1"><a href="#-1" class="headerlink" title></a></h2><p>##第二<br>maven导入包<br>redis.clients<br>jedis<br>spring包（导入注解）<br>dao类<br>public interface JedisDao {<br>    /**</p>
+<pre><code> * 判断key是否存在
+ * @param key
+ * @return
+ */
+Boolean exists(String key);
+
+/**
+ * 删除
+ * @param key
+ * @return
+ */
+Long del(String key);
+
+/**
+ * 设置值
+ * @param key
+ * @param value
+ * @return
+ */
+String set(String key,String value);
+
+/**
+ * 取值
+ * @param key
+ * @return
+ */
+String get(String key);
+
+long expire(String key, int i);
+</code></pre><p>}</p>
+<p>JedisDaoImpl包<br>@Repository<br>public class JedisDaoImpl implements JedisDao{<br>    @Resource<br>    private JedisCluster jedisClients;<br>    @Override<br>    public Boolean exists(String key) {<br>        return jedisClients.exists(key);<br>    }</p>
+<pre><code>@Override
+public Long del(String key) {
+    return jedisClients.del(key);
+}
+
+@Override
+public String set(String key, String value) {
+    return jedisClients.set(key, value);
+}
+
+@Override
+public String get(String key) {
+    return jedisClients.get(key);
+}
+
+@Override
+public long expire(String key, int i) {
+    // TODO Auto-generated method stub
+    return jedisClients.expire(key, i);
+}
+</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>@Service<br>public class TbContentServiceImpl implements TbContentService {<br>    @Reference<br>    private TbContentDubboService tbContentDubboServiceImpl;<br>    @Resource<br>    private JedisDao JedisDaoImpl;<br>    @Value(“${redis.bigpic.key}”)<br>    private String key;<br>    @Override<br>    public String showBigPic() {<br>        //先判断在redis中是否存在<br>        if(JedisDaoImpl.exists(key)){<br>            String value = JedisDaoImpl.get(key);<br>            if(value!=null&amp;&amp;!value.equals(“”)){<br>                return value;<br>            }<br>        }</p>
+<pre><code>    //如果不存在从mysql中取,取完后放入redis中
+    List&lt;TbContent&gt; list = tbContentDubboServiceImpl.selByCount(6, true);
+
+    List&lt;Map&lt;String,Object&gt;&gt; listResult = new ArrayList&lt;&gt;();
+    for (TbContent tc : list) {
+        Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
+
+        map.put(&quot;srcB&quot;, tc.getPic2());
+        map.put(&quot;height&quot;, 240);
+        map.put(&quot;alt&quot;, &quot;对不起,加载图片失败&quot;);
+        map.put(&quot;width&quot;, 670);
+        map.put(&quot;src&quot;, tc.getPic());
+        map.put(&quot;widthB&quot;, 550);
+        map.put(&quot;href&quot;, tc.getUrl() );
+        map.put(&quot;heightB&quot;, 240);
+
+        listResult.add(map);
+    }
+    String listJson = JsonUtils.objectToJson(listResult);
+    //把数据放入到redis中
+    JedisDaoImpl.set(key, listJson);
+    return listJson;
+}
+</code></pre><h2 id="-3"><a href="#-3" class="headerlink" title="}"></a>}</h2><p><img src="/2019/02/27/redis缓存技术/2.jpg" alt="t2"><br>加载redis配置文件，扫描文件，加载key位置<br><img src="/2019/02/27/redis缓存技术/4,jpg" alt="t4"></p>
+<h2 id="可以看到我们把数据json话存到jedis中。"><a href="#可以看到我们把数据json话存到jedis中。" class="headerlink" title="可以看到我们把数据json话存到jedis中。"></a>可以看到我们把数据json话存到jedis中。</h2><p>后台添加广告，先存放到mysql数据库中，再存放到redis中<br>思路，先把原来再redis里面数据（String字符串）转换到（list集合）</p>
+<h2 id="再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中"><a href="#再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中" class="headerlink" title="再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中"></a>再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中</h2><p>前提：依赖commons及redis<br>把spring的扫描属性文件&lt;context:properity-holder : location=”classpath<em>:</em>.properties”&gt;<br>在要缓存的文件中加入<br>       @Reference<br>        private TbContentDubboService tbContentDubboServiceImpl;<br>        @Resource<br>        private JedisDao JedisDaoImpl;<br>        @Value(“${redis.bigpic.key}”)   //注意这里是前台与后台的key要相同</p>
+<pre><code>private String key;
+</code></pre><hr>
+<pre><code>@Override
+public String &quot;业务方法名字&quot;() {
+        //先判断在redis中是否存在
+        if(JedisDaoImpl.exists(key)){
+                String value = JedisDaoImpl.get(key);
+                if(value!=null&amp;&amp;!value.equals(&quot;&quot;)){
+               List&lt;HashMap&gt; list = JsonUtils.jsonToList(value, HashMap.class);
+</code></pre><hr>
+<pre><code>         HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;(); //新增的图片存储
+                         。。。。
+         。。。。（往map.put中添加数据）
+         。。。。
+         if（list.size()==6）{  //这里的业务挺好，所以在这里也补充一下，
+           list.remove(5)  // 就是存放到list是有序集合，把新增的东西放到集合最前面，就可以把最新的资料放在前端中
+         }
+         list.add(0，map);
+         jedisDaoImpl.set(key, JsonUtils.objectToJson(list));//转换为json
+
+                 }
+         }
+
+。。。。。。。。。（业务代码）
+
+         String listJson = JsonUtils.objectToJson(listResult);
+         //把数据放入到redis中
+         JedisDaoImpl.set(key, listJson);
+         return listJson;
+ }
+</code></pre><p>}</p>
+<hr>
 
       
 

@@ -153,6 +153,298 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-solr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/28/solr/">solr</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/28/solr/" class="archive-article-date">
+  	<time datetime="2019-02-27T18:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>solr基本原理<br>1.什么是solr<br>solr是一个maven中的war项目<br>2.如何与solr进行交互<br>特定api solrj<br>3.进行大量数据检索时使用。<br>4.基于索引进行查询的<br>4.1 顺序查询：从内容的最开始找到内容为止。<br>4.2 反向键索引<br>    那什么叫反响键索引<br>    4.2.1把内容进行拆分<br>    例子：solr基本原理<br>    1.拆词 solr 基本 原理<br>    2.拆分成三个<br>    3.当你搜索solr原理<br>    4.会把“solr”原理 拆成solr 原理<br>    5.在进行匹配。<br>所以必须保证solr里面有内容。</p>
+<p>5.流行方案<br>5.1 lucene（solr基于lucene）<br>5.1 百度 api<br>5.2 googleapi</p>
+<p>因为solr是web项目。所以一定要经过中间体。比如tomcat<br>实际工作中，我们在搜索的时候，先把内容发到solr的项目。solr项目搜索到相关内容后，再返回给服务器<br>底层：Httpclient。两个服务器数据的交互。</p>
+<p>安装solr（略）想知道请留言给作者。<br>QQ：431794681 微信 ：13242853540<br>安装完成的效果<br><img src="/2019/02/28/solr/1.jpg" alt="t1"><br>新增 修改 删除的操作面板<br><img src="/2019/02/28/solr/2.jpg" alt="t2"><br>查询操作<br><img src="/2019/02/28/solr/3.jpg" alt="t3"><br>启动tomcat的时候，一定要加上tailf /logs/catalina.out</p>
+<hr>
+<h2 id="第二部分-拆词器"><a href="#第二部分-拆词器" class="headerlink" title="第二部分 拆词器"></a>第二部分 拆词器</h2><ol>
+<li>Solr 默认对中文拆词功能支持不好.<br>1.1 解决方案:使用 IK Analyzer 拆词器</li>
+</ol>
+<p><img src="/2019/02/28/solr/4.jpg" alt="t4"><br>词条拆分<br>在solr中有一个file属性。</p>
+<p><field name="xxx" type="text_ik" indexed="true" stored="true" multivalued="true"><br>name:叫什么名字都可以，显示在上图中。最好见闻知意。<br>type:若要用IK拆词器，就一定是”text_ik”。不能改变。<br>indexed:是否给该列建立索引。true/false<br>stored:是否被存储。在query界面查询结果中，是否把该列显示出来。<br>multiValued:是否有附属文件 true/false</field></p>
+<hr>
+<p>增删改操作面板操作界面：document<br><img src="/2019/02/28/solr/2.jpg" alt="t2"><br>支持：json/xml格式。<br>新增是，必须有id值。且id不能重复<br>例子：</p>
+<p><doc></doc></p>
+<p><field name="id">change.me</field></p>
+<p><field name="title">change.me</field><br><br>修改：只要id已经存在就进行修改。<br>删除:</p>
+<p><delete></delete></p>
+<p><id>id 内容</id></p>
+<p><delete></delete></p>
+<p><commit><br>删除全部：</commit></p>
+<p><delete></delete></p>
+<p><query><em>:</em></query><br></p>
+<h2 id><a href="#" class="headerlink" title></a><commit></commit></h2><h2 id="第三部分-查询"><a href="#第三部分-查询" class="headerlink" title="第三部分 查询"></a>第三部分 查询</h2><p>q: 查询字符串（必须的）。:表示查询所有；keyword:东看 表示按关键字“东看”查询<br>fq: filter query 过滤查询。使用Filter Query可以充分利用Filter Query Cache，提高检索性能。作用：在q查询符合结果中同时是fq查询符合的(类似求交集)，例如：q=mm&amp;fq=date_time:[20081001 TO 20091031]，找关键字mm，并且date_time是20081001到20091031之间的。<br>sort: 排序。格式如下：字段名 排序方式；如advertiserId desc 表示按id字段降序排列查询结果。<br>start,rows:表示查回结果从第几条数据开始显示，共显示多少条。<br>fl: field list。指定查询结果返回哪些字段。多个时以空格“ ”或逗号“,”分隔。不指定时，默认全返回。<br>df: default field默认的查询字段，一般默认指定。<br>Raw Query Parameters:<br>wt: write type。指定查询输出结果格式，我们常用的有json格式与xml格式。在solrconfig.xml中定义了查询输出格式：xml、json、Python、ruby、PHP、phps、custom。<br>indent: 返回的结果是否缩进，默认关闭，用 indent=true | on 开启，一般调试json,php,phps,ruby输出才有必要用这个参数。<br>debugQuery: 设置返回结果是否显示Debug信息。<br>dismax:<br>edismax:<br>hl: high light 高亮。hl=true表示启用高亮<br>hl.fl ： 用空格或逗号隔开的字段列表（指定高亮的字段）。要启用某个字段的highlight功能，就得保证该字段在schema中是stored。如果该参数未被给出，那么就会高 亮默认字段 standard handler会用df参数，dismax字段用qf参数。你可以使用星号去方便的高亮所有字段。如果你使用了通配符，那么要考虑启用 hl.requiredFieldMatch选项。<br>hl.simple.pre：<br>hl.requireFieldMatch: 如果置为true，除非该字段的查询结果不为空才会被高亮。它的默认值是false，意味 着它可能匹配某个字段却高亮一个不同的字段。如果hl.fl使用了通配符，那么就要启用该参数。尽管如此，如果你的查询是all字段（可能是使用 copy-field 指令），那么还是把它设为false，这样搜索结果能表明哪个字段的查询文本未被找到<br>hl.usePhraseHighlighter：如果一个查询中含有短语（引号框起来的）那么会保证一定要完全匹配短语的才会被高亮。<br>hl.highlightMultiTerm：如果使用通配符和模糊搜索，那么会确保与通配符匹配的term会高亮。默认为false，同时hl.usePhraseHighlighter要为true。<br>facet:分组统计，在搜索关键字的同时,能够按照Facet的字段进行分组并统计。<br>facet.query：Facet Query利用类似于filter query的语法提供了更为灵活的Facet.通过facet.query参数，可以对任意字段进行筛选。<br>facet.field：需要分组统计的字段，可以多个。<br>facet.prefix： 表示Facet字段值的前缀。比如facet.field=cpu&amp;facet.prefix=Intel，那么对cpu字段进行Facet查询，返回的cpu都是以Intel开头的， AMD开头的cpu型号将不会被统计在内。<br>spatial: </p>
+<h2 id="spellcheck-拼写检查。"><a href="#spellcheck-拼写检查。" class="headerlink" title="spellcheck: 拼写检查。"></a>spellcheck: 拼写检查。</h2><p>简洁版<br><em>:</em> 查询全部<br>“” 固定查询<br>添加复合属性：什么意思？？？即在<field>目录下面，添加附属类。&lt;</field></p>
+<p><copyfield source dest></copyfield></p>
+<p><field name="bjsxtall" type="text_ik" indexed="true" stored="true" multivalued="true"></field></p>
+<p><copyfield source="bjsxt" dest="bjsxtall"></copyfield></p>
+<p><copyfield source="bjsxt1" dest="bjsxtall"><br>source属性：子属性，把source的属性值赋予dest属性<br>dest属性：父属性。</copyfield></p>
+<p>fq：并列条件。即两个一起查询。<br>sort：排序asc desc<br>start：从哪里开始查   rows:显示几个（默认10个）<br>fl：根据属性列表查询<br>df：默认查询字段</p>
+<p>wt：返回格式，一般用json</p>
+<p>hl：高亮显示<br>hl.fl:属性名<br>hl.somple.pre：例子<span style="color:red"><br>hl.simple.post     </span><br>那么就在里面显示的东西加了css。</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/2019/02/28/solr/5.jpg" alt="t5"></h2><p>/**</p>
+<ul>
+<li>增加删除修改都需要提交事务</li>
+<li><p>@author Administrator<br><em>
+</em>/<br>public class Demo {</p>
+<p> /**</p>
+<ul>
+<li>新增5</li>
+<li>@throws SolrServerException</li>
+<li><p>@throws IOException<br>*/</p>
+<p>public void testInsert() throws SolrServerException, IOException{<br> SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;</p>
+<p> SolrInputDocument doc = new SolrInputDocument(); //我们都是在document中实施增删改。<br> doc.addField(“id”, “005”);<br>//        doc.addField(“bjsxt”, “java和大数据培训”);<br> doc.addField(“bjsxt1”, “大数据4”);</p>
+<p> client.add(doc);  //把数据添加到服务器<br> client.commit(); //一定要记得写，提交事务<br>}</p>
+<p>public void testDelete() throws SolrServerException, IOException{<br> SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;<br> client.deleteById(“001”);<br> client.commit();<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>@Test<br>    public void testQuery() throws SolrServerException, IOException{<br>        SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;</p>
+<pre><code>    //可视化界面左侧条件  重点！！！！！
+    SolrQuery params = new SolrQuery();
+    //设置q
+    params.setQuery(&quot;bjsxtall:*&quot;);
+    //设置分页
+    //从第几条开始查询,从0开始
+    params.setStart(0);
+    //查询几个
+    params.setRows(10);
+
+
+    //启动高亮
+    params.setHighlight(true);
+    //设置高亮列
+    params.addHighlightField(&quot;bjsxt&quot;);
+    //设置前缀
+    params.setHighlightSimplePre(&quot;&lt;span style=&apos;color:red;&apos;&gt;&quot;);
+    //设置后缀
+    params.setHighlightSimplePost(&quot;&lt;/span&gt;&quot;);
+
+    //相当于点击查询按钮, 本质,向solr web服务器发送请求,并接收响应. query对象里面包含了返回json数据
+    QueryResponse response = client.query(params);
+
+    Map&lt;String, Map&lt;String, List&lt;String&gt;&gt;&gt; hh = response.getHighlighting();
+
+
+    //取出docs{}
+    SolrDocumentList solrList = response.getResults();
+
+    for (SolrDocument doc : solrList) {
+        System.out.println(doc.getFieldValue(&quot;id&quot;));
+        System.out.println(&quot;未高亮:&quot;+doc.getFieldValue(&quot;bjsxt&quot;));
+        Map&lt;String, List&lt;String&gt;&gt; map = hh.get(doc.getFieldValue(&quot;id&quot;));
+        System.out.println(map);
+        //list可能为null
+        List&lt;String&gt; list = map.get(&quot;bjsxt&quot;);
+        System.out.println(list);
+        if(list!=null&amp;&amp;list.size()&gt;0){
+            System.out.println(&quot;高亮:&quot;+list.get(0));
+        }else{
+            System.out.println(&quot;没有高亮内容&quot;);
+        }
+        System.out.println(doc.getFieldValue(&quot;bjsxt1&quot;));
+    }
+
+}
+</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>solrcloud</p>
+<ol>
+<li>solr 是 web 项目,需要放入到 tomcat 中.依赖多个 tomcat,<br>让多个tomcat 之间能够通信</li>
+<li>需要借助 zookeeper 实现 tomcat 直接</li>
+</ol>
+<p>solrcloud及zookeeprt的搭建我就忽略了，同样有需求请联系本博主<br>qq：431794681 微信：13242853540<br>最终结果：<br><img src="/2019/02/28/solr/6.jpg" alt="t6"></p>
+<hr>
+<p>用solrj操作solrcloud<br><img src="/2019/02/28/solr/7.jpg" alt="t7"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/28/solr/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-购物车需求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/27/购物车需求/">购物车需求</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/27/购物车需求/" class="archive-article-date">
+  	<time datetime="2019-02-27T08:11:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需求1：用户未登录，不允许加入购物车<br>办法1：通过拦截器判断，在客户点击购物车按钮的时候，检查其登陆信息。cookie。把购物车里商品放入购物车。<br>拦截器具体工作思路：<br>方法继承 handleIntercetorhandleIntercetor<br>此处不能用软编码：Value（””）private String key;</p>
+<p>复写preHandle，<br>    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)<br>            throws Exception {<br>        String token = CookieUtils.getCookieValue(request, “TT_TOKEN”);<br>        if(token!=null&amp;&amp;!token.equals(“”)){<br>            String json = HttpClientUtil.doPost(“<a href="http://localhost:8084/user/token/&quot;+token)" target="_blank" rel="noopener">http://localhost:8084/user/token/&quot;+token)</a>;<br>            EgoResult er = JsonUtils.jsonToPojo(json, EgoResult.class);<br>            if(er.getStatus()==200){<br>                return true;<br>            }<br>        }<br>        String num = request.getParameter(“num”);<br>        response.sendRedirect(“<a href="http://localhost:8084/user/showLogin?interurl=&quot;+request.getRequestURL()+&quot;%3Fnum=&quot;+num)" target="_blank" rel="noopener">http://localhost:8084/user/showLogin?interurl=&quot;+request.getRequestURL()+&quot;%3Fnum=&quot;+num)</a>;<br>        return false;</p>
+<pre><code>}
+</code></pre><hr>
+<p>   <a href="mvc:interceptors" target="_blank" rel="noopener">mvc:interceptors</a><br>        <bean class="com.ego.cart.interceptor.LoginInterceptor"></bean></p>
+<pre><code>&lt;/mvc:interceptors&gt;
+</code></pre><hr>
+<p>@Controller<br>public class CartController {<br>    @Resource<br>    private CartService cartServiceImpl;<br>    /**</p>
+<pre><code> * 添加购物车
+ * @param id
+ * @return
+ */
+@RequestMapping(&quot;cart/add/{id}.html&quot;)
+public String addCart(@PathVariable long id,int num,HttpServletRequest request){
+    cartServiceImpl.addCart(id, num, request);
+    return &quot;cartSuccess&quot;;
+}
+
+/**
+ * 显示购物车
+ * @return
+ */
+@RequestMapping(&quot;cart/cart.html&quot;)
+public String showCart(Model model,HttpServletRequest request){
+    model.addAttribute(&quot;cartList&quot;, cartServiceImpl.showCart(request));
+    return &quot;cart&quot;;
+}
+/**
+ * 修改商品数量
+ * @param id
+ * @param num
+ * @param request
+ * @return
+ */
+@RequestMapping(&quot;cart/update/num/{id}/{num}.action&quot;)
+@ResponseBody
+public EgoResult update(@PathVariable long id,@PathVariable int num,HttpServletRequest request){
+    return cartServiceImpl.update(id, num, request);
+}
+/**
+ * 删除购物车商品
+ * @param id
+ * @param req
+ * @return
+ */
+@RequestMapping(&quot;cart/delete/{id}.action&quot;)
+@ResponseBody
+public EgoResult delete(@PathVariable long id,HttpServletRequest req){
+    return cartServiceImpl.delete(id, req);
+}
+</code></pre><h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p>@Controller<br>public class TbUserController {<br>    @Resource<br>    private TbUserService tbUserServiceImpl;<br>    /**</p>
+<pre><code> * 显示登录页面
+ * @return
+ */
+@RequestMapping(&quot;user/showLogin&quot;)
+public String showLogin(@RequestHeader(value=&quot;Referer&quot;,defaultValue=&quot;&quot;) String url,Model model,String interurl){
+    if(interurl!=null&amp;&amp;!interurl.equals(&quot;&quot;)){
+        model.addAttribute(&quot;redirect&quot;, interurl);
+    }else if(!url.equals(&quot;&quot;)){
+        model.addAttribute(&quot;redirect&quot;, url);
+    }
+    return &quot;login&quot;;
+}
+</code></pre><hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/27/购物车需求/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-新增商品内容至多表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -385,7 +677,9 @@ return index;
 }
 </code></pre><hr>
 <p>分析上面的代码：<br>首先是定义要浏览器输出的内容<br><img src="/2019/02/27/动态查询及分页查询事例代码/2.jpg" alt="t2"><br>需求的是categoryId（内容类目id） page rows<br>所以我们第一行的参数是这么来的<br>然后利用分页插件的jar实行分页功能。<br>新创建内容管理的表内容。通过id来查询所有内容类目内容。<br>把内容存到数组中，利用分页查询的api—— PageInfo<tbcontent>，对象是内容类目的表pojo</tbcontent></p>
-<h2 id="最后把分页查询的内容加入到-EasyUIDataGrid实体类中"><a href="#最后把分页查询的内容加入到-EasyUIDataGrid实体类中" class="headerlink" title="最后把分页查询的内容加入到 EasyUIDataGrid实体类中"></a>最后把分页查询的内容加入到 EasyUIDataGrid实体类中</h2><h2 id="消费方：直接调用雷勇就行，记得类型一致。"><a href="#消费方：直接调用雷勇就行，记得类型一致。" class="headerlink" title="消费方：直接调用雷勇就行，记得类型一致。"></a>消费方：直接调用雷勇就行，记得类型一致。</h2><p>业务处理总结：<br>第一步：查找前端控制器的内容<br>第二部：再jsp中查询上述的内容（ctrl+h）<br>第三部：根据第二部的内容确定返回类型，（可自行创建封装）<br>第四部：写dubbo方的内容，根据需求写实现类<br>第五步：写消费方的代码，具体考虑如何传递给控制器相关数据。<br>第六步：写控制器语句</p>
+<h2 id="最后把分页查询的内容加入到-EasyUIDataGrid实体类中"><a href="#最后把分页查询的内容加入到-EasyUIDataGrid实体类中" class="headerlink" title="最后把分页查询的内容加入到 EasyUIDataGrid实体类中"></a>最后把分页查询的内容加入到 EasyUIDataGrid实体类中</h2><h2 id="消费方：直接调用雷勇就行，记得类型一致。"><a href="#消费方：直接调用雷勇就行，记得类型一致。" class="headerlink" title="消费方：直接调用雷勇就行，记得类型一致。"></a>消费方：直接调用雷勇就行，记得类型一致。</h2><p>业务处理总结：<br>第一步：查找前端控制器的内容<br>第二部：再jsp中查询上述的内容（ctrl+h）<br>第三部：根据第二部的内容确定返回类型，（可自行创建封装）<br>第四部：写dubbo方的内容，根据需求写实现类<br>第五步：写消费方的代码，具体考虑如何传递给控制器相关数据。</p>
+<h2 id="第六步：写控制器语句"><a href="#第六步：写控制器语句" class="headerlink" title="第六步：写控制器语句"></a>第六步：写控制器语句</h2><p>排序方法<br>@Override<br>    public List<tbcontent> selByCount(int count, boolean isSort) {<br>        TbContentExample example = new TbContentExample();<br>        //排序<br>        if(isSort){<br>            example.setOrderByClause(“updated desc”);<br>        }<br>        if(count!=0){<br>            PageHelper.startPage(1, count);<br>            List<tbcontent> list = tbContentMapper.selectByExampleWithBLOBs(example);<br>            PageInfo<tbcontent> pi = new PageInfo&lt;&gt;(list);<br>            return pi.getList();<br>        }else{<br>            return tbContentMapper.selectByExampleWithBLOBs(example);<br>        }<br>    }</tbcontent></tbcontent></tbcontent></p>
+<p>}</p>
 
       
 
@@ -449,7 +743,181 @@ return index;
     <div class="article-entry" itemprop="articleBody">
       
         <p>##第一章<br>效果图：</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/redis缓存技术/1.jpg" alt="t1"></h2><p>:</p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/redis缓存技术/1.jpg" alt="t1"></h2><p>配置redis集群;这部分忽略。如果有兴趣，我会在后面详细写。<br>这篇文章主要写：怎么熟练运用redis技术<br>环境：linux eclipse</p>
+<p>##第一<br>创建redis pom<br>并导入applicationContext-jedis.xml</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
+<p><beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    "><br>    &lt;context:component-scan base-package=”com.ego.redis.dao.impl”&gt;&lt;/context:component-scan&gt;</beans></p>
+<pre><code>&lt;!-- 配置jedis连接池 --&gt;
+&lt;bean id=&quot;jedisPoolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;
+    &lt;!-- 最大连接数 --&gt;
+    &lt;property name=&quot;maxTotal&quot; value=&quot;30&quot; /&gt;
+    &lt;!-- 最大空闲连接数 --&gt;
+    &lt;property name=&quot;maxIdle&quot; value=&quot;10&quot; /&gt;
+    &lt;!-- 每次释放连接的最大数目 --&gt;
+    &lt;property name=&quot;numTestsPerEvictionRun&quot; value=&quot;1024&quot; /&gt;
+    &lt;!-- 释放连接的扫描间隔（毫秒） --&gt;
+    &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;30000&quot; /&gt;
+    &lt;!-- 连接最小空闲时间 --&gt;
+    &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;1800000&quot; /&gt;
+    &lt;!-- 连接空闲多久后释放, 当空闲时间&gt;该值 且 空闲连接&gt;最大空闲连接数 时直接释放 --&gt;
+    &lt;property name=&quot;softMinEvictableIdleTimeMillis&quot; value=&quot;10000&quot; /&gt;
+    &lt;!-- 获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 --&gt;
+    &lt;property name=&quot;maxWaitMillis&quot; value=&quot;1500&quot; /&gt;
+    &lt;!-- 在获取连接的时候检查有效性, 默认false --&gt;
+    &lt;property name=&quot;testOnBorrow&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 在空闲时检查有效性, 默认false --&gt;
+    &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot; /&gt;
+    &lt;!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true --&gt;
+    &lt;property name=&quot;blockWhenExhausted&quot; value=&quot;false&quot; /&gt;
+&lt;/bean&gt;
+
+
+
+&lt;!-- jedisCluster --&gt;
+&lt;bean id=&quot;jedisClients&quot; class=&quot;redis.clients.jedis.JedisCluster&quot;&gt;
+    &lt;constructor-arg name=&quot;poolConfig&quot; ref=&quot;jedisPoolConfig&quot;/&gt;
+    &lt;constructor-arg name=&quot;nodes&quot;&gt;
+        &lt;set&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7001&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7002&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7003&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7004&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7005&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
+                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
+                &lt;constructor-arg name=&quot;port&quot; value=&quot;7006&quot;/&gt;
+            &lt;/bean&gt;
+        &lt;/set&gt;
+    &lt;/constructor-arg&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="-1"><a href="#-1" class="headerlink" title></a></h2><p>##第二<br>maven导入包<br>redis.clients<br>jedis<br>spring包（导入注解）<br>dao类<br>public interface JedisDao {<br>    /**</p>
+<pre><code> * 判断key是否存在
+ * @param key
+ * @return
+ */
+Boolean exists(String key);
+
+/**
+ * 删除
+ * @param key
+ * @return
+ */
+Long del(String key);
+
+/**
+ * 设置值
+ * @param key
+ * @param value
+ * @return
+ */
+String set(String key,String value);
+
+/**
+ * 取值
+ * @param key
+ * @return
+ */
+String get(String key);
+
+long expire(String key, int i);
+</code></pre><p>}</p>
+<p>JedisDaoImpl包<br>@Repository<br>public class JedisDaoImpl implements JedisDao{<br>    @Resource<br>    private JedisCluster jedisClients;<br>    @Override<br>    public Boolean exists(String key) {<br>        return jedisClients.exists(key);<br>    }</p>
+<pre><code>@Override
+public Long del(String key) {
+    return jedisClients.del(key);
+}
+
+@Override
+public String set(String key, String value) {
+    return jedisClients.set(key, value);
+}
+
+@Override
+public String get(String key) {
+    return jedisClients.get(key);
+}
+
+@Override
+public long expire(String key, int i) {
+    // TODO Auto-generated method stub
+    return jedisClients.expire(key, i);
+}
+</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>@Service<br>public class TbContentServiceImpl implements TbContentService {<br>    @Reference<br>    private TbContentDubboService tbContentDubboServiceImpl;<br>    @Resource<br>    private JedisDao JedisDaoImpl;<br>    @Value(“${redis.bigpic.key}”)<br>    private String key;<br>    @Override<br>    public String showBigPic() {<br>        //先判断在redis中是否存在<br>        if(JedisDaoImpl.exists(key)){<br>            String value = JedisDaoImpl.get(key);<br>            if(value!=null&amp;&amp;!value.equals(“”)){<br>                return value;<br>            }<br>        }</p>
+<pre><code>    //如果不存在从mysql中取,取完后放入redis中
+    List&lt;TbContent&gt; list = tbContentDubboServiceImpl.selByCount(6, true);
+
+    List&lt;Map&lt;String,Object&gt;&gt; listResult = new ArrayList&lt;&gt;();
+    for (TbContent tc : list) {
+        Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
+
+        map.put(&quot;srcB&quot;, tc.getPic2());
+        map.put(&quot;height&quot;, 240);
+        map.put(&quot;alt&quot;, &quot;对不起,加载图片失败&quot;);
+        map.put(&quot;width&quot;, 670);
+        map.put(&quot;src&quot;, tc.getPic());
+        map.put(&quot;widthB&quot;, 550);
+        map.put(&quot;href&quot;, tc.getUrl() );
+        map.put(&quot;heightB&quot;, 240);
+
+        listResult.add(map);
+    }
+    String listJson = JsonUtils.objectToJson(listResult);
+    //把数据放入到redis中
+    JedisDaoImpl.set(key, listJson);
+    return listJson;
+}
+</code></pre><h2 id="-3"><a href="#-3" class="headerlink" title="}"></a>}</h2><p><img src="/2019/02/27/redis缓存技术/2.jpg" alt="t2"><br>加载redis配置文件，扫描文件，加载key位置<br><img src="/2019/02/27/redis缓存技术/4,jpg" alt="t4"></p>
+<h2 id="可以看到我们把数据json话存到jedis中。"><a href="#可以看到我们把数据json话存到jedis中。" class="headerlink" title="可以看到我们把数据json话存到jedis中。"></a>可以看到我们把数据json话存到jedis中。</h2><p>后台添加广告，先存放到mysql数据库中，再存放到redis中<br>思路，先把原来再redis里面数据（String字符串）转换到（list集合）</p>
+<h2 id="再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中"><a href="#再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中" class="headerlink" title="再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中"></a>再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中</h2><p>前提：依赖commons及redis<br>把spring的扫描属性文件&lt;context:properity-holder : location=”classpath<em>:</em>.properties”&gt;<br>在要缓存的文件中加入<br>       @Reference<br>        private TbContentDubboService tbContentDubboServiceImpl;<br>        @Resource<br>        private JedisDao JedisDaoImpl;<br>        @Value(“${redis.bigpic.key}”)   //注意这里是前台与后台的key要相同</p>
+<pre><code>private String key;
+</code></pre><hr>
+<pre><code>@Override
+public String &quot;业务方法名字&quot;() {
+        //先判断在redis中是否存在
+        if(JedisDaoImpl.exists(key)){
+                String value = JedisDaoImpl.get(key);
+                if(value!=null&amp;&amp;!value.equals(&quot;&quot;)){
+               List&lt;HashMap&gt; list = JsonUtils.jsonToList(value, HashMap.class);
+</code></pre><hr>
+<pre><code>         HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;(); //新增的图片存储
+                         。。。。
+         。。。。（往map.put中添加数据）
+         。。。。
+         if（list.size()==6）{  //这里的业务挺好，所以在这里也补充一下，
+           list.remove(5)  // 就是存放到list是有序集合，把新增的东西放到集合最前面，就可以把最新的资料放在前端中
+         }
+         list.add(0，map);
+         jedisDaoImpl.set(key, JsonUtils.objectToJson(list));//转换为json
+
+                 }
+         }
+
+。。。。。。。。。（业务代码）
+
+         String listJson = JsonUtils.objectToJson(listResult);
+         //把数据放入到redis中
+         JedisDaoImpl.set(key, listJson);
+         return listJson;
+ }
+</code></pre><p>}</p>
+<hr>
 
       
 
@@ -808,158 +1276,10 @@ public MappingJacksonValue showMenu(String callback){
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-25T14:47:55.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-在windows版本下，用github-hexo快速建立属于自己的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">在windows版本下，用github+hexo快速建立属于自己的博客</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
-  	<time datetime="2019-02-25T02:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第一章-搭配环境"><a href="#第一章-搭配环境" class="headerlink" title="第一章 搭配环境"></a>第一章 搭配环境</h2><p>1.1 安装Git<br>1.2 安装node.js  下载地址：<a href="http://nodejs.org/download/" target="_blank" rel="noopener">http://nodejs.org/download/</a><br>     由于我的笔记本是windows，所以选择的版本是node-v0.10.33-x64.msi</p>
-<pre><code>直接一直按下一步就可以了
-</code></pre><hr>
-<h2 id="第二章-配置GitHub"><a href="#第二章-配置GitHub" class="headerlink" title="第二章 配置GitHub"></a>第二章 配置GitHub</h2><p>1.1 登陆gitHub.com 注册登陆你的用户<br>1.2 并在github处，建立自己的仓库，repository，（位置在右上角）<br>     注意：：：建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io<br>1.3  配置SSH-Key<br>     首先必须确保有用户名及邮箱 git config –global user.name ‘xxxxx’<br>                                git config –global user.email ‘<a href="mailto:xxx@xx.xxx" target="_blank" rel="noopener">xxx@xx.xxx</a>’<br>     生成密钥：ssh-keygen -t rsa -C ‘上面的邮箱’<br>     然后连续按三个回车，此时我们会看到在三个回车的里面我们生成了<br>     .ssh目录下得到了两个文件：id_rsa（私有秘钥）和id_rsa.pub（公有密钥）<br>     登陆GitHub，进入你的Settings<br>     会看到左边这些目录，点击SSH and GPG keys</p>
-<pre><code>创建New SSH key，title可写可不写，key为私有key带邮箱的
-</code></pre><hr>
-<h2 id="第三章-安装Hexo"><a href="#第三章-安装Hexo" class="headerlink" title="第三章 安装Hexo"></a>第三章 安装Hexo</h2><p>  1.1 $ npm install -g hexo<br>  1.2 在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
-<p>  $ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
-<p>   npm install</p>
-<p>   1.3 可以云hexo server來測試一下當前是否創建成功<br>   1.4 創建新聞中 hexo n ‘文章名字’<br>   1.5 執行hexo +g可以生成動態網頁<br>   1.6部署到github<br>     1.6.1 首先要到hexo文件夾中找到配置_config.yml文件<br>     修改為：</p>
-<pre><code># Deployment
-</code></pre><h2 id="Docs-http-hexo-io-docs-deployment-html"><a href="#Docs-http-hexo-io-docs-deployment-html" class="headerlink" title="Docs: http://hexo.io/docs/deployment.html"></a>Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: github<br>  repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:github用戶名/github用戶名.github.io.git<br>  branch: master</p>
-<p>  保存退出 ：wq<br>  1.7 發佈<br>      hexo d<br>   1.8總結</p>
-<h2 id="每次部署可以按照-hexo-clean-hexo-g-hexo-d"><a href="#每次部署可以按照-hexo-clean-hexo-g-hexo-d" class="headerlink" title="   每次部署可以按照 hexo clean hexo g hexo d"></a>   每次部署可以按照 hexo clean hexo g hexo d</h2><h2 id="第四章-安裝主題"><a href="#第四章-安裝主題" class="headerlink" title="第四章  安裝主題"></a>第四章  安裝主題</h2><p>   1.1将Git Shell 切到/D/Hexo目录下，然后执行下面的命令，将pacman下载到 themes/pacman 目录下。<br>   $ git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="noopener">https://github.com/A-limon/pacman.git</a> themes/pacman<br>   1.2 修改你的博客根目录/D/Hexo下的config.yml配置文件中的theme属性，将其设置为pacman。<br>   1.3 評論框 静态博客要使用第三方评论系统，pacman配置了多说评论系统（/themes/pacman/_config.yml），默认关闭，只要将其打开即可:false-&gt;true。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说，即可发表平评论。</p>
-<h4 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h4><p>duoshuo:<br>  enable: true  ## duoshuo.com<br>  short_name:    ## duoshuo short name.</p>
-<p>  1.4 404頁面<br>    Hexo/source目录下。<br>    <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script></p>
-<pre><code>1.5 安裝插件
-4.4.1 sitemap插件
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 

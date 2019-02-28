@@ -6,19 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>新增商品内容至多表 | Hexo</title>
+  <title>solr | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="/*  * TbItem item, String desc用来接浏览器返回来的数据，里面分成两部分一部分是TbItem item表里面的类型，  * 另外一个是desc  * 要补充TbItem所有缺少的数据，  * 同理下面的DESC也要补充相应数据才能实行sql语句  * */ @Override public int save(TbItem item, String desc) {">
+  <meta name="description" content="solr基本原理1.什么是solrsolr是一个maven中的war项目2.如何与solr进行交互特定api solrj3.进行大量数据检索时使用。4.基于索引进行查询的4.1 顺序查询：从内容的最开始找到内容为止。4.2 反向键索引    那什么叫反响键索引    4.2.1把内容进行拆分    例子：solr基本原理    1.拆词 solr 基本 原理    2.拆分成三个    3.当你搜">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新增商品内容至多表">
-<meta property="og:url" content="http://yoursite.com/2019/02/27/新增商品内容至多表/index.html">
+<meta property="og:title" content="solr">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/solr/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="/*  * TbItem item, String desc用来接浏览器返回来的数据，里面分成两部分一部分是TbItem item表里面的类型，  * 另外一个是desc  * 要补充TbItem所有缺少的数据，  * 同理下面的DESC也要补充相应数据才能实行sql语句  * */ @Override public int save(TbItem item, String desc) {">
+<meta property="og:description" content="solr基本原理1.什么是solrsolr是一个maven中的war项目2.如何与solr进行交互特定api solrj3.进行大量数据检索时使用。4.基于索引进行查询的4.1 顺序查询：从内容的最开始找到内容为止。4.2 反向键索引    那什么叫反响键索引    4.2.1把内容进行拆分    例子：solr基本原理    1.拆词 solr 基本 原理    2.拆分成三个    3.当你搜">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-27T07:48:26.431Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/solr/7.jpg">
+<meta property="og:updated_time" content="2019-02-28T10:18:59.053Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新增商品内容至多表">
-<meta name="twitter:description" content="/*  * TbItem item, String desc用来接浏览器返回来的数据，里面分成两部分一部分是TbItem item表里面的类型，  * 另外一个是desc  * 要补充TbItem所有缺少的数据，  * 同理下面的DESC也要补充相应数据才能实行sql语句  * */ @Override public int save(TbItem item, String desc) {">
+<meta name="twitter:title" content="solr">
+<meta name="twitter:description" content="solr基本原理1.什么是solrsolr是一个maven中的war项目2.如何与solr进行交互特定api solrj3.进行大量数据检索时使用。4.基于索引进行查询的4.1 顺序查询：从内容的最开始找到内容为止。4.2 反向键索引    那什么叫反响键索引    4.2.1把内容进行拆分    例子：solr基本原理    1.拆词 solr 基本 原理    2.拆分成三个    3.当你搜">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/28/solr/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -155,55 +164,130 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-新增商品内容至多表" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-solr" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      新增商品内容至多表
+      solr
     </h1>
   
 
         
-        <a href="/2019/02/27/新增商品内容至多表/" class="archive-article-date">
-  	<time datetime="2019-02-27T07:23:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+        <a href="/2019/02/28/solr/" class="archive-article-date">
+  	<time datetime="2019-02-27T18:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>/*</p>
-<pre><code> * TbItem item, String desc用来接浏览器返回来的数据，里面分成两部分一部分是TbItem item表里面的类型，
- * 另外一个是desc
- * 要补充TbItem所有缺少的数据，
- * 同理下面的DESC也要补充相应数据才能实行sql语句
- * */
-@Override
-public int save(TbItem item, String desc) {
-     long id = IDUtils.genItemId();
-     item.setId(id);
-     Date date = new Date();
-     item.setCreated(date);
-     item.setUpdated(date);
-     item.setStatus((byte)1);
-     int index = tbItemDubboServiceImpl.insTbItem(item);
-     if(index&gt;0){
-     TbItemDesc itemDesc = new TbItemDesc();
-     itemDesc.setItemDesc(desc);
-     itemDesc.setItemId(id);
-     itemDesc.setCreated(date);
-     itemDesc.setUpdated(date);
-     index+=tbItemDescDubboService.insDesc(itemDesc);
-     }
-     if(index==2){
-     return 1;
-     }
-     return 0;
+        <p>solr基本原理<br>1.什么是solr<br>solr是一个maven中的war项目<br>2.如何与solr进行交互<br>特定api solrj<br>3.进行大量数据检索时使用。<br>4.基于索引进行查询的<br>4.1 顺序查询：从内容的最开始找到内容为止。<br>4.2 反向键索引<br>    那什么叫反响键索引<br>    4.2.1把内容进行拆分<br>    例子：solr基本原理<br>    1.拆词 solr 基本 原理<br>    2.拆分成三个<br>    3.当你搜索solr原理<br>    4.会把“solr”原理 拆成solr 原理<br>    5.在进行匹配。<br>所以必须保证solr里面有内容。</p>
+<p>5.流行方案<br>5.1 lucene（solr基于lucene）<br>5.1 百度 api<br>5.2 googleapi</p>
+<p>因为solr是web项目。所以一定要经过中间体。比如tomcat<br>实际工作中，我们在搜索的时候，先把内容发到solr的项目。solr项目搜索到相关内容后，再返回给服务器<br>底层：Httpclient。两个服务器数据的交互。</p>
+<p>安装solr（略）想知道请留言给作者。<br>QQ：431794681 微信 ：13242853540<br>安装完成的效果<br><img src="/2019/02/28/solr/1.jpg" alt="t1"><br>新增 修改 删除的操作面板<br><img src="/2019/02/28/solr/2.jpg" alt="t2"><br>查询操作<br><img src="/2019/02/28/solr/3.jpg" alt="t3"><br>启动tomcat的时候，一定要加上tailf /logs/catalina.out</p>
+<hr>
+<h2 id="第二部分-拆词器"><a href="#第二部分-拆词器" class="headerlink" title="第二部分 拆词器"></a>第二部分 拆词器</h2><ol>
+<li>Solr 默认对中文拆词功能支持不好.<br>1.1 解决方案:使用 IK Analyzer 拆词器</li>
+</ol>
+<p><img src="/2019/02/28/solr/4.jpg" alt="t4"><br>词条拆分<br>在solr中有一个file属性。</p>
+<p><field name="xxx" type="text_ik" indexed="true" stored="true" multivalued="true"><br>name:叫什么名字都可以，显示在上图中。最好见闻知意。<br>type:若要用IK拆词器，就一定是”text_ik”。不能改变。<br>indexed:是否给该列建立索引。true/false<br>stored:是否被存储。在query界面查询结果中，是否把该列显示出来。<br>multiValued:是否有附属文件 true/false</field></p>
+<hr>
+<p>增删改操作面板操作界面：document<br><img src="/2019/02/28/solr/2.jpg" alt="t2"><br>支持：json/xml格式。<br>新增是，必须有id值。且id不能重复<br>例子：</p>
+<p><doc></doc></p>
+<p><field name="id">change.me</field></p>
+<p><field name="title">change.me</field><br><br>修改：只要id已经存在就进行修改。<br>删除:</p>
+<p><delete></delete></p>
+<p><id>id 内容</id></p>
+<p><delete></delete></p>
+<p><commit><br>删除全部：</commit></p>
+<p><delete></delete></p>
+<p><query><em>:</em></query><br></p>
+<h2 id><a href="#" class="headerlink" title></a><commit></commit></h2><h2 id="第三部分-查询"><a href="#第三部分-查询" class="headerlink" title="第三部分 查询"></a>第三部分 查询</h2><p>q: 查询字符串（必须的）。:表示查询所有；keyword:东看 表示按关键字“东看”查询<br>fq: filter query 过滤查询。使用Filter Query可以充分利用Filter Query Cache，提高检索性能。作用：在q查询符合结果中同时是fq查询符合的(类似求交集)，例如：q=mm&amp;fq=date_time:[20081001 TO 20091031]，找关键字mm，并且date_time是20081001到20091031之间的。<br>sort: 排序。格式如下：字段名 排序方式；如advertiserId desc 表示按id字段降序排列查询结果。<br>start,rows:表示查回结果从第几条数据开始显示，共显示多少条。<br>fl: field list。指定查询结果返回哪些字段。多个时以空格“ ”或逗号“,”分隔。不指定时，默认全返回。<br>df: default field默认的查询字段，一般默认指定。<br>Raw Query Parameters:<br>wt: write type。指定查询输出结果格式，我们常用的有json格式与xml格式。在solrconfig.xml中定义了查询输出格式：xml、json、Python、ruby、PHP、phps、custom。<br>indent: 返回的结果是否缩进，默认关闭，用 indent=true | on 开启，一般调试json,php,phps,ruby输出才有必要用这个参数。<br>debugQuery: 设置返回结果是否显示Debug信息。<br>dismax:<br>edismax:<br>hl: high light 高亮。hl=true表示启用高亮<br>hl.fl ： 用空格或逗号隔开的字段列表（指定高亮的字段）。要启用某个字段的highlight功能，就得保证该字段在schema中是stored。如果该参数未被给出，那么就会高 亮默认字段 standard handler会用df参数，dismax字段用qf参数。你可以使用星号去方便的高亮所有字段。如果你使用了通配符，那么要考虑启用 hl.requiredFieldMatch选项。<br>hl.simple.pre：<br>hl.requireFieldMatch: 如果置为true，除非该字段的查询结果不为空才会被高亮。它的默认值是false，意味 着它可能匹配某个字段却高亮一个不同的字段。如果hl.fl使用了通配符，那么就要启用该参数。尽管如此，如果你的查询是all字段（可能是使用 copy-field 指令），那么还是把它设为false，这样搜索结果能表明哪个字段的查询文本未被找到<br>hl.usePhraseHighlighter：如果一个查询中含有短语（引号框起来的）那么会保证一定要完全匹配短语的才会被高亮。<br>hl.highlightMultiTerm：如果使用通配符和模糊搜索，那么会确保与通配符匹配的term会高亮。默认为false，同时hl.usePhraseHighlighter要为true。<br>facet:分组统计，在搜索关键字的同时,能够按照Facet的字段进行分组并统计。<br>facet.query：Facet Query利用类似于filter query的语法提供了更为灵活的Facet.通过facet.query参数，可以对任意字段进行筛选。<br>facet.field：需要分组统计的字段，可以多个。<br>facet.prefix： 表示Facet字段值的前缀。比如facet.field=cpu&amp;facet.prefix=Intel，那么对cpu字段进行Facet查询，返回的cpu都是以Intel开头的， AMD开头的cpu型号将不会被统计在内。<br>spatial: </p>
+<h2 id="spellcheck-拼写检查。"><a href="#spellcheck-拼写检查。" class="headerlink" title="spellcheck: 拼写检查。"></a>spellcheck: 拼写检查。</h2><p>简洁版<br><em>:</em> 查询全部<br>“” 固定查询<br>添加复合属性：什么意思？？？即在<field>目录下面，添加附属类。&lt;</field></p>
+<p><copyfield source dest></copyfield></p>
+<p><field name="bjsxtall" type="text_ik" indexed="true" stored="true" multivalued="true"></field></p>
+<p><copyfield source="bjsxt" dest="bjsxtall"></copyfield></p>
+<p><copyfield source="bjsxt1" dest="bjsxtall"><br>source属性：子属性，把source的属性值赋予dest属性<br>dest属性：父属性。</copyfield></p>
+<p>fq：并列条件。即两个一起查询。<br>sort：排序asc desc<br>start：从哪里开始查   rows:显示几个（默认10个）<br>fl：根据属性列表查询<br>df：默认查询字段</p>
+<p>wt：返回格式，一般用json</p>
+<p>hl：高亮显示<br>hl.fl:属性名<br>hl.somple.pre：例子<span style="color:red"><br>hl.simple.post     </span><br>那么就在里面显示的东西加了css。</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/2019/02/28/solr/5.jpg" alt="t5"></h2><p>/**</p>
+<ul>
+<li>增加删除修改都需要提交事务</li>
+<li><p>@author Administrator<br><em>
+</em>/<br>public class Demo {</p>
+<p> /**</p>
+<ul>
+<li>新增5</li>
+<li>@throws SolrServerException</li>
+<li><p>@throws IOException<br>*/</p>
+<p>public void testInsert() throws SolrServerException, IOException{<br> SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;</p>
+<p> SolrInputDocument doc = new SolrInputDocument(); //我们都是在document中实施增删改。<br> doc.addField(“id”, “005”);<br>//        doc.addField(“bjsxt”, “java和大数据培训”);<br> doc.addField(“bjsxt1”, “大数据4”);</p>
+<p> client.add(doc);  //把数据添加到服务器<br> client.commit(); //一定要记得写，提交事务<br>}</p>
+<p>public void testDelete() throws SolrServerException, IOException{<br> SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;<br> client.deleteById(“001”);<br> client.commit();<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>@Test<br>    public void testQuery() throws SolrServerException, IOException{<br>        SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;</p>
+<pre><code>    //可视化界面左侧条件  重点！！！！！
+    SolrQuery params = new SolrQuery();
+    //设置q
+    params.setQuery(&quot;bjsxtall:*&quot;);
+    //设置分页
+    //从第几条开始查询,从0开始
+    params.setStart(0);
+    //查询几个
+    params.setRows(10);
+
+
+    //启动高亮
+    params.setHighlight(true);
+    //设置高亮列
+    params.addHighlightField(&quot;bjsxt&quot;);
+    //设置前缀
+    params.setHighlightSimplePre(&quot;&lt;span style=&apos;color:red;&apos;&gt;&quot;);
+    //设置后缀
+    params.setHighlightSimplePost(&quot;&lt;/span&gt;&quot;);
+
+    //相当于点击查询按钮, 本质,向solr web服务器发送请求,并接收响应. query对象里面包含了返回json数据
+    QueryResponse response = client.query(params);
+
+    Map&lt;String, Map&lt;String, List&lt;String&gt;&gt;&gt; hh = response.getHighlighting();
+
+
+    //取出docs{}
+    SolrDocumentList solrList = response.getResults();
+
+    for (SolrDocument doc : solrList) {
+        System.out.println(doc.getFieldValue(&quot;id&quot;));
+        System.out.println(&quot;未高亮:&quot;+doc.getFieldValue(&quot;bjsxt&quot;));
+        Map&lt;String, List&lt;String&gt;&gt; map = hh.get(doc.getFieldValue(&quot;id&quot;));
+        System.out.println(map);
+        //list可能为null
+        List&lt;String&gt; list = map.get(&quot;bjsxt&quot;);
+        System.out.println(list);
+        if(list!=null&amp;&amp;list.size()&gt;0){
+            System.out.println(&quot;高亮:&quot;+list.get(0));
+        }else{
+            System.out.println(&quot;没有高亮内容&quot;);
+        }
+        System.out.println(doc.getFieldValue(&quot;bjsxt1&quot;));
+    }
+
 }
-</code></pre><hr>
+</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>solrcloud</p>
+<ol>
+<li>solr 是 web 项目,需要放入到 tomcat 中.依赖多个 tomcat,<br>让多个tomcat 之间能够通信</li>
+<li>需要借助 zookeeper 实现 tomcat 直接</li>
+</ol>
+<p>solrcloud及zookeeprt的搭建我就忽略了，同样有需求请联系本博主<br>qq：431794681 微信：13242853540<br>最终结果：<br><img src="/2019/02/28/solr/6.jpg" alt="t6"></p>
+<hr>
+<p>用solrj操作solrcloud<br><img src="/2019/02/28/solr/7.jpg" alt="t7"></p>
 
       
 
@@ -283,7 +367,7 @@ public int save(TbItem item, String desc) {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/27/新增商品内容至多表/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/28/solr/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +381,9 @@ public int save(TbItem item, String desc) {
   
 <nav id="article-nav">
   
-    <a href="/2019/02/27/购物车需求/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          购物车需求
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vsftpd+nginx上传图片和事务回滚</div>
+    <a href="/2019/02/27/购物车需求/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">购物车需求</div>
       <i class="icon-circle-right"></i>
     </a>
   

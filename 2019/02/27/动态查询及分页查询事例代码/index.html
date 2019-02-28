@@ -17,7 +17,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/02/27/动态查询及分页查询事例代码/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/27/动态查询及分页查询事例代码/2.jpg">
-<meta property="og:updated_time" content="2019-02-27T06:37:36.216Z">
+<meta property="og:updated_time" content="2019-02-27T18:06:43.609Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态查询及分页查询事例代码">
 <meta name="twitter:description" content="首先说一下需求效果：dubbo方事例代码：public class TbContentDubboServiceImpl implements TbContentDubboService {    @Resource    private TbContentMapper tbContentMapper;    @Override    public EasyUIDataGrid selContent">
@@ -188,7 +188,9 @@
 }
 </code></pre><hr>
 <p>分析上面的代码：<br>首先是定义要浏览器输出的内容<br><img src="/2019/02/27/动态查询及分页查询事例代码/2.jpg" alt="t2"><br>需求的是categoryId（内容类目id） page rows<br>所以我们第一行的参数是这么来的<br>然后利用分页插件的jar实行分页功能。<br>新创建内容管理的表内容。通过id来查询所有内容类目内容。<br>把内容存到数组中，利用分页查询的api—— PageInfo<tbcontent>，对象是内容类目的表pojo</tbcontent></p>
-<h2 id="最后把分页查询的内容加入到-EasyUIDataGrid实体类中"><a href="#最后把分页查询的内容加入到-EasyUIDataGrid实体类中" class="headerlink" title="最后把分页查询的内容加入到 EasyUIDataGrid实体类中"></a>最后把分页查询的内容加入到 EasyUIDataGrid实体类中</h2><h2 id="消费方：直接调用雷勇就行，记得类型一致。"><a href="#消费方：直接调用雷勇就行，记得类型一致。" class="headerlink" title="消费方：直接调用雷勇就行，记得类型一致。"></a>消费方：直接调用雷勇就行，记得类型一致。</h2><p>业务处理总结：<br>第一步：查找前端控制器的内容<br>第二部：再jsp中查询上述的内容（ctrl+h）<br>第三部：根据第二部的内容确定返回类型，（可自行创建封装）<br>第四部：写dubbo方的内容，根据需求写实现类<br>第五步：写消费方的代码，具体考虑如何传递给控制器相关数据。<br>第六步：写控制器语句</p>
+<h2 id="最后把分页查询的内容加入到-EasyUIDataGrid实体类中"><a href="#最后把分页查询的内容加入到-EasyUIDataGrid实体类中" class="headerlink" title="最后把分页查询的内容加入到 EasyUIDataGrid实体类中"></a>最后把分页查询的内容加入到 EasyUIDataGrid实体类中</h2><h2 id="消费方：直接调用雷勇就行，记得类型一致。"><a href="#消费方：直接调用雷勇就行，记得类型一致。" class="headerlink" title="消费方：直接调用雷勇就行，记得类型一致。"></a>消费方：直接调用雷勇就行，记得类型一致。</h2><p>业务处理总结：<br>第一步：查找前端控制器的内容<br>第二部：再jsp中查询上述的内容（ctrl+h）<br>第三部：根据第二部的内容确定返回类型，（可自行创建封装）<br>第四部：写dubbo方的内容，根据需求写实现类<br>第五步：写消费方的代码，具体考虑如何传递给控制器相关数据。</p>
+<h2 id="第六步：写控制器语句"><a href="#第六步：写控制器语句" class="headerlink" title="第六步：写控制器语句"></a>第六步：写控制器语句</h2><p>排序方法<br>@Override<br>    public List<tbcontent> selByCount(int count, boolean isSort) {<br>        TbContentExample example = new TbContentExample();<br>        //排序<br>        if(isSort){<br>            example.setOrderByClause(“updated desc”);<br>        }<br>        if(count!=0){<br>            PageHelper.startPage(1, count);<br>            List<tbcontent> list = tbContentMapper.selectByExampleWithBLOBs(example);<br>            PageInfo<tbcontent> pi = new PageInfo&lt;&gt;(list);<br>            return pi.getList();<br>        }else{<br>            return tbContentMapper.selectByExampleWithBLOBs(example);<br>        }<br>    }</tbcontent></tbcontent></tbcontent></p>
+<p>}</p>
 
       
 
