@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/28/solr实战/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/28/solr实战/2.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/28/solr实战/3.jpg">
-<meta property="og:updated_time" content="2019-02-28T15:59:01.530Z">
+<meta property="og:updated_time" content="2019-02-28T23:58:30.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="solr实战">
 <meta name="twitter:description" content="solrcloud实战应用需求分析：由百度网站可以看到，当我们点击百度一下的时候。百度自动从页面转到查询结果页面。结构是你搜索的结果+百度搜索。其中结果为作用域。 由此可以联想：在我们百度一下的时候，我们会把多个值发送给jsp solr完成步骤：   3.1 先配置field，field不能重复   3.2数据初始化    3.3完成搜索功能第一步  配置solrfield用之前配好IK|solr">
@@ -307,19 +307,6 @@ public Map&lt;String, Object&gt; selByQuery(String query,int page,int rows) thro
     return resultMap;
 }
 </code></pre><hr>
-<p>@RequestMapping(“search.html”) //伪静态，快速查询，ajax不允许这种形式<br>                      //model为作用域对象 例如：${}。。。叫做作用域。<br>    public String search(Model model,String q,@RequestParam(defaultValue=”1”) int page,@RequestParam(defaultValue=”12”) int rows){<br>        try {</p>
-<pre><code>        q = new String(q.getBytes(&quot;iso-8859-1&quot;),&quot;utf-8&quot;); //解决中文乱码
-        Map&lt;String, Object&gt; map = tbItemServiceImpl.selByQuery(q, page, rows);
-        model.addAttribute(&quot;query&quot;, q);
-        model.addAttribute(&quot;itemList&quot;, map.get(&quot;itemList&quot;));
-        model.addAttribute(&quot;totalPages&quot;, map.get(&quot;totalPages&quot;));
-        model.addAttribute(&quot;page&quot;, page);
-    } catch (Exception e) {
-        e.printStackTrace();
-    } 
-    return &quot;search&quot;;
-}
-</code></pre><hr>
 </copyfield></field>
       
 
@@ -412,6 +399,15 @@ public Map&lt;String, Object&gt; selByQuery(String query,int page,int rows) thro
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/03/01/httpclient/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          httpclient
+        
+      </div>
+    </a>
   
   
     <a href="/2019/02/28/solr/" id="article-nav-older" class="article-nav-link-wrap">
