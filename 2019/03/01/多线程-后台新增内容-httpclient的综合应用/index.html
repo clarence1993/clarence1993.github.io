@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="/**  新增 @param item @return*/int add(Map&amp;lt;String,Object&amp;gt; map,String desc) throwsSolrServerException, IOException;@Overridepublic int add(Map&amp;lt;String,Object&amp;gt; map,String desc)throws SolrServer">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-01T03:00:57.099Z">
+<meta property="og:updated_time" content="2019-03-01T04:54:07.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程+后台新增内容+httpclient的综合应用">
 <meta name="twitter:description" content="/**  新增 @param item @return*/int add(Map&amp;lt;String,Object&amp;gt; map,String desc) throwsSolrServerException, IOException;@Overridepublic int add(Map&amp;lt;String,Object&amp;gt; map,String desc)throws SolrServer">
@@ -191,7 +191,8 @@
 <hr>
 <h2 id="实现后台同步"><a href="#实现后台同步" class="headerlink" title="实现后台同步"></a>实现后台同步</h2><p>1.引入 httpclient 的依赖<br>2.添加 httpclient 依赖和 HttpClientUtil<br>工具类和在 commons.properties 添加 solr 的 url</p>
 <p>3.<br>3.1 doPostJson()设置请求头中内容类型为 json 把参数以流的<br>形式发送给服务器<br>final TbItem itemFinal = item;<br>final String descFinal = desc;<br>new Thread(){<br>public void run() {<br>Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();<br>map.put(“item”, itemFinal);<br>map.put(“desc”, descFinal);<br>HttpClientUtil.doPostJson(url,<br>JsonUtils.objectToJson(map));<br>//使用 java 代码调用其他项目的控制器<br>};</p>
-<h2 id="start"><a href="#start" class="headerlink" title="}.start();"></a>}.start();</h2>
+<h2 id="start"><a href="#start" class="headerlink" title="}.start();"></a>}.start();</h2><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>我们来一步一步的分析代码<br>1.我们是通过HttpClienrUntil这个工具包来实现两个服务器之间的通信。请参考httpClient的内容。如何发送url请求头，并解析响应体。<br>2.HttpClientUtil.doPostJson(url,JsonUtils.objectToJson(map));<br>这里的url是通过软编码（Value（”solr新增地址url”））private String key，JsonUtils.objectToJson(map))是指要发送的内容，并把内容转换成json格式，以流的形式传递<br>所以，我们在solr的新增controller中，接收请求体时，使用@RequestBody 把接收的流转转换为为对象。跟@ResponseBody 把对象转换为流正好相反。<br>3.由于要传递的参数有多个类，所以这里以hashmap封装。注意在取值时也要以hashmap取。接口也要改。<br>4.因为他这里录入数据库与录入solr是可以异步分开执行的，所以用多线程形式。</p>
+
       
 
       
@@ -283,6 +284,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/03/02/高频面试题系列/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          高频面试题系列
+        
+      </div>
+    </a>
   
   
     <a href="/2019/03/01/httpclient/" id="article-nav-older" class="article-nav-link-wrap">

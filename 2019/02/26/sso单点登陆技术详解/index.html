@@ -8,17 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>sso单点登陆技术详解 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##第一节 cookie 1.客户端存值技术 字符串 1.1 存储位置 客户端浏览器 1.2作业：存值 1.3：只能存字符串 2.cookie运行原理： 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取">
+  <meta name="description" content="##第一节cookie 1.客户端存值技术 字符串 1.1 存储位置 客户端浏览器 1.2作业：存值 1.3：只能存字符串 2.cookie运行原理： 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sso单点登陆技术详解">
 <meta property="og:url" content="http://yoursite.com/2019/02/26/sso单点登陆技术详解/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="##第一节 cookie 1.客户端存值技术 字符串 1.1 存储位置 客户端浏览器 1.2作业：存值 1.3：只能存字符串 2.cookie运行原理： 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取">
+<meta property="og:description" content="##第一节cookie 1.客户端存值技术 字符串 1.1 存储位置 客户端浏览器 1.2作业：存值 1.3：只能存字符串 2.cookie运行原理： 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取到">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-26T06:46:04.864Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/26/sso单点登陆技术详解/1.jpg">
+<meta property="og:updated_time" content="2019-03-02T08:20:35.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sso单点登陆技术详解">
-<meta name="twitter:description" content="##第一节 cookie 1.客户端存值技术 字符串 1.1 存储位置 客户端浏览器 1.2作业：存值 1.3：只能存字符串 2.cookie运行原理： 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取">
+<meta name="twitter:description" content="##第一节cookie 1.客户端存值技术 字符串 1.1 存储位置 客户端浏览器 1.2作业：存值 1.3：只能存字符串 2.cookie运行原理： 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取到">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/26/sso单点登陆技术详解/1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,8 +177,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##第一节</p>
-<p>cookie</p>
+        <p>##第一节<br><img src="/2019/02/26/sso单点登陆技术详解/1.jpg" alt="t1"><br>cookie</p>
 <p>1.客户端存值技术 字符串<br> 1.1 存储位置 客户端浏览器<br> 1.2作业：存值<br> 1.3：只能存字符串</p>
 <p>2.cookie运行原理：<br> 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）<br>   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取到cookie的内容。<br> 2.2服务器内可以产生cookie内容，需要放入到响应对象中 相应给客户端浏览器，要求跳转类型为重定向，客户端浏览器接收相应内容后会把cookie内容存储到指定文件夹内容。<br> 怎么产生cookie和调用cookie<br>request.setMaxAge（）cookie存在最大时长，单位：秒<br>request.setPath（）控制哪些路径能访问cookies<br>request.setDomain（localhost）控制哪些域名</p>
 <p>3.产生cookie<br>4.产生获取cookies</p>
@@ -187,6 +188,32 @@
 <hr>
 <p>##第三章<br>实现登陆功能<br>运行环境：eclipse linux zookeeper redis dubbo spring springMVC Mybatic<br>dubbo 提供的方法：<br>需求1：在demo passport中，创建在dubbo写好的登陆方法，调用此方法，导入用户输入的信息。若有，返回用户信息类型。若无，返回null。<br>判断用户是否为null，成功则按照前端的ajax，返回相应数据，这里返回的是“200”<br>否则返回，输入一段data，用户名或密码有误，请重新登陆。<br>控制器：返回类型：结果类（如下）。<br>根据前端的信息，封装一个结果类，创建这个结果类。待会会把相关参数注入再这个结果类，返回给浏览器。<br>需求3：重点：获取请求头，放入url中。在显示登陆页面控制器方法中，加入@RequestHeader（“Referer”） String url，Model model。补充知识：model，springframework.ui。存放url。发送给浏览器让浏览器接收到url，当登陆成功后，返回原来的页面。<br>需求5：接收cookie，当用户登陆成功后，把用户信息放入到redis中，产生一个cookie<br>       调用cookieUtil工具包，setcookie。<br>jedisdao，参考redis章节。value：存放用户信息，注意要把用户信息转换为json格式，所以要加入JsonUtil.ObjectToJson（用户信息），key：uuid<br>需求4：设置cookie有效时间，在缓存redis中添加expire（key，time）（过期时间方法），单位秒。<br>需求6：退出用户，调用工具类cookieutil进行删除，参数根据前端文档的参数调整。</p>
 <hr>
+<p>package com.ego.passport.service.impl;</p>
+<p>import java.util.UUID;</p>
+<p>import javax.annotation.Resource;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
+<p>import org.springframework.stereotype.Service;</p>
+<p>import com.alibaba.dubbo.config.annotation.Reference;<br>import com.ego.commons.pojo.EgoResult;<br>import com.ego.commons.util.CookieUtils;<br>import com.ego.commons.util.JsonUtils;<br>import com.ego.dubbo.service.TbUserDubboService;<br>import com.ego.passport.service.TbUserService;<br>import com.ego.pojo.TbUser;<br>import com.ego.redis.dao.JedisDao;</p>
+<p>@Service<br>public class TbUserServiceImpl implements TbUserService {<br>    @Reference<br>    private TbUserDubboService tbUserDubboServiceImpl;<br>    @Resource<br>    private JedisDao jedisDaoImpl;<br>    @Override<br>    public EgoResult login(TbUser user,HttpServletRequest request,HttpServletResponse response) {<br>        EgoResult er = new EgoResult();<br>        TbUser userSelect = tbUserDubboServiceImpl.selByUser(user);<br>        if(userSelect!=null){<br>            er.setStatus(200);<br>            //当用户登录成功后把用户信息放入到redis中<br>            String key = UUID.randomUUID().toString();<br>            jedisDaoImpl.set(key, JsonUtils.objectToJson(userSelect));<br>            jedisDaoImpl.expire(key, 60<em>60</em>24<em>7);<br>            //产生Cookie<br>            CookieUtils.setCookie(request, response, “TT_TOKEN”, key, 60</em>60<em>24</em>7);<br>        }else{<br>            er.setMsg(“用户名和密码错误”);<br>        }<br>        return er;</p>
+<pre><code>}
+</code></pre><hr>
+<pre><code>@Override
+public EgoResult getUserInfoByToken(String token) {
+    EgoResult er = new EgoResult();
+    String json = jedisDaoImpl.get(token);
+    if(json!=null&amp;&amp;!json.equals(&quot;&quot;)){
+        TbUser tbUser = JsonUtils.jsonToPojo(json, TbUser.class);
+        //可以把密码清空
+        tbUser.setPassword(null);
+        er.setStatus(200);
+        er.setMsg(&quot;OK&quot;);
+        er.setData(tbUser);
+    }else{
+        er.setMsg(&quot;获取失败&quot;);
+    }
+
+    return er;
+}
+</code></pre><hr>
 
       
 
