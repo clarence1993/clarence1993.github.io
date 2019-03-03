@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>springboot | Hexo</title>
+  <title>springData | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="springboot初级1  springboot入门1.1 springboot 简介1.2 构建springboot 项目以及启动讲解1.3 springboot入门hellowolrd 2 springboot整合web开发2.1 整合servlet2.2 整合filter2.3 访问静态资源2.4 文件上传 3spring boot 视图层技术3.1 整合jsp技术3.2 整合freema">
+  <meta name="description" content="Hibernate JPA标准 Hibernate JPA Spring Date Spring Date JPA Spring Date Reids">
 <meta property="og:type" content="article">
-<meta property="og:title" content="springboot">
-<meta property="og:url" content="http://yoursite.com/2019/03/02/springboot/index.html">
+<meta property="og:title" content="springData">
+<meta property="og:url" content="http://yoursite.com/2019/03/03/springData/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="springboot初级1  springboot入门1.1 springboot 简介1.2 构建springboot 项目以及启动讲解1.3 springboot入门hellowolrd 2 springboot整合web开发2.1 整合servlet2.2 整合filter2.3 访问静态资源2.4 文件上传 3spring boot 视图层技术3.1 整合jsp技术3.2 整合freema">
+<meta property="og:description" content="Hibernate JPA标准 Hibernate JPA Spring Date Spring Date JPA Spring Date Reids">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/02/springboot/1.jpg">
-<meta property="og:updated_time" content="2019-03-03T11:08:42.031Z">
+<meta property="og:updated_time" content="2019-03-03T12:47:18.425Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="springboot">
-<meta name="twitter:description" content="springboot初级1  springboot入门1.1 springboot 简介1.2 构建springboot 项目以及启动讲解1.3 springboot入门hellowolrd 2 springboot整合web开发2.1 整合servlet2.2 整合filter2.3 访问静态资源2.4 文件上传 3spring boot 视图层技术3.1 整合jsp技术3.2 整合freema">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/02/springboot/1.jpg">
+<meta name="twitter:title" content="springData">
+<meta name="twitter:description" content="Hibernate JPA标准 Hibernate JPA Spring Date Spring Date JPA Spring Date Reids">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,165 +155,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-springboot" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-springData" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      springboot
+      springData
     </h1>
   
 
         
-        <a href="/2019/03/02/springboot/" class="archive-article-date">
-  	<time datetime="2019-03-02T12:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-02</time>
+        <a href="/2019/03/03/springData/" class="archive-article-date">
+  	<time datetime="2019-03-03T11:09:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id><a href="#" class="headerlink" title></a><img src="/2019/03/02/springboot/1.jpg" alt="t1"></h2><p>springboot初级<br>1  springboot入门<br>1.1 springboot 简介<br>1.2 构建springboot 项目以及启动讲解<br>1.3 springboot入门hellowolrd</p>
-<p>2 springboot整合web开发<br>2.1 整合servlet<br>2.2 整合filter<br>2.3 访问静态资源<br>2.4 文件上传</p>
-<p>3spring boot 视图层技术<br>3.1 整合jsp技术<br>3.2 整合freemarker<br>3.3 整合Thymeleaf</p>
-<p>4springboot整合持久层技术</p>
-<h2 id="4-1-使用spring-boot整合MyBatis"><a href="#4-1-使用spring-boot整合MyBatis" class="headerlink" title="4.1 使用spring boot整合MyBatis"></a>4.1 使用spring boot整合MyBatis</h2><p>##第一章<br>1.使用maven创建<br>创建maven，在pom文件里面输入<br>注意：<br>packaging选jar，<br>groupId——org.springframework.boot<br>artifactId——spring-boot-starter-parent</p>
-<h2 id="version-1-5-10-根据自己定"><a href="#version-1-5-10-根据自己定" class="headerlink" title="version 1.5.10 //根据自己定"></a>version 1.5.10 //根据自己定</h2><p>修改jdk版本</p>
-<p>在pom中<br>加入</p>
-<p><properties>标签 &lt;java.version&gt;1.7鼠标右键  update maven </properties></p>
-<p>注入启动器</p>
-<p><dependencies> </dependencies></p>
-<p><dependency> </dependency></p>
-<p><group> org.springframework.boot </group></p>
-<h2 id="spring-boot-starter-web"><a href="#spring-boot-starter-web" class="headerlink" title="spring-boot-starter-web"></a><artifactid>spring-boot-starter-web</artifactid></h2><p>spring-boot-starter-web包<br>支持全栈式的web开发，包括tomcat和springMvC等jar包<br>spring-boot-starter-jdbc<br>支持spring以jdbc方式操作数据库的jar包的集合<br>spring-boot-starter-redis</p>
-<h2 id="支持redis数据缓存操作"><a href="#支持redis数据缓存操作" class="headerlink" title="支持redis数据缓存操作"></a>支持redis数据缓存操作</h2><p>入门实例<br>其中controller与springMVC没什么不同<br>不过许多包都不用导入————这就是springboot优势</p>
-<p>启动器<br>/**</p>
-<ul>
-<li>SpringBoot 启动类</li>
-<li>@author Administrator<br><em>
-</em>/<br>@SpringBootApplication<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<hr>
-<hr>
-<p>2 springboot整合web开发<br>2.1 整合servlet<br>2.2 整合filter<br>2.3 访问静态资源<br>2.4 文件上传</p>
-<hr>
-<p>/*<em>
-</em>SpringBoot 整合 Servlet 方式一<br><em>
-</em><servlet></servlet></p>
-<ul>
-<li><servlet-name>FirstServlet</servlet-name></li>
-<li><servlet-class>com.bjsxt.servlet.FirstServlet</servlet-class><br><em>
-</em><br>*<servlet-mapping></servlet-mapping></li>
-<li><servlet-name>FirstServlet</servlet-name></li>
-<li><url-pattern>/first</url-pattern><br><em>
-</em><br>*/<br>@WebServlet(name=”FirstServlet”,urlPatterns=”/first”)<br>public class FirstServlet extends HttpServlet {<br>@Override<br>protected void doGet(HttpServletRequest req, HttpServletResponse resp)<br>throws ServletException, IOException {<br>// TODO Auto-generated method stub<br>super.doGet(req, resp);<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>SpringBoot 整合 Servlet 方式一<br><em>
-</em><br>*/<br>@SpringBootApplication<br>@ServletComponentScan //在 springBoot 启动时会扫描@WebServlet，并将该类实例<br>化<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<p>/<strong><br><em>SpringBoot 整合 Servlet 方式二
-</em><br>*/<br>public class SecondServlet extends HttpServlet {<br>@Override<br>protected void doGet(HttpServletRequest req, HttpServletResponse resp)<br>throws ServletException, IOException {<br>System.out.println(“SecondServlet……….”);<br>}<br>}<br>/</strong></p>
-<ul>
-<li>SpringBoot 整合 Servlet 方式二<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App2 {<br>public static void main(String[] args) {<br>SpringApplication.run(App2.class, args);<br>}<br>@Bean<br>public ServletRegistrationBean getServletRegistrationBean(){<br>ServletRegistrationBean bean = new ServletRegistrationBean(new<br>SecondServlet());<br>bean.addUrlMappings(“/second”);<br>return bean;<br>}<br>}</li>
-</ul>
-<p>总结：一个采用注解一个采用实例化。根据需要是否创建复杂</p>
-<hr>
-<p>2.2 整合filter<br>/*<em>
-</em>SpringBoot 整合 Filter 方式一：注解方式<br>*<filter></filter></p>
-<ul>
-<li><filter-name>FirstFilter</filter-name></li>
-<li><filter-class>com.bjsxt.filter.FirstFilter</filter-class><br><em>
-</em><filter-mapping></filter-mapping></li>
-<li><filter-name>FirstFilter</filter-name></li>
-<li><url-pattern>/first</url-pattern><br><em>
-</em>/<br>//@WebFilter(filterName=”FirstFilter”,urlPatterns={“<em>.do”,”</em>.jsp”})</li>
-</ul>
-<p>@WebFilter(filterName=”FirstFilter”,urlPatterns=”/first”)<br>public class FirstFilter implements Filter {<br>@Override<br>public void destroy() {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void doFilter(ServletRequest arg0, ServletResponse arg1,<br>FilterChain arg2)<br>throws IOException, ServletException {<br>System.out.println(“进入 Filter”);<br>arg2.doFilter(arg0, arg1);<br>System.out.println(“离开 Filter”);<br>}<br>@Override<br>public void init(FilterConfig arg0) throws ServletException {<br>// TODO Auto-generated method stub<br>}<br>}<br>/*<em>
-</em>SpringBoot 整合 Filter 方式一<br><em>
-</em>/<br>@SpringBootApplication<br>@ServletComponentScan<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>/*<em>
-</em><br><em>SpringBoot 整合 Filter 方式二
-</em><br>*/<br>public class SecondFilter implements Filter {<br>@Override<br>public void destroy() {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void doFilter(ServletRequest arg0, ServletResponse arg1,<br>FilterChain arg2)<br>throws IOException, ServletException {<br>System.out.println(“进入 SecondFilter”);<br>arg2.doFilter(arg0, arg1);<br>System.out.println(“离开 SecondFilter”);<br>}<br>@Override<br>public void init(FilterConfig arg0) throws ServletException {<br>// TODO Auto-generated method stub<br>}<br>}</p>
-<p>/**</p>
-<ul>
-<li>SpringBoot 整合 Filter 方式二<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App2 {<br>public static void main(String[] args) {<br>SpringApplication.run(App2.class, args);<br>}<br>/**</li>
-<li>注册 Servlet</li>
-<li>@return<br>*/<br>@Bean<br>public ServletRegistrationBean getServletRegistrationBean(){<br>ServletRegistrationBean bean = new ServletRegistrationBean(new<br>SecondServlet());<br>bean.addUrlMappings(“/second”);<br>return bean;<br>}<br>/**</li>
-<li>注册 Filter<br><em>/<br>@Bean<br>public FilterRegistrationBean getFilterRegistrationBean(){<br>FilterRegistrationBean bean = new FilterRegistrationBean(new<br>SecondFilter());<br>//bean.addUrlPatterns(new String[]{“</em>.do”,”*.jsp”});<br>bean.addUrlPatterns(“/second”);<br>return bean;<br>}<br>}</li>
-</ul>
-<hr>
-<hr>
-<p>/**</p>
-<ul>
-<li>springBoot 整合 Listener<br><em>
-</em><listener></listener></li>
-<li><listener-class>com.bjsxt.listener.FirstListener</listener-class><br><em>
-</em>/<br>@WebListener<br>public class FirstListener implements ServletContextListener {<br>@Override<br>public void contextDestroyed(ServletContextEvent arg0) {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void contextInitialized(ServletContextEvent arg0) {<br>System.out.println(“Listener…init……”);<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>springBoot 整合 Listener 方式一<br><em>
-</em><br>*/<br>@SpringBootApplication<br>@ServletComponentScan<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<hr>
-<p>/**</p>
-<ul>
-<li>springBoot 整合 Listener 方式二。<br><em>
-</em><br>*/<br>public class SecondListener implements ServletContextListener {<br>@Override<br>public void contextDestroyed(ServletContextEvent arg0) {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void contextInitialized(ServletContextEvent arg0) {<br>System.out.println(“SecondListener..init…..”);<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>SpringBoot 整合 Listener 方式二<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App2 {<br>public static void main(String[] args) {<br>SpringApplication.run(App2.class, args);<br>}<br>/**</li>
-<li>注册 listener<br>*/<br>@Bean<br>public ServletListenerRegistrationBean<secondlistener><br>getServletListenerRegistrationBean(){<br>ServletListenerRegistrationBean<secondlistener> bean= new<br>ServletListenerRegistrationBean<secondlistener>(new SecondListener());<br>return bean;<br>}<br>}</secondlistener></secondlistener></secondlistener></li>
-</ul>
-<hr>
-<hr>
-<p>四，访问静态</p>
-<ol>
-<li><p>SpringBoot 从 classpath/static 的<br>文件再resources下一定要在static文件夹下</p>
-</li>
-<li><p>ServletContext 根目<br>在src/main/webapp 目录名称必须是webapp</p>
-</li>
-</ol>
-<hr>
-<hr>
-<p>五，文件上传</p>
-<p>/**</p>
-<ul>
-<li>SpringBoot 文件上传<br><em>
-</em><br><em>/<br>//@Controller<br>@RestController //表示该类下的方法的返回值会自动做 json 格式的转换<br>public class FileUploadController {<br>/</em></li>
-<li>处理文件上传<br>*/<br>@RequestMapping(“/fileUploadController”)<br>public Map&lt;String, Object&gt; fileUpload(MultipartFile filename)throws<br>Exception{<br>System.out.println(filename.getOriginalFilename());<br>filename.transferTo(new<br>File(“e:/“+filename.getOriginalFilename()));<br>Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();<br>map.put(“msg”, “ok”);<br>return map;<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>SpringBoot 文件上传<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<p>设置单个上传文件的大小<br>spring.http.multipart.maxFileSize=200MB<br>设置一次请求上传文件的总容量<br>spring.http.multipart.maxRequestSize=200</p>
-<hr>
-<hr>
-<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><p>整合 jsp<br>整合 freemarker </p>
-<h2 id="整合-Thymeleaf"><a href="#整合-Thymeleaf" class="headerlink" title="整合 Thymeleaf"></a>整合 Thymeleaf</h2><p>要使用jsp项目的时候，必须在pom加入一下配置信息。<br><!-- jstl --></p>
-<p><dependency></dependency></p>
-<p><groupid>javax.servlet</groupid></p>
-<p><artifactid>jstl</artifactid><br><br><!-- jasper --></p>
-<p><dependency></dependency></p>
-<p><groupid>org.apache.tomcat.embed</groupid></p>
-<p><artifactid>tomcat-embed-jasper</artifactid></p>
-<p><scope>provided</scope></p>
-<h2 id="-2"><a href="#-2" class="headerlink" title></a></h2><p>springboot的视图解析器<br>3,创建 springBoot 的全局配置文件，application.properties<br>spring.mvc.view.prefix=/WEB-INF/jsp/spring.mvc.view.suffix=.j</p>
-<p><!-- freemarker 启动器的坐标 --><dependency><groupid>org.springframework.boot</groupid><artifactid>spring-boot-starter-freemarker</artifactid>&lt;/dependenc</dependency></p>
-<hr>
-<p>后面两个待续。。。。。。。。</p>
-<hr>
-<p>Springboot 整合持久层框架</p>
+        <p>Hibernate</p>
+<p>JPA标准</p>
+<p>Hibernate JPA</p>
+<p>Spring Date</p>
+<p>Spring Date JPA</p>
+<p>Spring Date Reids</p>
 
       
 
@@ -395,7 +260,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/02/springboot/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/03/springData/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -409,18 +274,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/03/springData/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/03/03/sql优化/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          springData
+          sql优化
         
       </div>
     </a>
   
   
-    <a href="/2019/03/02/高频面试题系列/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">高频面试题系列</div>
+    <a href="/2019/03/02/springboot/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">springboot</div>
       <i class="icon-circle-right"></i>
     </a>
   
