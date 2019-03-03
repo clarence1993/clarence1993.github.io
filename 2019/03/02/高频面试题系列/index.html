@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="public static void main(String[] args) {      int i =1;     System.out.println(i);     i = i++;     System.out.println(i);     int j =i++;     System.out.println(j);     int k =i+ ++i * i++;     Syste">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-02T08:22:45.784Z">
+<meta property="og:updated_time" content="2019-03-02T12:05:19.053Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高频面试题系列">
 <meta name="twitter:description" content="public static void main(String[] args) {      int i =1;     System.out.println(i);     i = i++;     System.out.println(i);     int j =i++;     System.out.println(j);     int k =i+ ++i * i++;     Syste">
@@ -192,6 +192,21 @@
 </code></pre><hr>
 <p>赋值=，最后计算<br>=右边的从左到右加载值依次压入操作数栈<br>实际先算哪个，看运算符优先级<br>自增 自减做操都是直接修改变量的值，不经过操作数栈<br>最后的赋值之前，临时结果也是存储在操作数栈</p>
 <hr>
+<p>Signleton—-单例设计模式<br>要点：<br>一是某个类只能有一个实例；  构造器私有化<br>二是它必须自行创建这个实例；   含有一个该类的静态变量来保存这个唯一的实例<br>三是它必须自行向整个系统提供这个实例   对外提供获取该实例对象的方式：（1）直接暴露  （2）用静态变量的get方法获取</p>
+<hr>
+<p>饿汉式<br>直接创建实例对象，不管你是否需要这个对象都会创建<br>public static final Singleton1 I = new Singleton1(); //I是常量<br>private Singleton(){}  //构造器私有化<br>枚举：现在<br>public enum Singleton{<br>  I<br>}<br>静态代码块：适合创建复杂对象<br>public static final Singleton1;<br>static{  I = new Singleton1();  }</p>
+<h2 id="publicSingleton"><a href="#publicSingleton" class="headerlink" title="publicSingleton(){}"></a>publicSingleton(){}</h2><p>懒汉式：<br>延迟创建这个实例对象</p>
+<p>（1）构造器私有化<br>（2）用一个静态变量保存这个唯一的实例<br>（3）提供一本静态方法，获取这个实例对象<br>private static singleton I;<br>private Singleton(){}<br>public static Singleton getI(){<br>  if(i==null){<br>   i =new Singleton();<br>  }</p>
+<h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p>安全版<br>private static class inner{<br>private static Singleton i;<br>}<br>private Singleton<br>private static lei geti{<br>  return lei.inner.i;</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>类初始化过程<br>1 一个类要创建实例需要先加载并初始化该类<br>   main方法所在的类需要先加载和初始化<br>2一个子类要初始化需要初始化父类</p>
+<h2 id="3一个类初始化就是执行clinit-方法"><a href="#3一个类初始化就是执行clinit-方法" class="headerlink" title="3一个类初始化就是执行clinit()方法"></a>3一个类初始化就是执行clinit()方法</h2><p>先执行<br>1.静态代码方法<br>2.静态代码块</p>
+<p>实例初始化</p>
+<p><init>()方法<br>它可以重载有多个，有几个构造器就有几个<init>方法、</init></init></p>
+<p><init>()方法由非静态实例变量显示赋值代码和非静态代码块（从上到<br>下按顺序执行）/对应构造器代码组成（最后执行）。<br>super();<br>i = test();<br>子类的非静态代码块<br>子类的无参构造</init></p>
+<p>非静态方法其实有一个默认的对象this<br>this 构造器 </p>
+<hr>
+<p>哪些方法不可以被重写</p>
+<p>对象的多态性</p>
 
       
 
@@ -284,6 +299,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/03/02/springboot/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          springboot
+        
+      </div>
+    </a>
   
   
     <a href="/2019/03/01/多线程-后台新增内容-httpclient的综合应用/" id="article-nav-older" class="article-nav-link-wrap">
