@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>高并发编程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="##高并发编程基础   强烈推荐Java并发编程之美 1线程安全性 1.1什么是线程安全性 1.2原子性整个程序中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。原子性操作：原子性在一个操作是不可中断的，要么全部执行成功要么全部执行失败，有着“同生共死”的感觉。及时在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。1.2.1 竞态条件当某个计算的正确性取决于多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高并发编程">
+<meta property="og:url" content="http://yoursite.com/2019/03/04/高并发编程/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="##高并发编程基础   强烈推荐Java并发编程之美 1线程安全性 1.1什么是线程安全性 1.2原子性整个程序中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。原子性操作：原子性在一个操作是不可中断的，要么全部执行成功要么全部执行失败，有着“同生共死”的感觉。及时在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。1.2.1 竞态条件当某个计算的正确性取决于多">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-04T14:18:51.436Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="高并发编程">
+<meta name="twitter:description" content="##高并发编程基础   强烈推荐Java并发编程之美 1线程安全性 1.1什么是线程安全性 1.2原子性整个程序中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。原子性操作：原子性在一个操作是不可中断的，要么全部执行成功要么全部执行失败，有着“同生共死”的感觉。及时在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。1.2.1 竞态条件当某个计算的正确性取决于多">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -151,485 +155,93 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-新增商品内容至多表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="n-高并发编程" class="article article-type-n " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/新增商品内容至多表/">新增商品内容至多表</a>
+    <h1 class="article-title" itemprop="name">
+      高并发编程
     </h1>
   
 
         
-        <a href="/2019/02/27/新增商品内容至多表/" class="archive-article-date">
-  	<time datetime="2019-02-27T07:23:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
+        <a href="/2019/03/04/高并发编程/" class="archive-article-date">
+  	<time datetime="2019-03-04T04:50:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>/*</p>
-<pre><code> * TbItem item, String desc用来接浏览器返回来的数据，里面分成两部分一部分是TbItem item表里面的类型，
- * 另外一个是desc
- * 要补充TbItem所有缺少的数据，
- * 同理下面的DESC也要补充相应数据才能实行sql语句
- * */
-@Override
-public int save(TbItem item, String desc) {
-     long id = IDUtils.genItemId();
-     item.setId(id);
-     Date date = new Date();
-     item.setCreated(date);
-     item.setUpdated(date);
-     item.setStatus((byte)1);
-     int index = tbItemDubboServiceImpl.insTbItem(item);
-     if(index&gt;0){
-     TbItemDesc itemDesc = new TbItemDesc();
-     itemDesc.setItemDesc(desc);
-     itemDesc.setItemId(id);
-     itemDesc.setCreated(date);
-     itemDesc.setUpdated(date);
-     index+=tbItemDescDubboService.insDesc(itemDesc);
-     }
-     if(index==2){
-     return 1;
-     }
-     return 0;
-}
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/新增商品内容至多表/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vsftpd-nginx上传图片和事务回滚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/">vsftpd+nginx上传图片和事务回滚</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/" class="archive-article-date">
-  	<time datetime="2019-02-27T06:40:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>效果图</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/vsftpd-nginx上传图片和事务回滚/1.jpg" alt="t1"></h2><p>linux：vsftpd+nginx必须要安装</p>
-<p>插件：FtpUtil.java IDUtils<br>其中FtpUtil中，FtpUtil的FtpClient里要导入common-nets包<br>在maven中加入scope provided<br>加入配置文件：commons.properties(里面是地址：端号 用户 密码 存入地址)<br>利用spring的扫描属性文件功能扫描：<br>&lt;context:property-placeholder location=”classpath<em>:</em>.properties”/&gt;</p>
-<h2 id="作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。"><a href="#作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。" class="headerlink" title="作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。"></a>作用：在写实现类，通过value注解倒入相关信息，当在调用FtpUtil工具类方便。</h2><p>@Service<br>public class PicServiceImpl implements PicService {</p>
-<pre><code>@Value(&quot;${ftpclient.host}&quot;)
-private String host;
-</code></pre><p>@Value(“${ftpclient.port}”)<br>private int port;<br>@Value(“${ftpclient.username}”)<br>private String username;<br>@Value(“${ftpclient.password}”)<br>private String password;<br>@Value(“${ftpclient.basepath}”)<br>private String basepath;<br>@Value(“${ftpclient.filepath}”)<br>private String filepath;<br>/*</p>
-<ul>
-<li>调用ftp文件传输的类</li>
-<li>定义文件名称String fileimagename：</li>
-<li>调用FtpUtil.uploadFile上传图片的方法，返回一个boolean的类型来判断图片是否上传成功及返回上传内容给客户看，</li>
-<li>进行回溯功能返回给浏览器。</li>
-<li>*/<br> @Override<br> public Map&lt;String, Object&gt; upload(MultipartFile file) throws IOException {<pre><code>String fileimagename=IDUtils.genImageName()+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(&quot;.&quot;));
-// TODO Auto-generated method stub
-boolean result = FtpUtil.uploadFile(host, port, username, password, basepath, filepath, fileimagename, file.getInputStream());
-Map&lt;String, Object&gt; map =new HashMap&lt;&gt;();
-if(result) {
-    map.put(&quot;error&quot;, 0);
-    map.put(&quot;url&quot;, &quot;http://&quot;+host+&quot;/&quot;+fileimagename);
-}else {
-    map.put(&quot;error&quot;, 1);
-    map.put(&quot;message&quot;, &quot;图片上传失败&quot;);
-}
-return map ;
-</code></pre> }</li>
-</ul>
-<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>@Controller<br>public class PicController {<br>    @Resource<br>    private PicService picServiceImpl;</p>
-<pre><code>/*
- * 实现图片传输MultipartFile：是网络传输的springweb类，返回的是一个map类型
- * */
-@RequestMapping(&quot;pic/upload&quot;)
-@ResponseBody
-public Map&lt;String,Object&gt; upload(MultipartFile uploadFile){
-     Map&lt;String,Object&gt; map =null;
-    try {
- map =    picServiceImpl.upload(uploadFile);
-    } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-    return map;
-}
-</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>事务回滚：<br>将两个表的增删改除信息封装到一个方法。在dubbo方法里面封装信息。用try cathch判断是否新增成功。<br>在spring中tx：advice加入rollback-for=java.lang.exception</p>
-<pre><code>int index = 0;
-
-index = tbItemDubboServiceImpl.insTbItemDesc(item, itemDesc);
-System.out.println(&quot;index:&quot; + index);
-return index;
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/vsftpd-nginx上传图片和事务回滚/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-动态查询及分页查询事例代码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/动态查询及分页查询事例代码/">动态查询及分页查询事例代码</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/27/动态查询及分页查询事例代码/" class="archive-article-date">
-  	<time datetime="2019-02-27T05:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先说一下需求效果：<br><img src="/2019/02/27/动态查询及分页查询事例代码/1.jpg" alt="t1"><br>dubbo方事例代码：<br>public class TbContentDubboServiceImpl implements TbContentDubboService {<br>    @Resource<br>    private TbContentMapper tbContentMapper;<br>    @Override<br>    public EasyUIDataGrid selContentByPage(long categoryId, int page, int rows) {<br>        PageHelper.startPage(page, rows);<br>        TbContentExample example = new TbContentExample();<br>        if(categoryId!=0){<br>            example.createCriteria().andCategoryIdEqualTo(categoryId);<br>        }<br>        List<tbcontent> list = tbContentMapper.selectByExampleWithBLOBs(example);</tbcontent></p>
-<pre><code>    PageInfo&lt;TbContent&gt; pi = new PageInfo&lt;&gt;(list);
-
-    EasyUIDataGrid datagrid = new EasyUIDataGrid();
-    datagrid.setRows(pi.getList());
-    datagrid.setTotal(pi.getTotal());
-    return datagrid;
-}
-</code></pre><hr>
-<p>分析上面的代码：<br>首先是定义要浏览器输出的内容<br><img src="/2019/02/27/动态查询及分页查询事例代码/2.jpg" alt="t2"><br>需求的是categoryId（内容类目id） page rows<br>所以我们第一行的参数是这么来的<br>然后利用分页插件的jar实行分页功能。<br>新创建内容管理的表内容。通过id来查询所有内容类目内容。<br>把内容存到数组中，利用分页查询的api—— PageInfo<tbcontent>，对象是内容类目的表pojo</tbcontent></p>
-<h2 id="最后把分页查询的内容加入到-EasyUIDataGrid实体类中"><a href="#最后把分页查询的内容加入到-EasyUIDataGrid实体类中" class="headerlink" title="最后把分页查询的内容加入到 EasyUIDataGrid实体类中"></a>最后把分页查询的内容加入到 EasyUIDataGrid实体类中</h2><h2 id="消费方：直接调用雷勇就行，记得类型一致。"><a href="#消费方：直接调用雷勇就行，记得类型一致。" class="headerlink" title="消费方：直接调用雷勇就行，记得类型一致。"></a>消费方：直接调用雷勇就行，记得类型一致。</h2><p>业务处理总结：<br>第一步：查找前端控制器的内容<br>第二部：再jsp中查询上述的内容（ctrl+h）<br>第三部：根据第二部的内容确定返回类型，（可自行创建封装）<br>第四部：写dubbo方的内容，根据需求写实现类<br>第五步：写消费方的代码，具体考虑如何传递给控制器相关数据。</p>
-<h2 id="第六步：写控制器语句"><a href="#第六步：写控制器语句" class="headerlink" title="第六步：写控制器语句"></a>第六步：写控制器语句</h2><p>排序方法<br>@Override<br>    public List<tbcontent> selByCount(int count, boolean isSort) {<br>        TbContentExample example = new TbContentExample();<br>        //排序<br>        if(isSort){<br>            example.setOrderByClause(“updated desc”);<br>        }<br>        if(count!=0){<br>            PageHelper.startPage(1, count);<br>            List<tbcontent> list = tbContentMapper.selectByExampleWithBLOBs(example);<br>            PageInfo<tbcontent> pi = new PageInfo&lt;&gt;(list);<br>            return pi.getList();<br>        }else{<br>            return tbContentMapper.selectByExampleWithBLOBs(example);<br>        }<br>    }</tbcontent></tbcontent></tbcontent></p>
-<p>}</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/动态查询及分页查询事例代码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-redis缓存技术" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/redis缓存技术/">redis缓存技术</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/27/redis缓存技术/" class="archive-article-date">
-  	<time datetime="2019-02-27T04:20:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一章<br>效果图：</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/redis缓存技术/1.jpg" alt="t1"></h2><p>配置redis集群;这部分忽略。如果有兴趣，我会在后面详细写。<br>这篇文章主要写：怎么熟练运用redis技术<br>环境：linux eclipse</p>
-<p>##第一<br>创建redis pom<br>并导入applicationContext-jedis.xml</p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
-<p><beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
-    "><br>    &lt;context:component-scan base-package=”com.ego.redis.dao.impl”&gt;&lt;/context:component-scan&gt;</beans></p>
-<pre><code>&lt;!-- 配置jedis连接池 --&gt;
-&lt;bean id=&quot;jedisPoolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;
-    &lt;!-- 最大连接数 --&gt;
-    &lt;property name=&quot;maxTotal&quot; value=&quot;30&quot; /&gt;
-    &lt;!-- 最大空闲连接数 --&gt;
-    &lt;property name=&quot;maxIdle&quot; value=&quot;10&quot; /&gt;
-    &lt;!-- 每次释放连接的最大数目 --&gt;
-    &lt;property name=&quot;numTestsPerEvictionRun&quot; value=&quot;1024&quot; /&gt;
-    &lt;!-- 释放连接的扫描间隔（毫秒） --&gt;
-    &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;30000&quot; /&gt;
-    &lt;!-- 连接最小空闲时间 --&gt;
-    &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;1800000&quot; /&gt;
-    &lt;!-- 连接空闲多久后释放, 当空闲时间&gt;该值 且 空闲连接&gt;最大空闲连接数 时直接释放 --&gt;
-    &lt;property name=&quot;softMinEvictableIdleTimeMillis&quot; value=&quot;10000&quot; /&gt;
-    &lt;!-- 获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 --&gt;
-    &lt;property name=&quot;maxWaitMillis&quot; value=&quot;1500&quot; /&gt;
-    &lt;!-- 在获取连接的时候检查有效性, 默认false --&gt;
-    &lt;property name=&quot;testOnBorrow&quot; value=&quot;true&quot; /&gt;
-    &lt;!-- 在空闲时检查有效性, 默认false --&gt;
-    &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot; /&gt;
-    &lt;!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true --&gt;
-    &lt;property name=&quot;blockWhenExhausted&quot; value=&quot;false&quot; /&gt;
-&lt;/bean&gt;
-
-
-
-&lt;!-- jedisCluster --&gt;
-&lt;bean id=&quot;jedisClients&quot; class=&quot;redis.clients.jedis.JedisCluster&quot;&gt;
-    &lt;constructor-arg name=&quot;poolConfig&quot; ref=&quot;jedisPoolConfig&quot;/&gt;
-    &lt;constructor-arg name=&quot;nodes&quot;&gt;
-        &lt;set&gt;
-            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
-                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
-                &lt;constructor-arg name=&quot;port&quot; value=&quot;7001&quot;/&gt;
-            &lt;/bean&gt;
-            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
-                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
-                &lt;constructor-arg name=&quot;port&quot; value=&quot;7002&quot;/&gt;
-            &lt;/bean&gt;
-            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
-                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
-                &lt;constructor-arg name=&quot;port&quot; value=&quot;7003&quot;/&gt;
-            &lt;/bean&gt;
-            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
-                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
-                &lt;constructor-arg name=&quot;port&quot; value=&quot;7004&quot;/&gt;
-            &lt;/bean&gt;
-            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
-                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
-                &lt;constructor-arg name=&quot;port&quot; value=&quot;7005&quot;/&gt;
-            &lt;/bean&gt;
-            &lt;bean class=&quot;redis.clients.jedis.HostAndPort&quot;&gt;
-                &lt;constructor-arg name=&quot;host&quot; value=&quot;192.168.138.131&quot;/&gt;
-                &lt;constructor-arg name=&quot;port&quot; value=&quot;7006&quot;/&gt;
-            &lt;/bean&gt;
-        &lt;/set&gt;
-    &lt;/constructor-arg&gt;
-&lt;/bean&gt;
-</code></pre><h2 id="-1"><a href="#-1" class="headerlink" title></a></h2><p>##第二<br>maven导入包<br>redis.clients<br>jedis<br>spring包（导入注解）<br>dao类<br>public interface JedisDao {<br>    /**</p>
-<pre><code> * 判断key是否存在
- * @param key
- * @return
- */
-Boolean exists(String key);
-
-/**
- * 删除
- * @param key
- * @return
- */
-Long del(String key);
-
-/**
- * 设置值
- * @param key
- * @param value
- * @return
- */
-String set(String key,String value);
-
-/**
- * 取值
- * @param key
- * @return
- */
-String get(String key);
-
-long expire(String key, int i);
-</code></pre><p>}</p>
-<p>JedisDaoImpl包<br>@Repository<br>public class JedisDaoImpl implements JedisDao{<br>    @Resource<br>    private JedisCluster jedisClients;<br>    @Override<br>    public Boolean exists(String key) {<br>        return jedisClients.exists(key);<br>    }</p>
-<pre><code>@Override
-public Long del(String key) {
-    return jedisClients.del(key);
-}
-
-@Override
-public String set(String key, String value) {
-    return jedisClients.set(key, value);
-}
-
-@Override
-public String get(String key) {
-    return jedisClients.get(key);
-}
-
-@Override
-public long expire(String key, int i) {
-    // TODO Auto-generated method stub
-    return jedisClients.expire(key, i);
-}
-</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>@Service<br>public class TbContentServiceImpl implements TbContentService {<br>    @Reference<br>    private TbContentDubboService tbContentDubboServiceImpl;<br>    @Resource<br>    private JedisDao JedisDaoImpl;<br>    @Value(“${redis.bigpic.key}”)<br>    private String key;<br>    @Override<br>    public String showBigPic() {<br>        //先判断在redis中是否存在<br>        if(JedisDaoImpl.exists(key)){<br>            String value = JedisDaoImpl.get(key);<br>            if(value!=null&amp;&amp;!value.equals(“”)){<br>                return value;<br>            }<br>        }</p>
-<pre><code>    //如果不存在从mysql中取,取完后放入redis中
-    List&lt;TbContent&gt; list = tbContentDubboServiceImpl.selByCount(6, true);
-
-    List&lt;Map&lt;String,Object&gt;&gt; listResult = new ArrayList&lt;&gt;();
-    for (TbContent tc : list) {
-        Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();
-
-        map.put(&quot;srcB&quot;, tc.getPic2());
-        map.put(&quot;height&quot;, 240);
-        map.put(&quot;alt&quot;, &quot;对不起,加载图片失败&quot;);
-        map.put(&quot;width&quot;, 670);
-        map.put(&quot;src&quot;, tc.getPic());
-        map.put(&quot;widthB&quot;, 550);
-        map.put(&quot;href&quot;, tc.getUrl() );
-        map.put(&quot;heightB&quot;, 240);
-
-        listResult.add(map);
-    }
-    String listJson = JsonUtils.objectToJson(listResult);
-    //把数据放入到redis中
-    JedisDaoImpl.set(key, listJson);
-    return listJson;
-}
-</code></pre><h2 id="-3"><a href="#-3" class="headerlink" title="}"></a>}</h2><p><img src="/2019/02/27/redis缓存技术/2.jpg" alt="t2"><br>加载redis配置文件，扫描文件，加载key位置<br><img src="/2019/02/27/redis缓存技术/4,jpg" alt="t4"></p>
-<h2 id="可以看到我们把数据json话存到jedis中。"><a href="#可以看到我们把数据json话存到jedis中。" class="headerlink" title="可以看到我们把数据json话存到jedis中。"></a>可以看到我们把数据json话存到jedis中。</h2><p>后台添加广告，先存放到mysql数据库中，再存放到redis中<br>思路，先把原来再redis里面数据（String字符串）转换到（list集合）</p>
-<h2 id="再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中"><a href="#再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中" class="headerlink" title="再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中"></a>再把新增对象放到集合中，再把得到的list返回转换为字符串（String）存到redis中</h2><p>前提：依赖commons及redis<br>把spring的扫描属性文件&lt;context:properity-holder : location=”classpath<em>:</em>.properties”&gt;<br>在要缓存的文件中加入<br>       @Reference<br>        private TbContentDubboService tbContentDubboServiceImpl;<br>        @Resource<br>        private JedisDao JedisDaoImpl;<br>        @Value(“${redis.bigpic.key}”)   //注意这里是前台与后台的key要相同</p>
-<pre><code>private String key;
-</code></pre><hr>
-<pre><code>@Override
-public String &quot;业务方法名字&quot;() {
-        //先判断在redis中是否存在
-        if(JedisDaoImpl.exists(key)){
-                String value = JedisDaoImpl.get(key);
-                if(value!=null&amp;&amp;!value.equals(&quot;&quot;)){
-               List&lt;HashMap&gt; list = JsonUtils.jsonToList(value, HashMap.class);
-</code></pre><hr>
-<pre><code>         HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;(); //新增的图片存储
-                         。。。。
-         。。。。（往map.put中添加数据）
-         。。。。
-         if（list.size()==6）{  //这里的业务挺好，所以在这里也补充一下，
-           list.remove(5)  // 就是存放到list是有序集合，把新增的东西放到集合最前面，就可以把最新的资料放在前端中
-         }
-         list.add(0，map);
-         jedisDaoImpl.set(key, JsonUtils.objectToJson(list));//转换为json
-
-                 }
-         }
-
-。。。。。。。。。（业务代码）
-
-         String listJson = JsonUtils.objectToJson(listResult);
-         //把数据放入到redis中
-         JedisDaoImpl.set(key, listJson);
-         return listJson;
- }
-</code></pre><p>}</p>
+        <p>##高并发编程基础   强烈推荐Java并发编程之美</p>
+<p>1线程安全性</p>
+<p>1.1什么是线程安全性</p>
+<p>1.2原子性<br>整个程序中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。<br>原子性操作：原子性在一个操作是不可中断的，要么全部执行成功要么全部执行失败，有着“同生共死”的感觉。及时在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。<br>1.2.1 竞态条件<br>当某个计算的正确性取决于多个线程的交替执行时序时，那么就会发生竟态条件。</p>
+<p>1.3加锁机制<br>1.3.1 内置锁  同步代码块：Synchronized Block<br>包括两个部分：一是锁的对象引用,  二是作为这个锁保护的代码块。<br>Synchronized（lock）{<br>//访问或修改由锁保护的共享状态。<br>}<br>每个java对象都可以用做一个实现同步的锁，这些锁被称为内置锁或监视锁<br>java的内置锁最多只有一个线程能持有这种锁。所以由这个锁保护的线程会以原子性方式执行</p>
+<p>1.3.2重入<br>当某个线程请求一个由其他线程持有的锁时，发出请求的线程就会阻塞。但是内置锁是可以重入，既是某个线程试图获得一个已经由它自己持有的锁，那么这个请求就会成功。</p>
+<p>1.4用锁来保护状态<br>由于锁能使其保护的代码路径以串行形式来访问，因此可以通过锁来构造一些协议以实现对共享状态的独占访问。只要始终遵循这些协议，就能确保状态的一致性。</p>
+<p>1.5活跃性与性能</p>
+<p>2对象的共享</p>
+<p>2.1可见性</p>
+<p>2.2发布与逸出</p>
+<p>2.3线程封闭</p>
+<p>2.4不变性</p>
+<p>2.5安全发布</p>
+<hr>
+<p>Synchronized 关键字<br>synchronized 锁什么？锁对象。<br>可能锁对象包括：（1） this， 当前的方法对象，运行过程中的对象（2）临界资源对象 多个线程多个方法都能找到的对象<br>，（3）Class 类对象 静态同步方法，锁的是当前类型的类对象。<br>原子性：某个代码块执行不被分割。</p>
+<p>同步方法只影响其他线程调用同一个同步方法时的锁问题，不影响其他线程调用非同步方法，或调用其他锁的方法</p>
+<p>脏读：当有复杂的逻辑商业代码执行的时候，发生延迟。使得在读数据得时候发生异常，导致读错数据。</p>
+<p>引出一个问题：同步方法只能保证当前方法得原子性，不能保证多个业务方法之间得互相访问的原子性。<br>注意在商业开发，多方法要求结果访问原子操作，需要多个方法都枷锁，且锁定统一一个资源</p>
+<p>可重入：同一个线程，多次调用同步代码，锁定同一个锁对象。</p>
+<p>继承：子类同步方法覆盖父类同步方法。可以指定调用父类的同步方法 。相当于锁的重入。</p>
+<p>锁与异常：当同步方法中发生异常的时候，自动释放所资源，不会影响其他线程的执行。<br>注意，同步业务逻辑中，如果发生异常处理，请重置回滚。</p>
+<p>锁对象变更问题<br>同步代码一旦加锁后，那么会有一个临时的锁引用执行锁对象，和真实的引用无直接关联。<br>在锁未释放之前，修改锁对象应用，不会影响同步代码的执行</p>
+<p>常量问题<br>在定义同步代码块是，不要使用常量对象作为锁对象</p>
+<hr>
+<p>volatile 关键字<br>可见性：当CPU计算的临时数据存到缓存空间，当硬盘读class对象存到内存中，形式类对象。放给缓存。<br>当发生中断的时候，可能会清空缓存，读cpu数据。<br>volatile改变的是内存特性。告诉cpu/或者os系统，一定要找内存最新的数据值。<br>（前提必须是访问同一对象）。<br>volatile，只能保证可见性，不能保证原子性。加在存在变化的对象！！！！！！！</p>
+<hr>
+<p>wait notify<br>等待会释放锁标记。</p>
+<p>lock</p>
+<p>生产者消费者模式。。。。。<br>简单来说，就是生产者生产到一定数量的东西，放到商品橱柜，生产者停止生产，唤醒消费者开始消费商品橱柜，当商品橱柜里面的东西消费到一定程度的时候，停止消费者，开启生产者。</p>
+<hr>
+<h2 id="Atomic-xxx-类型组-：原子操作。其中的每个方法都是原子操作。可以保证线程安全。"><a href="#Atomic-xxx-类型组-：原子操作。其中的每个方法都是原子操作。可以保证线程安全。" class="headerlink" title="Atomic xxx 类型组 ：原子操作。其中的每个方法都是原子操作。可以保证线程安全。"></a>Atomic xxx 类型组 ：原子操作。其中的每个方法都是原子操作。可以保证线程安全。</h2><p>CountDownLatch 门闩</p>
+<h2 id="可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。"><a href="#可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。" class="headerlink" title="可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。"></a>可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。</h2><p>ReentrantLock<br>重入锁</p>
+<p>类似于同步的方法。<br>lock.lock 加锁<br>lock.unlock  解锁<br>例子：<br>lock.lock<br>业务代码块<br>lock.unlock</p>
+<p>islock=lock.trylock  尝试锁：如果有锁，无法获取锁标记。如果获取锁标记，返回true。<br>例子<br>boolean islock =false;<br>finally{<br>  if（islock）{<br>       lock.unlock;<br>  }<br>}<br>注意：尝试锁在接触锁标记的时候，一定要判断是否获取锁标记.如果当前线程没有获取锁标记，会抛出异常信息。</p>
+<p>islocked =lock.trylock(5,timeunit.seconds)<br>阻塞尝试锁，阻塞参数代表时长，尝试获取锁标记。如果超时，不等待。直接返回。</p>
+<p>lock.lockInterruptibly：尝试打断锁：阻塞等待锁。可以被其他的线程打断阻塞状态（可被打断）<br>打断线程休眠。非正常结束阻塞状态的线程，都会抛异常。<br>相当于人物处理器的结束任务。</p>
+<p>阻塞状态：包括普通阻塞，等待队列，锁池队列</p>
+<p>普通阻塞：sleep()  可被打断<br>等待队列：wait() 可被notify唤醒 无法被打断<br>锁池队列：无法获取锁标记<br>   使用reetrantlock的lock方法，获取锁标记，无法被打断<br>   使用lockInterrupttibly方法，可被打断</p>
+<p>Reentrantlock(true)公平锁：公平锁表示线程获取锁的顺序时按照线程请求所得时间早晚来决定的，也就是最早请求锁的线程将最早获取到锁，而非公平锁则运行时闯入，也就是先来不一定先得。<br>最好不要用，最大长度不超过10。</p>
+<p>lock.newConditionLock()  条件锁</p>
 <hr>
 
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -637,16 +249,75 @@ public String &quot;业务方法名字&quot;() {
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/redis缓存技术/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/04/高并发编程/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/03/sql优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sql优化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -666,505 +337,14 @@ public String &quot;业务方法名字&quot;() {
 
 
 
-
-  
-    <article id="post-CMS系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/CMS系统/">CMS系统</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/27/CMS系统/" class="archive-article-date">
-  	<time datetime="2019-02-27T01:09:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CMS系统<br>1.需求 内容分类管理<br>2.需求 内容管理</p>
-<hr>
-<p>##第一章 把内容分类管理表中的信息以父节点插入到EasyUitree树状模型中。<br>效果图<br><img src="/2019/02/27/CMS系统/1.jpg" alt="t1"><br>1.显示一个tree。</p>
-<h2 id="List-show"><a href="#List-show" class="headerlink" title="List show();"></a>List<easyuitree> show();</easyuitree></h2><p>public List<easyuitree> showCategory(long id) {<br>        List<easyuitree> listTree = new ArrayList<easyuitree>();<br>        List<tbcontentcategory> list = tbContentCategoryDubboServiceImpl.selByPid(id);<br>        for (TbContentCategory cate : list) {<br>            EasyUiTree tree = new EasyUiTree();</tbcontentcategory></easyuitree></easyuitree></easyuitree></p>
-<pre><code>        tree.setId(cate.getId());
-        tree.setText(cate.getName());
-        tree.setState(cate.getIsParent()?&quot;closed&quot;:&quot;open&quot;);
-
-        listTree.add(tree);
-    }
-    return listTree;
-}
-</code></pre><hr>
-<p>public class TbContentCategoryDubboServiceImpl implements TbContentCategoryDubboService {<br>    @Resource<br>    private TbContentCategoryMapper tbContentCategoryMapper;</p>
-<pre><code>@Override
-public List&lt;TbContentCategory&gt; selByPid(long id) {
-    TbContentCategoryExample example = new TbContentCategoryExample();
-    example.createCriteria().andParentIdEqualTo(id).andStatusEqualTo(1);
-    return tbContentCategoryMapper.selectByExample(example);
-}
-</code></pre><hr>
-<p>需要说明的是<br>getIsParent()?”closed”:”open”为显示状态</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/CMS系统/2.jpg" alt="t2"></h2><p>##第二章 新增 重命名 删除<br>前端文件：F12，寻找header，通过url，ctrl+f 查找jsp文件，发现位置<br>要注意：右键菜单事件：onContextMenu：function（e，node）//e事件类型 node节点<br>找到ajax的“success”方法，寻找大Menu方法，通过ctrl+f寻找div位置</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/2019/02/27/CMS系统/3.jpg" alt="t3"></h2><p>下面是新增内容<br>可以看到，我们后端要传给前端的参数值分别由status id<br>从From Data 可以看出浏览器要传给控制器由parentId 及name<br>查询（同上） 新增（参数 内容分类管理表） 修改功能（参数 内容分类管理表）</p>
-<p>在功能的service上，根据之前，浏览器的信息可知道，我们的参数parentId 及name，也可以封装到对象使用<br>然后在实现类里面补充封装对象属性，再调用dubbo方法。<br>若新增成功，把该新增的节点的父节点赋予父节点属性。就是把右键所中的id更新为父节点。<br>判断当前节点是否已经存在，通过遍历新增节点的名字与当前父节点所有的子节点名称。是否相同。<br>若相同，则返回当前对象<br>若不同，则新增ID<br>再控制器中，返回得到的对象。</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title></a><img src="/2019/02/27/CMS系统/4.jpg" alt="t4"></h2><p>修改内容<br>参数 status </p>
-<p>需求：有同名存在就修改失败，没有同名则成功。<br>创建：通过id查询内容类目所有子类目，返回的内容分类管理表。<br>首先第一步<br>查询当前节点信息 查询当前节点的父节点的所有子节点信息。遍历是否有重名。<br>进行重命名工作。返回前端需要的信息。封装。返回。<br><img src="/2019/02/27/CMS系统/5.jpg" alt="t5"></p>
-<hr>
-<p>删除内容<br>把想要删除的数据的status值变为0，判断当前节点为父节点还是子节点，若当前没有子节点，则当前父节点变为子节点。</p>
-<p>需求：把当前的文件删除。<br>相同套路，都是一样是传递对象。用对象封装浏览器所需要的信息。返回给浏览器。<br>第一步：把内容变为删除状态，再遍历当前节点的所有信息，查询父节点的<br>如果当前的父节点内容为空。（可以通过上述查询的子节点的数组长度判断）<br>新建一个对象，然后把当前父节点的id传递给新对象。新对象没有父节点。<br>若成功，则返回一个前端控制器成功的status。<br>否则返回当前对象。</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title></a><img src="/2019/02/27/CMS系统/6.jpg" alt="t6"></h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/CMS系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jsonp使用原理及应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/jsonp使用原理及应用/">jsonp使用原理及应用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/26/jsonp使用原理及应用/" class="archive-article-date">
-  	<time datetime="2019-02-26T15:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一章 jsonp原理<br>1.ajax一个服务器访问另外一个服务器的js文件<br>2.但不可以访问json数据及字符串</p>
-<hr>
-<p>##第二章 把控制器返回的结果伪装成js文件<br>前端操作<br>伪装步骤：<br>1.request.setContentType(“application/x-javascript”)<br>然后就可以新建request对象对其注入信息。<br>注意：这里可以参考W3SCHOLL的webbuilding里面的MIME类型<br>MINE是藐视消息内容类型的因特网标准<br>MINE 消息能包含文本图像 音频 视频以及其他应用程序专用的数据。<br>2.直接在ajax的文件中加入datatype：’jsonp’<br>                        jsonCallback:’a’ //a是参数值 回调方法相当于理解success<br>            回调函数名。重点！！！！<br>            jsonp:’b’  //b是参数名     b=a<br>            通常b是’callback’;<br>            function a（data）{} //函数在外面jsoncallback及json必须写—</p>
-<p>重点理解：：函数名（返回数据）</p>
-<hr>
-<p>3.控制器操作：<br>String a =req.getParamater(“callback”)  //获取前端的jsonp：callback，创建函数名<br>request.setContentType(“application/x-javascript”)<br>PrintWriter out =resp.getWriter();<br>out.print(a+”(123);”); //重点：函数名（上传数据），函数名在上述第一行。</p>
-<h2 id="当服务器调用callback-’callback的值’，"><a href="#当服务器调用callback-’callback的值’，" class="headerlink" title="当服务器调用callback=’callback的值’，"></a>当服务器调用callback=’callback的值’，</h2><p>下面我们用一个实例讲解一下如何使用jsonp：<br>@RequsetMapping（）<br>@responsebody<br>public MappingJacksonValue demo(String callback){<br>    people p =new people();<br>    p.set(); p.set();<br>    MappingJacksonValue mjv = new MappingJackValue(p);<br>    mjv.setJsonFunction(callback);<br>    return mjv;<br>// 我们可以看到，我们使用一个MappingJackValue的方法来帮我们简化操作。<br>// 我们只需要把想要回传的数据放入mjv方法，再用mjv调用setJsonFunction（callback）即可<br>// 由此我们可以联想，我们可以把一推数据返回页面。嘻嘻嘻嘻</p>
-<h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p>##最终章<br>实战练习，把商城的商品分类选择页面通过ajax返回。<br>1.确定数据类型（pojo）<br>从前端的文件，看出数据要返回的类型为：u  n  i（）<br>分别是String String List<object>类型<br>2.确定递归方法显示页面（service）<br> 2.1根据父类木id查询所有子类目 比如：通过电器类——电视 冰箱等等<br> 2.2查询类目id查询<br>3.具体实现类</object></p>
-<hr>
-<p>具体实现方法及解析<br>@Service<br>public class TbItemCatServiceImpl implements TbItemCatService {<br>    @Reference<br>    private TbItemCatDubboService tbItemCatDubboServiceImpl;<br>    @Override<br>    public PortalMenu showCatMenu() {<br>        //查询出所有一级菜单<br>        List<tbitemcat> list = tbItemCatDubboServiceImpl.show(0);<br>        PortalMenu pm =new PortalMenu();<br>        pm.setData(selAllMenu(list));<br>        return pm;<br>    }<br>    /**</tbitemcat></p>
-<pre><code> * 最终返回结果所有查询到的结果.
- */
-public List&lt;Object&gt; selAllMenu(List&lt;TbItemCat&gt; list){
-    List&lt;Object&gt; listNode = new ArrayList&lt;&gt;();
-    for (TbItemCat tbItemCat : list) {
-        if(tbItemCat.getIsParent()){
-            PortalMenuNode pmd  = new PortalMenuNode();
-            pmd.setU(&quot;/products/&quot;+tbItemCat.getId()+&quot;.html&quot;);
-            pmd.setN(&quot;&lt;a href=&apos;/products/&quot;+tbItemCat.getId()+&quot;.html&apos;&gt;&quot;+tbItemCat.getName()+&quot;&lt;/a&gt;&quot;);
-            pmd.setI(selAllMenu(tbItemCatDubboServiceImpl.show(tbItemCat.getId())));
-            listNode.add(pmd);
-        }else{
-            listNode.add(&quot;/products/&quot;+tbItemCat.getId()+&quot;.html|&quot;+tbItemCat.getName());
-        }
-    }
-</code></pre><hr>
-<p>控制器写法：<br>@Controller<br>public class TbItemCatController {<br>    @Resource<br>    private TbItemCatService tbItemCatServiceImpl;<br>    /**</p>
-<pre><code> * 返回jsonp数据格式包含所有菜单信息
- * @param callback
- * @return
- */
-@RequestMapping(&quot;rest/itemcat/all&quot;)
-@ResponseBody
-public MappingJacksonValue showMenu(String callback){
-    MappingJacksonValue mjv = new MappingJacksonValue(tbItemCatServiceImpl.showCatMenu());
-    mjv.setJsonpFunction(callback);
-    return mjv;
-}
-</code></pre><h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>最终显示效果:::<br><img src="/2019/02/26/jsonp使用原理及应用/1.jpg" alt="t"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/jsonp使用原理及应用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sso单点登陆技术详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/sso单点登陆技术详解/">sso单点登陆技术详解</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/26/sso单点登陆技术详解/" class="archive-article-date">
-  	<time datetime="2019-02-26T02:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一节<br><img src="/2019/02/26/sso单点登陆技术详解/1.jpg" alt="t1"><br>cookie</p>
-<p>1.客户端存值技术 字符串<br> 1.1 存储位置 客户端浏览器<br> 1.2作业：存值<br> 1.3：只能存字符串</p>
-<p>2.cookie运行原理：<br> 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）<br>   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取到cookie的内容。<br> 2.2服务器内可以产生cookie内容，需要放入到响应对象中 相应给客户端浏览器，要求跳转类型为重定向，客户端浏览器接收相应内容后会把cookie内容存储到指定文件夹内容。<br> 怎么产生cookie和调用cookie<br>request.setMaxAge（）cookie存在最大时长，单位：秒<br>request.setPath（）控制哪些路径能访问cookies<br>request.setDomain（localhost）控制哪些域名</p>
-<p>3.产生cookie<br>4.产生获取cookies</p>
-<p>HttpSessionn 运行原理<br>1.当客户端浏览器访问服务器是，服务器接收请求后会判断请求中是否存在cookie包含jsessionid<br>2.如果包含jessionid把对应值取出，作为key从全局MapString,session&gt;对象往出取session对象<br>  2.1-1如果没有对应的key，执行新建session步骤 会执行新建session<br>  2.1-2如果有对应的可以，把session对象取出。根据自己的业务添加操作。<br>3.tomcat会新建一个session对象，同时会产生一个uuid，作为map的可以，新建的session对象作为value，还会把uuid放入到cookie作为value，对应的key是jsesssionid</p>
-<p>使用redis+cookie模拟session步骤<br>1.流程<br> 1.1 第一次请求时，cookie中没有token<br> 1.2 产生一个uuid，同视把token字符串作为cookie的key，uuid作为cookie的Value<br> 1.3如果希望类似往session存储内容，直接把uuid当作redis的key，把需要存储的内容作为value<br>1.4 把cookie对象相应给客户浏览器</p>
-<hr>
-<p>##第二章<br>登陆退出需求业务分析<br>1.通过网页首页，点击登陆按钮进行登陆<br>2.加入购车车，结算之前，跳转到登陆页面，里面可以通过扫一扫和输入登陆用户信息或者密码<br>3.通过referer，当用户输入登陆成功之后，跳转回之前的页面。<br>4.7天内登陆，免登陆信息<br>5.登陆完成后，在登陆页面的信息中改变为当前用户信息。<br>6.退出用户功能。</p>
-<hr>
-<p>##第三章<br>实现登陆功能<br>运行环境：eclipse linux zookeeper redis dubbo spring springMVC Mybatic<br>dubbo 提供的方法：<br>需求1：在demo passport中，创建在dubbo写好的登陆方法，调用此方法，导入用户输入的信息。若有，返回用户信息类型。若无，返回null。<br>判断用户是否为null，成功则按照前端的ajax，返回相应数据，这里返回的是“200”<br>否则返回，输入一段data，用户名或密码有误，请重新登陆。<br>控制器：返回类型：结果类（如下）。<br>根据前端的信息，封装一个结果类，创建这个结果类。待会会把相关参数注入再这个结果类，返回给浏览器。<br>需求3：重点：获取请求头，放入url中。在显示登陆页面控制器方法中，加入@RequestHeader（“Referer”） String url，Model model。补充知识：model，springframework.ui。存放url。发送给浏览器让浏览器接收到url，当登陆成功后，返回原来的页面。<br>需求5：接收cookie，当用户登陆成功后，把用户信息放入到redis中，产生一个cookie<br>       调用cookieUtil工具包，setcookie。<br>jedisdao，参考redis章节。value：存放用户信息，注意要把用户信息转换为json格式，所以要加入JsonUtil.ObjectToJson（用户信息），key：uuid<br>需求4：设置cookie有效时间，在缓存redis中添加expire（key，time）（过期时间方法），单位秒。<br>需求6：退出用户，调用工具类cookieutil进行删除，参数根据前端文档的参数调整。</p>
-<hr>
-<p>package com.ego.passport.service.impl;</p>
-<p>import java.util.UUID;</p>
-<p>import javax.annotation.Resource;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
-<p>import org.springframework.stereotype.Service;</p>
-<p>import com.alibaba.dubbo.config.annotation.Reference;<br>import com.ego.commons.pojo.EgoResult;<br>import com.ego.commons.util.CookieUtils;<br>import com.ego.commons.util.JsonUtils;<br>import com.ego.dubbo.service.TbUserDubboService;<br>import com.ego.passport.service.TbUserService;<br>import com.ego.pojo.TbUser;<br>import com.ego.redis.dao.JedisDao;</p>
-<p>@Service<br>public class TbUserServiceImpl implements TbUserService {<br>    @Reference<br>    private TbUserDubboService tbUserDubboServiceImpl;<br>    @Resource<br>    private JedisDao jedisDaoImpl;<br>    @Override<br>    public EgoResult login(TbUser user,HttpServletRequest request,HttpServletResponse response) {<br>        EgoResult er = new EgoResult();<br>        TbUser userSelect = tbUserDubboServiceImpl.selByUser(user);<br>        if(userSelect!=null){<br>            er.setStatus(200);<br>            //当用户登录成功后把用户信息放入到redis中<br>            String key = UUID.randomUUID().toString();<br>            jedisDaoImpl.set(key, JsonUtils.objectToJson(userSelect));<br>            jedisDaoImpl.expire(key, 60<em>60</em>24<em>7);<br>            //产生Cookie<br>            CookieUtils.setCookie(request, response, “TT_TOKEN”, key, 60</em>60<em>24</em>7);<br>        }else{<br>            er.setMsg(“用户名和密码错误”);<br>        }<br>        return er;</p>
-<pre><code>}
-</code></pre><hr>
-<pre><code>@Override
-public EgoResult getUserInfoByToken(String token) {
-    EgoResult er = new EgoResult();
-    String json = jedisDaoImpl.get(token);
-    if(json!=null&amp;&amp;!json.equals(&quot;&quot;)){
-        TbUser tbUser = JsonUtils.jsonToPojo(json, TbUser.class);
-        //可以把密码清空
-        tbUser.setPassword(null);
-        er.setStatus(200);
-        er.setMsg(&quot;OK&quot;);
-        er.setData(tbUser);
-    }else{
-        er.setMsg(&quot;获取失败&quot;);
-    }
-
-    return er;
-}
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/sso单点登陆技术详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dubbo实战分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: dubbo实战分析<br>date: 2019-02-25 20:48:55<br>tags:<br><img src="/2019/02/26/dubbo实战分析/1.jpg" alt="t"><br><img src="/2019/02/26/dubbo实战分析/1.jpg" title="这是一个新的博客的图片的说明"></p>
-<h2 id="iframe"><a href="#iframe" class="headerlink" title="#iframe"></a>#iframe</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/dubbo实战分析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-25T14:47:55.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-在windows版本下，用github-hexo快速建立属于自己的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">在windows版本下，用github+hexo快速建立属于自己的博客</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/" class="archive-article-date">
-  	<time datetime="2019-02-25T02:45:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第一章-搭配环境"><a href="#第一章-搭配环境" class="headerlink" title="第一章 搭配环境"></a>第一章 搭配环境</h2><p>1.1 安装Git<br>1.2 安装node.js  下载地址：<a href="http://nodejs.org/download/" target="_blank" rel="noopener">http://nodejs.org/download/</a><br>     由于我的笔记本是windows，所以选择的版本是node-v0.10.33-x64.msi</p>
-<pre><code>直接一直按下一步就可以了
-</code></pre><hr>
-<h2 id="第二章-配置GitHub"><a href="#第二章-配置GitHub" class="headerlink" title="第二章 配置GitHub"></a>第二章 配置GitHub</h2><p>1.1 登陆gitHub.com 注册登陆你的用户<br>1.2 并在github处，建立自己的仓库，repository，（位置在右上角）<br>     注意：：：建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io<br>1.3  配置SSH-Key<br>     首先必须确保有用户名及邮箱 git config –global user.name ‘xxxxx’<br>                                git config –global user.email ‘<a href="mailto:xxx@xx.xxx" target="_blank" rel="noopener">xxx@xx.xxx</a>’<br>     生成密钥：ssh-keygen -t rsa -C ‘上面的邮箱’<br>     然后连续按三个回车，此时我们会看到在三个回车的里面我们生成了<br>     .ssh目录下得到了两个文件：id_rsa（私有秘钥）和id_rsa.pub（公有密钥）<br>     登陆GitHub，进入你的Settings<br>     会看到左边这些目录，点击SSH and GPG keys</p>
-<pre><code>创建New SSH key，title可写可不写，key为私有key带邮箱的
-</code></pre><hr>
-<h2 id="第三章-安装Hexo"><a href="#第三章-安装Hexo" class="headerlink" title="第三章 安装Hexo"></a>第三章 安装Hexo</h2><p>  1.1 $ npm install -g hexo<br>  1.2 在电脑中建立一个名字叫「Hexo」的文件夹（比如我建在了D:\Hexo），然后在此文件夹中右键打开Git Bash。执行下面的命令</p>
-<p>  $ hexo init<br>[info] Copying data<br>[info] You are almost done! Don’t forget to run <code>npm install</code> before you start b<br>logging with Hexo!</p>
-<p>   npm install</p>
-<p>   1.3 可以云hexo server來測試一下當前是否創建成功<br>   1.4 創建新聞中 hexo n ‘文章名字’<br>   1.5 執行hexo +g可以生成動態網頁<br>   1.6部署到github<br>     1.6.1 首先要到hexo文件夾中找到配置_config.yml文件<br>     修改為：</p>
-<pre><code># Deployment
-</code></pre><h2 id="Docs-http-hexo-io-docs-deployment-html"><a href="#Docs-http-hexo-io-docs-deployment-html" class="headerlink" title="Docs: http://hexo.io/docs/deployment.html"></a>Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type: github<br>  repository: <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:github用戶名/github用戶名.github.io.git<br>  branch: master</p>
-<p>  保存退出 ：wq<br>  1.7 發佈<br>      hexo d<br>   1.8總結</p>
-<h2 id="每次部署可以按照-hexo-clean-hexo-g-hexo-d"><a href="#每次部署可以按照-hexo-clean-hexo-g-hexo-d" class="headerlink" title="   每次部署可以按照 hexo clean hexo g hexo d"></a>   每次部署可以按照 hexo clean hexo g hexo d</h2><h2 id="第四章-安裝主題"><a href="#第四章-安裝主題" class="headerlink" title="第四章  安裝主題"></a>第四章  安裝主題</h2><p>   1.1将Git Shell 切到/D/Hexo目录下，然后执行下面的命令，将pacman下载到 themes/pacman 目录下。<br>   $ git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="noopener">https://github.com/A-limon/pacman.git</a> themes/pacman<br>   1.2 修改你的博客根目录/D/Hexo下的config.yml配置文件中的theme属性，将其设置为pacman。<br>   1.3 評論框 静态博客要使用第三方评论系统，pacman配置了多说评论系统（/themes/pacman/_config.yml），默认关闭，只要将其打开即可:false-&gt;true。直接用你的微博/豆瓣/人人/百度/开心网帐号登录多说，即可发表平评论。</p>
-<h4 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h4><p>duoshuo:<br>  enable: true  ## duoshuo.com<br>  short_name:    ## duoshuo short name.</p>
-<p>  1.4 404頁面<br>    Hexo/source目录下。<br>    <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8"></script></p>
-<pre><code>1.5 安裝插件
-4.4.1 sitemap插件
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/在windows版本下，用github-hexo快速建立属于自己的博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1189,8 +369,8 @@ public EgoResult getUserInfoByToken(String token) {
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
