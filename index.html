@@ -153,6 +153,73 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-锁的底层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/04/锁的底层/">锁的底层</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/04/锁的底层/" class="archive-article-date">
+  	<time datetime="2019-03-04T14:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##锁的底层实现</p>
+<p>对象内存简图<br>对内存：<br>对象（包含以下三个）：</p>
+<p>对象头：hashcode 锁信息 GC 粉黛年龄<br>实例变量<br>填充数据<br>数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与其monitor之间的关系有存在多种实现方式，如monitor可以与对象一起创建销毁或当线程视图获取对象锁时自动生成，但当一个monitor被某个线程持有后，它便处于锁定状态。</p>
+<p>观察者：<br>monitor对象<br>_EntryList:记录等待队列<br>_WaitSet：记录wait的等待队列</p>
+<h2 id="Owner：线程与堆之间的关系记录者"><a href="#Owner：线程与堆之间的关系记录者" class="headerlink" title="_Owner：线程与堆之间的关系记录者"></a>_Owner：线程与堆之间的关系记录者</h2><p>——<br><img src="/2019/03/04/锁的底层/1.jpg" alt="T1"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/04/锁的底层/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="n-高并发编程" class="article article-type-n  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1198,135 +1265,9 @@ public Map&lt;String, Object&gt; selByQuery(String query,int page,int rows) thro
 
 
   
-    <article id="post-购物车需求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/购物车需求/">购物车需求</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/27/购物车需求/" class="archive-article-date">
-  	<time datetime="2019-02-27T08:11:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需求1：用户未登录，不允许加入购物车<br>办法1：通过拦截器判断，在客户点击购物车按钮的时候，检查其登陆信息。cookie。把购物车里商品放入购物车。<br>拦截器具体工作思路：<br>方法继承 handleIntercetorhandleIntercetor<br>此处不能用软编码：Value（””）private String key;</p>
-<p>复写preHandle，<br>    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)<br>            throws Exception {<br>        String token = CookieUtils.getCookieValue(request, “TT_TOKEN”);<br>        if(token!=null&amp;&amp;!token.equals(“”)){<br>            String json = HttpClientUtil.doPost(“<a href="http://localhost:8084/user/token/&quot;+token)" target="_blank" rel="noopener">http://localhost:8084/user/token/&quot;+token)</a>;<br>            EgoResult er = JsonUtils.jsonToPojo(json, EgoResult.class);<br>            if(er.getStatus()==200){<br>                return true;<br>            }<br>        }<br>        String num = request.getParameter(“num”);<br>        response.sendRedirect(“<a href="http://localhost:8084/user/showLogin?interurl=&quot;+request.getRequestURL()+&quot;%3Fnum=&quot;+num)" target="_blank" rel="noopener">http://localhost:8084/user/showLogin?interurl=&quot;+request.getRequestURL()+&quot;%3Fnum=&quot;+num)</a>;<br>        return false;</p>
-<pre><code>}
-</code></pre><hr>
-<p>   <a href="mvc:interceptors" target="_blank" rel="noopener">mvc:interceptors</a><br>        <bean class="com.ego.cart.interceptor.LoginInterceptor"></bean></p>
-<pre><code>&lt;/mvc:interceptors&gt;
-</code></pre><hr>
-<p>@Controller<br>public class CartController {<br>    @Resource<br>    private CartService cartServiceImpl;<br>    /**</p>
-<pre><code> * 添加购物车
- * @param id
- * @return
- */
-@RequestMapping(&quot;cart/add/{id}.html&quot;)
-public String addCart(@PathVariable long id,int num,HttpServletRequest request){
-    cartServiceImpl.addCart(id, num, request);
-    return &quot;cartSuccess&quot;;
-}
-
-/**
- * 显示购物车
- * @return
- */
-@RequestMapping(&quot;cart/cart.html&quot;)
-public String showCart(Model model,HttpServletRequest request){
-    model.addAttribute(&quot;cartList&quot;, cartServiceImpl.showCart(request));
-    return &quot;cart&quot;;
-}
-/**
- * 修改商品数量
- * @param id
- * @param num
- * @param request
- * @return
- */
-@RequestMapping(&quot;cart/update/num/{id}/{num}.action&quot;)
-@ResponseBody
-public EgoResult update(@PathVariable long id,@PathVariable int num,HttpServletRequest request){
-    return cartServiceImpl.update(id, num, request);
-}
-/**
- * 删除购物车商品
- * @param id
- * @param req
- * @return
- */
-@RequestMapping(&quot;cart/delete/{id}.action&quot;)
-@ResponseBody
-public EgoResult delete(@PathVariable long id,HttpServletRequest req){
-    return cartServiceImpl.delete(id, req);
-}
-</code></pre><h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p>@Controller<br>public class TbUserController {<br>    @Resource<br>    private TbUserService tbUserServiceImpl;<br>    /**</p>
-<pre><code> * 显示登录页面
- * @return
- */
-@RequestMapping(&quot;user/showLogin&quot;)
-public String showLogin(@RequestHeader(value=&quot;Referer&quot;,defaultValue=&quot;&quot;) String url,Model model,String interurl){
-    if(interurl!=null&amp;&amp;!interurl.equals(&quot;&quot;)){
-        model.addAttribute(&quot;redirect&quot;, interurl);
-    }else if(!url.equals(&quot;&quot;)){
-        model.addAttribute(&quot;redirect&quot;, url);
-    }
-    return &quot;login&quot;;
-}
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/购物车需求/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
