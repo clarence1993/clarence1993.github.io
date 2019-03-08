@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>锁的底层 | Hexo</title>
+  <title>并发容器 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。 ##锁的底层实现 对象内存简图对内存：对象（包含以下三个）： 对象头：hashcode 锁信息 GC 粉黛年龄实例变量填充数据数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与">
+  <meta name="description" content="ThreadLocal ————-&amp;gt; Thread.getCurrentThread()    Map     ————-&amp;gt;  value(线程需要保存的变量)    ThreadLoacal.set(value) —-&amp;gt;map.put(Thread.getCurrentThread(),value)    ThreadLocal.get() ——&amp;gt;map.get(Thre">
 <meta property="og:type" content="article">
-<meta property="og:title" content="锁的底层">
-<meta property="og:url" content="http://yoursite.com/2019/03/04/锁的底层/index.html">
+<meta property="og:title" content="并发容器">
+<meta property="og:url" content="http://yoursite.com/2019/03/05/并发容器/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。 ##锁的底层实现 对象内存简图对内存：对象（包含以下三个）： 对象头：hashcode 锁信息 GC 粉黛年龄实例变量填充数据数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与">
+<meta property="og:description" content="ThreadLocal ————-&amp;gt; Thread.getCurrentThread()    Map     ————-&amp;gt;  value(线程需要保存的变量)    ThreadLoacal.set(value) —-&amp;gt;map.put(Thread.getCurrentThread(),value)    ThreadLocal.get() ——&amp;gt;map.get(Thre">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/锁的底层/1.jpg">
-<meta property="og:updated_time" content="2019-03-05T03:18:09.504Z">
+<meta property="og:updated_time" content="2019-03-05T10:54:21.018Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="锁的底层">
-<meta name="twitter:description" content="写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。 ##锁的底层实现 对象内存简图对内存：对象（包含以下三个）： 对象头：hashcode 锁信息 GC 粉黛年龄实例变量填充数据数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/04/锁的底层/1.jpg">
+<meta name="twitter:title" content="并发容器">
+<meta name="twitter:description" content="ThreadLocal ————-&amp;gt; Thread.getCurrentThread()    Map     ————-&amp;gt;  value(线程需要保存的变量)    ThreadLoacal.set(value) —-&amp;gt;map.put(Thread.getCurrentThread(),value)    ThreadLocal.get() ——&amp;gt;map.get(Thre">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -156,39 +154,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-锁的底层" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-并发容器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      锁的底层
+      并发容器
     </h1>
   
 
         
-        <a href="/2019/03/04/锁的底层/" class="archive-article-date">
-  	<time datetime="2019-03-04T14:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
+        <a href="/2019/03/05/并发容器/" class="archive-article-date">
+  	<time datetime="2019-03-05T03:18:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。</p>
-<p>##锁的底层实现</p>
-<p>对象内存简图<br>对内存：<br>对象（包含以下三个）：</p>
-<p>对象头：hashcode 锁信息 GC 粉黛年龄<br>实例变量<br>填充数据<br>数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与其monitor之间的关系有存在多种实现方式，如monitor可以与对象一起创建销毁或当线程视图获取对象锁时自动生成，但当一个monitor被某个线程持有后，它便处于锁定状态。</p>
-<p>观察者：<br>monitor对象<br>_EntryList:记录等待队列<br>_WaitSet：记录wait的等待队列</p>
-<h2 id="Owner：线程与堆之间的关系记录者"><a href="#Owner：线程与堆之间的关系记录者" class="headerlink" title="_Owner：线程与堆之间的关系记录者"></a>_Owner：线程与堆之间的关系记录者</h2><p>——</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/03/04/锁的底层/1.jpg" alt="T1"></h2><p>锁的重入  （底层解释）<br>   在java中，同步锁时可以重入的，只有同一线程hhi行同步代码块，对同一个对象加锁时才可重入。<br>   当线程持有锁时，会在monitor的计算器中执行递增计算，若当前线程调用其他同步代码，且同步代码的锁对象同时，monitor中的计数器继续递增，每个同步代码块执行结束，monitor中的计数器都会递减，直至所有同步代码执行结束，monitor中的计数器为0时，释放锁标记，_Owner标记赋值为null。</p>
+        <p>ThreadLocal ————-&gt; Thread.getCurrentThread()<br>    Map     ————-&gt;  value(线程需要保存的变量)<br>    ThreadLoacal.set(value) —-&gt;map.put(Thread.getCurrentThread(),value)<br>    ThreadLocal.get() ——&gt;map.get(Thread.getCurrentThread());<br>内存问题：在并发量高的时候，可能发生内存溢出。<br>使用ThreadLocal的时候，一定注意回收资源问题，每个线程结束之前，将当前线程保存的线程变量一定要删除。<br>ThreadLoacl。remove(); 在run方法最后写remove操作</p>
+<p>ConcurrentLinkedQueue&lt;&gt;<br>基础链表同步队列</p>
+<p>并发容器 -LinkBlockingQueue&lt;&gt;<br>阻塞容器<br>put &amp; take —自动阻塞<br>put 自动阻塞，队列容量满后，自动阻塞<br>take自动阻塞方法后，队列容量为0后，自动阻塞</p>
+<p>ArrayBlockingQueue&lt;&gt;<br>add方法 容量不满会抛出异常 阻塞<br>put方法 容量不足等待消费 阻塞<br>offer方法 不会阻塞 单参数 不足返回false<br>                   三参数 （offer（value，times，timeunit））参数3为等待时长。</p>
+<p>delayqueue&lt;&gt;<br>定时任务 排序任务<br>排序和getdelay方法配合完成<br>compareto方法 比较大小<br>getdelay 根据参数timeunit来决定，如何返回结果值。<br>定时关机？？？？</p>
+<p>LinkedTransferQueue<br>当用put方法，该数据会等待get或者take使用，才把数据交付。<br>先take 后put  可以 都要try catch<br>开两个线程 可以  都要try catch</p>
+<p>add是往里面放东西，且不做阻塞等待<br>而transfer方法属于空中接力，没有往里面放东西。必须有消费者（take），一般用于处理即时消息</p>
+<p>SynchronusQueue<br>同步队列，是一个容量为0的队列。是一个特殊的transferqueue<br>必须先有消费线程等待，才能使用的队列。<br>add方法，无阻塞。若没有消费线程阻塞等待数据，则抛出异常<br>put方法，有阻塞。若没有消费线程阻塞等待数据，则阻塞。<br>用法同上：例如定时发送信息。</p>
 <hr>
-<p>4.锁的种类</p>
-<p>偏向锁 自旋锁 轻量级锁 重量级锁。</p>
-<p>锁的使用方式为：先提供偏向锁，如果不满足的时候，升级为轻量级锁，再不满足，升级为重量级锁，自旋锁时一个过度的锁状态，不是一种实际的锁类型。<br>  锁只能升级，不能降级。<br>4.1 重量级锁：请看锁的底层实现。对象内存简图。<br>4.2 偏向锁：是一种编译解释锁。如果代码中不可能出现多线程并发争抢同一个锁的时候，JVM编译代码，解释执行的时候，会自动的放弃同步信息。消除synchronized的同步代码结果。使用锁标记的形式记录锁状态。在monitor中有变量acc_sy  .当变量值使用的时候，代表偏向锁锁定。可以避免锁的争抢he1维护。提高效率。<br>4.3 轻量级锁 过度锁。当偏向锁不满足，也就是有多线程并发访问，锁定同一个对象的时候，先提升为轻量级锁，也是使用标记acc_sy标记记录的。acc_un 标记记录未获取到锁信息的线程。就是只有两个线程争抢锁标记的时候，有限使用轻量级锁。（仅限于两个线程）<br>4.4 自旋锁  是一个过渡锁。是偏向锁和轻量级锁的过渡。</p>
-<pre><code>当获取锁的过程中，未获取到。JVM自动执行若干次空循环，再次申请锁，而不是进入阻塞状态的qi
-</code></pre><hr>
 
       
 
@@ -268,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/04/锁的底层/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/05/并发容器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -282,18 +276,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/05/并发容器/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/03/05/线程池/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          并发容器
+          线程池
         
       </div>
     </a>
   
   
-    <a href="/2019/03/04/高并发编程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">高并发编程</div>
+    <a href="/2019/03/04/锁的底层/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">锁的底层</div>
       <i class="icon-circle-right"></i>
     </a>
   

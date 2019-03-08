@@ -152,6 +152,443 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-httpclient" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/01/httpclient/">httpclient</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/01/httpclient/" class="archive-article-date">
+  	<time datetime="2019-02-28T23:58:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>httpclient<br>是用来向tomcat等中间体发送url地址，解析中间体发送的结果。<br>@Test<br>    public void doGet() throws Exception {<br>        //创建一个httpclient对象 由这个类负责发送请求，及解析响应<br>        CloseableHttpClient httpClient = HttpClients.createDefault();<br>        //创建一个GET对象<br>        HttpGet get = new HttpGet(“<a href="http://www.sogou.com&quot;)" target="_blank" rel="noopener">http://www.sogou.com&quot;)</a>;<br>        //执行请求             响应结果        执行请求（get对象）<br>        CloseableHttpResponse response = httpClient.execute(get);<br>        //取响应的结果<br>        int statusCode = response.getStatusLine().getStatusCode();</p>
+<pre><code>System.out.println(statusCode);
+</code></pre><hr>
+<p>//重点：把参数放入到请求体中</p>
+<pre><code>List&lt;NameValuePair&gt; params =new ArrayList&lt;&gt;(); //注意NameValuePair是接口类，所以要创建它的实现类来创建方法，实现类是class。
+params.add(new BasicNameValuePair(&quot;name&quot;,&quot;zhangsan&quot;)); //BasicNameValuePair是NameValuePair的实现类  通过按F4看它的实现类
+//把参数发送回请求体HttpGet
+        get.setEntity(new UrlEncodedFormEntity(params,&quot;utf-8&quot;));
+</code></pre><hr>
+<pre><code>                 //  获取响应体
+    HttpEntity entity = response.getEntity();
+                       //工具类把响应体中内容转换为字符串
+    String string = EntityUtils.toString(entity, &quot;utf-8&quot;);
+    System.out.println(string);
+    //关闭httpclient
+    response.close();
+    httpClient.close();
+}
+</code></pre><hr>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/01/httpclient/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-solr实战" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/28/solr实战/">solr实战</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/28/solr实战/" class="archive-article-date">
+  	<time datetime="2019-02-28T10:22:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="solrcloud实战应用"><a href="#solrcloud实战应用" class="headerlink" title="solrcloud实战应用"></a>solrcloud实战应用</h3><p>需求分析：<br><img src="/2019/02/28/solr实战/1.jpg" alt="t1"><br>由百度网站可以看到，当我们点击百度一下的时候。百度自动从页面转到查询结果页面。<br>结构是你搜索的结果+百度搜索。<br>其中结果为作用域。</p>
+<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/28/solr实战/2.jpg" alt="t1"></h2><p>由此可以联想：在我们百度一下的时候，我们会把多个值发送给jsp</p>
+<p>solr完成步骤：<br>   3.1 先配置field，field不能重复<br>   3.2数据初始化</p>
+<h2 id="3-3完成搜索功能"><a href="#3-3完成搜索功能" class="headerlink" title="   3.3完成搜索功能"></a>   3.3完成搜索功能</h2><h2 id="第一步-配置solrfield"><a href="#第一步-配置solrfield" class="headerlink" title="第一步  配置solrfield"></a>第一步  配置solrfield</h2><p>用之前配好IK|solr，在solr/conf/schema进行配置</p>
+<p><field name="item_title" type="text_ik" indexed="true" stored="true"></field></p>
+<p><field name="item_sell_point" type="text_ik" indexed="true" stored="true"></field></p>
+<p><field name="item_price" type="long" indexed="true" stored="true"></field></p>
+<p><field name="item_image" type="string" indexed="false" stored="true"></field></p>
+<p><field name="item_category_name" type="string" indexed="true" stored="true"></field></p>
+<field name="item_desc" type="text_ik" indexed="true" stored="false">
+
+<p><field name="item_keywords" type="text_ik" indexed="true" stored="false" multivalued="true"></field></p>
+<p><copyfield source="item_title" dest="item_keywords"></copyfield></p>
+<p><copyfield source="item_sell_point" dest="item_keywords"></copyfield></p>
+<p><copyfield source="item_category_name" dest="item_keywords"></copyfield></p>
+<copyfield source="item_desc" dest="item_keywords">
+
+<p>有关字节描述，请查看上一章内容，检查是否配置成功，若配置成功会出现上述name的字段</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/2019/02/28/solr实战/3.jpg" alt="t3"></h2><h2 id="第二部-solr数据初始化"><a href="#第二部-solr数据初始化" class="headerlink" title="第二部 solr数据初始化"></a>第二部 solr数据初始化</h2><p>@Service<br>public class TbItemServiceImpl implements TbItemService{<br>    @Reference<br>    private TbItemDubboService tbItemDubboServiceImpl;<br>    @Reference<br>    private TbItemCatDubboService tbItemCatDubboServiceImpl;<br>    @Reference<br>    private TbItemDescDubboService tbItemDescDubboServiceImpl;</p>
+<pre><code>@Resource
+private CloudSolrClient solrClient;
+@Override
+public void init() throws SolrServerException, IOException {
+    solrClient.deleteByQuery(&quot;*:*&quot;);   //重点关注
+    solrClient.commit();                //重点关注
+    //查询所有正常的商品
+    List&lt;TbItem&gt; listItem = tbItemDubboServiceImpl.selAllByStatus((byte)1);
+    for (TbItem item : listItem) {
+        //商品对应的类目信息
+        TbItemCat cat = tbItemCatDubboServiceImpl.selById(item.getCid());
+        //商品对应的描述信息
+        TbItemDesc desc = tbItemDescDubboServiceImpl.selByItemid(item.getId());
+        //查询Item表里面的有关信息
+
+        //创建对象
+        SolrInputDocument doc = new SolrInputDocument();   //重点关注
+
+        doc.setField(&quot;id&quot;, item.getId());                         //重点关注
+        doc.setField(&quot;item_title&quot;, item.getTitle());             //重点关注
+        doc.setField(&quot;item_sell_point&quot;, item.getSellPoint());    //重点关注
+        doc.setField(&quot;item_price&quot;,item.getPrice() );             //重点关注
+        doc.setField(&quot;item_image&quot;, item.getImage());             //重点关注
+        doc.setField(&quot;item_category_name&quot;, cat.getName());       //重点关注
+        doc.setField(&quot;item_desc&quot;, desc.getItemDesc());           //重点关注
+        doc.setField(&quot;item_updated&quot;, item.getUpdated());         //重点关注
+        solrClient.add(doc);                                     //重点关注
+    }
+    solrClient.commit();                                             //重点关注
+}
+重点关注：：：如何使用solr把数据注入solr中。与上面第一步solrfield的name配合来看。
+</code></pre><hr>
+<p>重点：：：在当前项目spring里面使用用uop<br>           &lt;!– 利用springAop特性实现构造注入  设置注入<br>     CloudSolrClient       example =   new CloudSolrClient(“192.168.249.131:2181,192.168.249.131:2182,192.168.249.131:2183”);<br>        example.setdefaultCollection(collection1); 设值注入用变迁property</p>
+<pre><code>    --&gt;
+&lt;bean id=&quot;solrClient&quot; class=&quot;org.apache.solr.client.solrj.impl.CloudSolrClient&quot;&gt;
+    &lt;constructor-arg type=&quot;java.lang.String&quot; value=&quot;192.168.138.132:2181,192.168.138.132:2182,192.168.138.132:2183&quot;&gt;&lt;/constructor-arg&gt;
+    &lt;property name=&quot;defaultCollection&quot; value=&quot;collection1&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><hr>
+<pre><code>@Resource
+private TbItemService tbItemServiceImpl;
+/**
+ * 初始化
+ * @return
+ */
+@RequestMapping(value=&quot;solr/init&quot;,produces=&quot;text/html;charset=utf-8&quot;)
+@ResponseBody
+public String init(){
+    long start = System.currentTimeMillis();
+    try {
+        //查詢四大需求信息匯總init
+        tbItemServiceImpl.init();
+        long end = System.currentTimeMillis();
+        return &quot;初始化总时间:&quot;+(end-start)/1000+&quot;秒&quot;;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return &quot;初始化失败&quot;;
+    } 
+}
+</code></pre><hr>
+<h2 id="实现搜索功能"><a href="#实现搜索功能" class="headerlink" title="实现搜索功能"></a>实现搜索功能</h2><pre><code>@Override
+public Map&lt;String, Object&gt; selByQuery(String query,int page,int rows) throws SolrServerException, IOException {
+    SolrQuery params = new SolrQuery();
+    //设置分页条件
+    params.setStart(rows*(page-1));   //看回前一章基础query
+    params.setRows(rows);             //看回前一章基础query
+    //设置条件
+    params.setQuery(&quot;item_keywords:&quot;+query);   //看回前一章基础query
+    //设置高亮
+    params.setHighlight(true);                    //看回前一章基础query
+    params.addHighlightField(&quot;item_title&quot;);       //看回前一章基础query
+    params.setHighlightSimplePre(&quot;&lt;span style=&apos;color:red&apos;&gt;&quot;);   //看回前一章基础query
+    params.setHighlightSimplePost(&quot;&lt;/span&gt;&quot;);                   //看回前一章基础query
+    params.setSort(&quot;item_updated&quot;, ORDER.desc);                 //看回前一章基础query
+    QueryResponse response = solrClient.query(params);          //看回前一章基础query
+
+    List&lt;TbItemChild&gt; listChild = new ArrayList&lt;&gt;();
+    //未高亮内容
+    SolrDocumentList listSolr = response.getResults();
+    //高亮内容
+    Map&lt;String, Map&lt;String, List&lt;String&gt;&gt;&gt; hh = response.getHighlighting();
+    //把solr（数据库）doc的内容往listchild里面放数据
+    for (SolrDocument doc : listSolr) {
+        TbItemChild  child = new TbItemChild();    //创建对象
+        child.setId(Long.parseLong(doc.getFieldValue(&quot;id&quot;).toString()));       //传入数据
+        List&lt;String&gt; list = hh.get(doc.getFieldValue(&quot;id&quot;)).get(&quot;item_title&quot;);
+        //判断是否有高亮
+        if(list!=null&amp;&amp;list.size()&gt;0){
+            child.setTitle(list.get(0));
+        }else{
+            child.setTitle(doc.getFieldValue(&quot;item_title&quot;).toString());
+        }
+        child.setPrice((Long)doc.getFieldValue(&quot;item_price&quot;));  //传入的数据
+        Object image = doc.getFieldValue(&quot;item_image&quot;);        // 传入的数据
+        child.setImages(image==null||image.equals(&quot;&quot;)?new String[1]:image.toString().split(&quot;,&quot;)); //传入的数据
+        child.setSellPoint(doc.getFieldValue(&quot;item_sell_point&quot;).toString());               //传入的数据
+
+        listChild.add(child);     引入到对象
+    }
+
+    //把从solr数据库查找到的数据放到hashmap中。
+    Map&lt;String,Object&gt; resultMap = new HashMap&lt;&gt;();
+    resultMap.put(&quot;itemList&quot;, listChild);
+    resultMap.put(&quot;totalPages&quot;, listSolr.getNumFound()%rows==0?listSolr.getNumFound()/rows:listSolr.getNumFound()/rows+1);
+
+
+    return resultMap;
+}
+</code></pre><hr>
+</copyfield></field>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/28/solr实战/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-solr" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/28/solr/">solr</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/28/solr/" class="archive-article-date">
+  	<time datetime="2019-02-27T18:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>solr基本原理<br>1.什么是solr<br>solr是一个maven中的war项目<br>2.如何与solr进行交互<br>特定api solrj<br>3.进行大量数据检索时使用。<br>4.基于索引进行查询的<br>4.1 顺序查询：从内容的最开始找到内容为止。<br>4.2 反向键索引<br>    那什么叫反响键索引<br>    4.2.1把内容进行拆分<br>    例子：solr基本原理<br>    1.拆词 solr 基本 原理<br>    2.拆分成三个<br>    3.当你搜索solr原理<br>    4.会把“solr”原理 拆成solr 原理<br>    5.在进行匹配。<br>所以必须保证solr里面有内容。</p>
+<p>5.流行方案<br>5.1 lucene（solr基于lucene）<br>5.1 百度 api<br>5.2 googleapi</p>
+<p>因为solr是web项目。所以一定要经过中间体。比如tomcat<br>实际工作中，我们在搜索的时候，先把内容发到solr的项目。solr项目搜索到相关内容后，再返回给服务器<br>底层：Httpclient。两个服务器数据的交互。</p>
+<p>安装solr（略）想知道请留言给作者。<br>QQ：431794681 微信 ：13242853540<br>安装完成的效果<br><img src="/2019/02/28/solr/1.jpg" alt="t1"><br>新增 修改 删除的操作面板<br><img src="/2019/02/28/solr/2.jpg" alt="t2"><br>查询操作<br><img src="/2019/02/28/solr/3.jpg" alt="t3"><br>启动tomcat的时候，一定要加上tailf /logs/catalina.out</p>
+<hr>
+<h2 id="第二部分-拆词器"><a href="#第二部分-拆词器" class="headerlink" title="第二部分 拆词器"></a>第二部分 拆词器</h2><ol>
+<li>Solr 默认对中文拆词功能支持不好.<br>1.1 解决方案:使用 IK Analyzer 拆词器</li>
+</ol>
+<p><img src="/2019/02/28/solr/4.jpg" alt="t4"><br>词条拆分<br>在solr中有一个file属性。</p>
+<p><field name="xxx" type="text_ik" indexed="true" stored="true" multivalued="true"><br>name:叫什么名字都可以，显示在上图中。最好见闻知意。<br>type:若要用IK拆词器，就一定是”text_ik”。不能改变。<br>indexed:是否给该列建立索引。true/false<br>stored:是否被存储。在query界面查询结果中，是否把该列显示出来。<br>multiValued:是否有附属文件 true/false</field></p>
+<hr>
+<p>增删改操作面板操作界面：document<br><img src="/2019/02/28/solr/2.jpg" alt="t2"><br>支持：json/xml格式。<br>新增是，必须有id值。且id不能重复<br>例子：</p>
+<p><doc></doc></p>
+<p><field name="id">change.me</field></p>
+<p><field name="title">change.me</field><br><br>修改：只要id已经存在就进行修改。<br>删除:</p>
+<p><delete></delete></p>
+<p><id>id 内容</id></p>
+<p><delete></delete></p>
+<p><commit><br>删除全部：</commit></p>
+<p><delete></delete></p>
+<p><query><em>:</em></query><br></p>
+<h2 id><a href="#" class="headerlink" title></a><commit></commit></h2><h2 id="第三部分-查询"><a href="#第三部分-查询" class="headerlink" title="第三部分 查询"></a>第三部分 查询</h2><p>q: 查询字符串（必须的）。:表示查询所有；keyword:东看 表示按关键字“东看”查询<br>fq: filter query 过滤查询。使用Filter Query可以充分利用Filter Query Cache，提高检索性能。作用：在q查询符合结果中同时是fq查询符合的(类似求交集)，例如：q=mm&amp;fq=date_time:[20081001 TO 20091031]，找关键字mm，并且date_time是20081001到20091031之间的。<br>sort: 排序。格式如下：字段名 排序方式；如advertiserId desc 表示按id字段降序排列查询结果。<br>start,rows:表示查回结果从第几条数据开始显示，共显示多少条。<br>fl: field list。指定查询结果返回哪些字段。多个时以空格“ ”或逗号“,”分隔。不指定时，默认全返回。<br>df: default field默认的查询字段，一般默认指定。<br>Raw Query Parameters:<br>wt: write type。指定查询输出结果格式，我们常用的有json格式与xml格式。在solrconfig.xml中定义了查询输出格式：xml、json、Python、ruby、PHP、phps、custom。<br>indent: 返回的结果是否缩进，默认关闭，用 indent=true | on 开启，一般调试json,php,phps,ruby输出才有必要用这个参数。<br>debugQuery: 设置返回结果是否显示Debug信息。<br>dismax:<br>edismax:<br>hl: high light 高亮。hl=true表示启用高亮<br>hl.fl ： 用空格或逗号隔开的字段列表（指定高亮的字段）。要启用某个字段的highlight功能，就得保证该字段在schema中是stored。如果该参数未被给出，那么就会高 亮默认字段 standard handler会用df参数，dismax字段用qf参数。你可以使用星号去方便的高亮所有字段。如果你使用了通配符，那么要考虑启用 hl.requiredFieldMatch选项。<br>hl.simple.pre：<br>hl.requireFieldMatch: 如果置为true，除非该字段的查询结果不为空才会被高亮。它的默认值是false，意味 着它可能匹配某个字段却高亮一个不同的字段。如果hl.fl使用了通配符，那么就要启用该参数。尽管如此，如果你的查询是all字段（可能是使用 copy-field 指令），那么还是把它设为false，这样搜索结果能表明哪个字段的查询文本未被找到<br>hl.usePhraseHighlighter：如果一个查询中含有短语（引号框起来的）那么会保证一定要完全匹配短语的才会被高亮。<br>hl.highlightMultiTerm：如果使用通配符和模糊搜索，那么会确保与通配符匹配的term会高亮。默认为false，同时hl.usePhraseHighlighter要为true。<br>facet:分组统计，在搜索关键字的同时,能够按照Facet的字段进行分组并统计。<br>facet.query：Facet Query利用类似于filter query的语法提供了更为灵活的Facet.通过facet.query参数，可以对任意字段进行筛选。<br>facet.field：需要分组统计的字段，可以多个。<br>facet.prefix： 表示Facet字段值的前缀。比如facet.field=cpu&amp;facet.prefix=Intel，那么对cpu字段进行Facet查询，返回的cpu都是以Intel开头的， AMD开头的cpu型号将不会被统计在内。<br>spatial: </p>
+<h2 id="spellcheck-拼写检查。"><a href="#spellcheck-拼写检查。" class="headerlink" title="spellcheck: 拼写检查。"></a>spellcheck: 拼写检查。</h2><p>简洁版<br><em>:</em> 查询全部<br>“” 固定查询<br>添加复合属性：什么意思？？？即在<field>目录下面，添加附属类。&lt;</field></p>
+<p><copyfield source dest></copyfield></p>
+<p><field name="bjsxtall" type="text_ik" indexed="true" stored="true" multivalued="true"></field></p>
+<p><copyfield source="bjsxt" dest="bjsxtall"></copyfield></p>
+<p><copyfield source="bjsxt1" dest="bjsxtall"><br>source属性：子属性，把source的属性值赋予dest属性<br>dest属性：父属性。</copyfield></p>
+<p>fq：并列条件。即两个一起查询。<br>sort：排序asc desc<br>start：从哪里开始查   rows:显示几个（默认10个）<br>fl：根据属性列表查询<br>df：默认查询字段</p>
+<p>wt：返回格式，一般用json</p>
+<p>hl：高亮显示<br>hl.fl:属性名<br>hl.somple.pre：例子<span style="color:red"><br>hl.simple.post     </span><br>那么就在里面显示的东西加了css。</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/2019/02/28/solr/5.jpg" alt="t5"></h2><p>/**</p>
+<ul>
+<li>增加删除修改都需要提交事务</li>
+<li><p>@author Administrator<br><em>
+</em>/<br>public class Demo {</p>
+<p> /**</p>
+<ul>
+<li>新增5</li>
+<li>@throws SolrServerException</li>
+<li><p>@throws IOException<br>*/</p>
+<p>public void testInsert() throws SolrServerException, IOException{<br> SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;</p>
+<p> SolrInputDocument doc = new SolrInputDocument(); //我们都是在document中实施增删改。<br> doc.addField(“id”, “005”);<br>//        doc.addField(“bjsxt”, “java和大数据培训”);<br> doc.addField(“bjsxt1”, “大数据4”);</p>
+<p> client.add(doc);  //把数据添加到服务器<br> client.commit(); //一定要记得写，提交事务<br>}</p>
+<p>public void testDelete() throws SolrServerException, IOException{<br> SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;<br> client.deleteById(“001”);<br> client.commit();<br>}</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>@Test<br>    public void testQuery() throws SolrServerException, IOException{<br>        SolrClient client = new HttpSolrClient(“<a href="http://192.168.249.131:8080/solr/&quot;)" target="_blank" rel="noopener">http://192.168.249.131:8080/solr/&quot;)</a>;</p>
+<pre><code>    //可视化界面左侧条件  重点！！！！！
+    SolrQuery params = new SolrQuery();
+    //设置q
+    params.setQuery(&quot;bjsxtall:*&quot;);
+    //设置分页
+    //从第几条开始查询,从0开始
+    params.setStart(0);
+    //查询几个
+    params.setRows(10);
+
+
+    //启动高亮
+    params.setHighlight(true);
+    //设置高亮列
+    params.addHighlightField(&quot;bjsxt&quot;);
+    //设置前缀
+    params.setHighlightSimplePre(&quot;&lt;span style=&apos;color:red;&apos;&gt;&quot;);
+    //设置后缀
+    params.setHighlightSimplePost(&quot;&lt;/span&gt;&quot;);
+
+    //相当于点击查询按钮, 本质,向solr web服务器发送请求,并接收响应. query对象里面包含了返回json数据
+    QueryResponse response = client.query(params);
+
+    Map&lt;String, Map&lt;String, List&lt;String&gt;&gt;&gt; hh = response.getHighlighting();
+
+
+    //取出docs{}
+    SolrDocumentList solrList = response.getResults();
+
+    for (SolrDocument doc : solrList) {
+        System.out.println(doc.getFieldValue(&quot;id&quot;));
+        System.out.println(&quot;未高亮:&quot;+doc.getFieldValue(&quot;bjsxt&quot;));
+        Map&lt;String, List&lt;String&gt;&gt; map = hh.get(doc.getFieldValue(&quot;id&quot;));
+        System.out.println(map);
+        //list可能为null
+        List&lt;String&gt; list = map.get(&quot;bjsxt&quot;);
+        System.out.println(list);
+        if(list!=null&amp;&amp;list.size()&gt;0){
+            System.out.println(&quot;高亮:&quot;+list.get(0));
+        }else{
+            System.out.println(&quot;没有高亮内容&quot;);
+        }
+        System.out.println(doc.getFieldValue(&quot;bjsxt1&quot;));
+    }
+
+}
+</code></pre><h2 id="-2"><a href="#-2" class="headerlink" title="}"></a>}</h2><p>solrcloud</p>
+<ol>
+<li>solr 是 web 项目,需要放入到 tomcat 中.依赖多个 tomcat,<br>让多个tomcat 之间能够通信</li>
+<li>需要借助 zookeeper 实现 tomcat 直接</li>
+</ol>
+<p>solrcloud及zookeeprt的搭建我就忽略了，同样有需求请联系本博主<br>qq：431794681 微信：13242853540<br>最终结果：<br><img src="/2019/02/28/solr/6.jpg" alt="t6"></p>
+<hr>
+<p>用solrj操作solrcloud<br><img src="/2019/02/28/solr/7.jpg" alt="t7"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/28/solr/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-购物车需求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -957,225 +1394,6 @@ public MappingJacksonValue showMenu(String callback){
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/02/26/jsonp使用原理及应用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sso单点登陆技术详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/sso单点登陆技术详解/">sso单点登陆技术详解</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/26/sso单点登陆技术详解/" class="archive-article-date">
-  	<time datetime="2019-02-26T02:59:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一节<br><img src="/2019/02/26/sso单点登陆技术详解/1.jpg" alt="t1"><br>cookie</p>
-<p>1.客户端存值技术 字符串<br> 1.1 存储位置 客户端浏览器<br> 1.2作业：存值<br> 1.3：只能存字符串</p>
-<p>2.cookie运行原理：<br> 2.1 当浏览器输入UPL 访问服务器是自动携带所有有效cookie（）<br>   cookie（时间内，之地那个路径内，指定域名），tomcat接收请求后会把cookie放入到httpservletRequest中，在代码中通过request对象获取到cookie的内容。<br> 2.2服务器内可以产生cookie内容，需要放入到响应对象中 相应给客户端浏览器，要求跳转类型为重定向，客户端浏览器接收相应内容后会把cookie内容存储到指定文件夹内容。<br> 怎么产生cookie和调用cookie<br>request.setMaxAge（）cookie存在最大时长，单位：秒<br>request.setPath（）控制哪些路径能访问cookies<br>request.setDomain（localhost）控制哪些域名</p>
-<p>3.产生cookie<br>4.产生获取cookies</p>
-<p>HttpSessionn 运行原理<br>1.当客户端浏览器访问服务器是，服务器接收请求后会判断请求中是否存在cookie包含jsessionid<br>2.如果包含jessionid把对应值取出，作为key从全局MapString,session&gt;对象往出取session对象<br>  2.1-1如果没有对应的key，执行新建session步骤 会执行新建session<br>  2.1-2如果有对应的可以，把session对象取出。根据自己的业务添加操作。<br>3.tomcat会新建一个session对象，同时会产生一个uuid，作为map的可以，新建的session对象作为value，还会把uuid放入到cookie作为value，对应的key是jsesssionid</p>
-<p>使用redis+cookie模拟session步骤<br>1.流程<br> 1.1 第一次请求时，cookie中没有token<br> 1.2 产生一个uuid，同视把token字符串作为cookie的key，uuid作为cookie的Value<br> 1.3如果希望类似往session存储内容，直接把uuid当作redis的key，把需要存储的内容作为value<br>1.4 把cookie对象相应给客户浏览器</p>
-<hr>
-<p>##第二章<br>登陆退出需求业务分析<br>1.通过网页首页，点击登陆按钮进行登陆<br>2.加入购车车，结算之前，跳转到登陆页面，里面可以通过扫一扫和输入登陆用户信息或者密码<br>3.通过referer，当用户输入登陆成功之后，跳转回之前的页面。<br>4.7天内登陆，免登陆信息<br>5.登陆完成后，在登陆页面的信息中改变为当前用户信息。<br>6.退出用户功能。</p>
-<hr>
-<p>##第三章<br>实现登陆功能<br>运行环境：eclipse linux zookeeper redis dubbo spring springMVC Mybatic<br>dubbo 提供的方法：<br>需求1：在demo passport中，创建在dubbo写好的登陆方法，调用此方法，导入用户输入的信息。若有，返回用户信息类型。若无，返回null。<br>判断用户是否为null，成功则按照前端的ajax，返回相应数据，这里返回的是“200”<br>否则返回，输入一段data，用户名或密码有误，请重新登陆。<br>控制器：返回类型：结果类（如下）。<br>根据前端的信息，封装一个结果类，创建这个结果类。待会会把相关参数注入再这个结果类，返回给浏览器。<br>需求3：重点：获取请求头，放入url中。在显示登陆页面控制器方法中，加入@RequestHeader（“Referer”） String url，Model model。补充知识：model，springframework.ui。存放url。发送给浏览器让浏览器接收到url，当登陆成功后，返回原来的页面。<br>需求5：接收cookie，当用户登陆成功后，把用户信息放入到redis中，产生一个cookie<br>       调用cookieUtil工具包，setcookie。<br>jedisdao，参考redis章节。value：存放用户信息，注意要把用户信息转换为json格式，所以要加入JsonUtil.ObjectToJson（用户信息），key：uuid<br>需求4：设置cookie有效时间，在缓存redis中添加expire（key，time）（过期时间方法），单位秒。<br>需求6：退出用户，调用工具类cookieutil进行删除，参数根据前端文档的参数调整。</p>
-<hr>
-<p>package com.ego.passport.service.impl;</p>
-<p>import java.util.UUID;</p>
-<p>import javax.annotation.Resource;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
-<p>import org.springframework.stereotype.Service;</p>
-<p>import com.alibaba.dubbo.config.annotation.Reference;<br>import com.ego.commons.pojo.EgoResult;<br>import com.ego.commons.util.CookieUtils;<br>import com.ego.commons.util.JsonUtils;<br>import com.ego.dubbo.service.TbUserDubboService;<br>import com.ego.passport.service.TbUserService;<br>import com.ego.pojo.TbUser;<br>import com.ego.redis.dao.JedisDao;</p>
-<p>@Service<br>public class TbUserServiceImpl implements TbUserService {<br>    @Reference<br>    private TbUserDubboService tbUserDubboServiceImpl;<br>    @Resource<br>    private JedisDao jedisDaoImpl;<br>    @Override<br>    public EgoResult login(TbUser user,HttpServletRequest request,HttpServletResponse response) {<br>        EgoResult er = new EgoResult();<br>        TbUser userSelect = tbUserDubboServiceImpl.selByUser(user);<br>        if(userSelect!=null){<br>            er.setStatus(200);<br>            //当用户登录成功后把用户信息放入到redis中<br>            String key = UUID.randomUUID().toString();<br>            jedisDaoImpl.set(key, JsonUtils.objectToJson(userSelect));<br>            jedisDaoImpl.expire(key, 60<em>60</em>24<em>7);<br>            //产生Cookie<br>            CookieUtils.setCookie(request, response, “TT_TOKEN”, key, 60</em>60<em>24</em>7);<br>        }else{<br>            er.setMsg(“用户名和密码错误”);<br>        }<br>        return er;</p>
-<pre><code>}
-</code></pre><hr>
-<pre><code>@Override
-public EgoResult getUserInfoByToken(String token) {
-    EgoResult er = new EgoResult();
-    String json = jedisDaoImpl.get(token);
-    if(json!=null&amp;&amp;!json.equals(&quot;&quot;)){
-        TbUser tbUser = JsonUtils.jsonToPojo(json, TbUser.class);
-        //可以把密码清空
-        tbUser.setPassword(null);
-        er.setStatus(200);
-        er.setMsg(&quot;OK&quot;);
-        er.setData(tbUser);
-    }else{
-        er.setMsg(&quot;获取失败&quot;);
-    }
-
-    return er;
-}
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/sso单点登陆技术详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dubbo实战分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: dubbo实战分析<br>date: 2019-02-25 20:48:55<br>tags:<br><img src="/2019/02/26/dubbo实战分析/1.jpg" alt="t"><br><img src="/2019/02/26/dubbo实战分析/1.jpg" title="这是一个新的博客的图片的说明"></p>
-<h2 id="iframe"><a href="#iframe" class="headerlink" title="#iframe"></a>#iframe</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/dubbo实战分析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/25/hello-world/" class="archive-article-date">
-  	<time datetime="2019-02-25T14:47:55.869Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/hello-world/">展开全文 >></a>
         </p>
       
 

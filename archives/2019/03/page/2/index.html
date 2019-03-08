@@ -6,21 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>锁的底层 | Hexo</title>
+  <title>Archives: 2019/3 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。 ##锁的底层实现 对象内存简图对内存：对象（包含以下三个）： 对象头：hashcode 锁信息 GC 粉黛年龄实例变量填充数据数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与">
-<meta property="og:type" content="article">
-<meta property="og:title" content="锁的底层">
-<meta property="og:url" content="http://yoursite.com/2019/03/04/锁的底层/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/archives/2019/03/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。 ##锁的底层实现 对象内存简图对内存：对象（包含以下三个）： 对象头：hashcode 锁信息 GC 粉黛年龄实例变量填充数据数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/03/04/锁的底层/1.jpg">
-<meta property="og:updated_time" content="2019-03-05T03:18:09.504Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="锁的底层">
-<meta name="twitter:description" content="写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。 ##锁的底层实现 对象内存简图对内存：对象（包含以下三个）： 对象头：hashcode 锁信息 GC 粉黛年龄实例变量填充数据数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/04/锁的底层/1.jpg">
+<meta name="twitter:title" content="Hexo">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -156,176 +150,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-锁的底层" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      锁的底层
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/03/01/httpclient/" class="archive-article-date">
+  	<time datetime="2019-02-28T23:58:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/03/01/httpclient/">httpclient</a>
     </h1>
   
 
-        
-        <a href="/2019/03/04/锁的底层/" class="archive-article-date">
-  	<time datetime="2019-03-04T14:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。</p>
-<p>##锁的底层实现</p>
-<p>对象内存简图<br>对内存：<br>对象（包含以下三个）：</p>
-<p>对象头：hashcode 锁信息 GC 粉黛年龄<br>实例变量<br>填充数据<br>数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与其monitor之间的关系有存在多种实现方式，如monitor可以与对象一起创建销毁或当线程视图获取对象锁时自动生成，但当一个monitor被某个线程持有后，它便处于锁定状态。</p>
-<p>观察者：<br>monitor对象<br>_EntryList:记录等待队列<br>_WaitSet：记录wait的等待队列</p>
-<h2 id="Owner：线程与堆之间的关系记录者"><a href="#Owner：线程与堆之间的关系记录者" class="headerlink" title="_Owner：线程与堆之间的关系记录者"></a>_Owner：线程与堆之间的关系记录者</h2><p>——</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/03/04/锁的底层/1.jpg" alt="T1"></h2><p>锁的重入  （底层解释）<br>   在java中，同步锁时可以重入的，只有同一线程hhi行同步代码块，对同一个对象加锁时才可重入。<br>   当线程持有锁时，会在monitor的计算器中执行递增计算，若当前线程调用其他同步代码，且同步代码的锁对象同时，monitor中的计数器继续递增，每个同步代码块执行结束，monitor中的计数器都会递减，直至所有同步代码执行结束，monitor中的计数器为0时，释放锁标记，_Owner标记赋值为null。</p>
-<hr>
-<p>4.锁的种类</p>
-<p>偏向锁 自旋锁 轻量级锁 重量级锁。</p>
-<p>锁的使用方式为：先提供偏向锁，如果不满足的时候，升级为轻量级锁，再不满足，升级为重量级锁，自旋锁时一个过度的锁状态，不是一种实际的锁类型。<br>  锁只能升级，不能降级。<br>4.1 重量级锁：请看锁的底层实现。对象内存简图。<br>4.2 偏向锁：是一种编译解释锁。如果代码中不可能出现多线程并发争抢同一个锁的时候，JVM编译代码，解释执行的时候，会自动的放弃同步信息。消除synchronized的同步代码结果。使用锁标记的形式记录锁状态。在monitor中有变量acc_sy  .当变量值使用的时候，代表偏向锁锁定。可以避免锁的争抢he1维护。提高效率。<br>4.3 轻量级锁 过度锁。当偏向锁不满足，也就是有多线程并发访问，锁定同一个对象的时候，先提升为轻量级锁，也是使用标记acc_sy标记记录的。acc_un 标记记录未获取到锁信息的线程。就是只有两个线程争抢锁标记的时候，有限使用轻量级锁。（仅限于两个线程）<br>4.4 自旋锁  是一个过渡锁。是偏向锁和轻量级锁的过渡。</p>
-<pre><code>当获取锁的过程中，未获取到。JVM自动执行若干次空循环，再次申请锁，而不是进入阻塞状态的qi
-</code></pre><hr>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/04/锁的底层/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/03/05/并发容器/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          并发容器
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/03/04/高并发编程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">高并发编程</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2019/03/">&laquo; Prev</a><a class="page-number" href="/archives/2019/03/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -351,8 +221,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
