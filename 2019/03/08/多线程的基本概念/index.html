@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>多线程的基本概念 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="##线程的实现  线程状态 线程同步 生产消费者 高级主题  ##创建线程多用runnable，少用Thread继承Thread类class xxx extends Thread{}xxxxx.start();实现Runnable接口class xxxx implements Runnable{ }xxxx p = new xxxx(参数)； new Thread(p).start();编码标准：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程的基本概念">
+<meta property="og:url" content="http://yoursite.com/2019/03/08/多线程的基本概念/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="##线程的实现  线程状态 线程同步 生产消费者 高级主题  ##创建线程多用runnable，少用Thread继承Thread类class xxx extends Thread{}xxxxx.start();实现Runnable接口class xxxx implements Runnable{ }xxxx p = new xxxx(参数)； new Thread(p).start();编码标准：">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-09T02:48:02.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="多线程的基本概念">
+<meta name="twitter:description" content="##线程的实现  线程状态 线程同步 生产消费者 高级主题  ##创建线程多用runnable，少用Thread继承Thread类class xxx extends Thread{}xxxxx.start();实现Runnable接口class xxxx implements Runnable{ }xxxx p = new xxxx(参数)； new Thread(p).start();编码标准：">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,81 +154,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-关于添加内容的总结心得" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-多线程的基本概念" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/10/关于添加内容的总结心得/">关于添加内容的总结心得</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/10/关于添加内容的总结心得/" class="archive-article-date">
-  	<time datetime="2019-03-09T17:41:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一步从文档从找出要新增的内容<br>其中要知道数据库表中对应的内容，从而知道要在dubbo方法中要新建什么样的新增方法，通常传回的类型为int，传入的对象通常是数据库表的对象。在dubbo实现类调用mapper的方法实现把内容新增到数据库中。<br>建立方法：选择mapper/pojo对应的参数</p>
-<p>写业务方法的controller时，要先看看前端要传回的类型数是什么，比如ajax，传回来的是data的数据，肯定data.xxx。根据这个xxx，可以新增一个commons类来接收这些参数。比如result中有msg/status等等。</p>
-<p>然后编写业务的service方法，参数为上面确定要接收的参数。<br>业务的serviceimpl调用之前的dubbo方法，把内容往里面放。还要记得把数据库其他内容补全。 </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/10/关于添加内容的总结心得/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多线程的基本概念" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/08/多线程的基本概念/">多线程的基本概念</a>
+    <h1 class="article-title" itemprop="name">
+      多线程的基本概念
     </h1>
   
 
@@ -251,6 +188,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -258,16 +216,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/08/多线程的基本概念/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/08/多线程的基本概念/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/03/10/关于添加内容的总结心得/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          关于添加内容的总结心得
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/08/IO流/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IO流</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -287,766 +313,14 @@
 
 
 
-
-  
-    <article id="post-IO流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/08/IO流/">IO流</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/08/IO流/" class="archive-article-date">
-  	<time datetime="2019-03-08T04:44:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>IO流，故名思意。是input output<br>核心类：File InputStream OutputStream Reader Writer Closeable Flushable Serializable<br>流的分类：1.节点流：可以直接从数据源或目的地读写数据<br>          2.处理流（包装流）：不直接连接到数据源或目的地，是其他流进行封装。目的主要是简化操作和提高性能<br>      节点流和处理流的关系：<br>      1.节点流处于io操作的第一线，所有操作必须通过他们进行：<br>      2.处理流可以对其他流进行处理（提高效率或操作灵活性）。<br>流分类：1.字节流：按照字节读取数据（：InputStream OutputStream ）<br>        2.字符流：按照字符读取数据（ Reader Writer）因为文件编码的不同，从而有了对字符进行高效操作的字符流对象<br>    原理：底层还是基于字节流操作，自动搜寻了指定的码表。</p>
-<pre><code>字节流：InputStream FileInputStream
-                    FilterInputStream
-            BufferedInputStream
-            DataInputStream
-            LineNumberInputStream
-            PushbackInputStream
-            PipedInputStream
-            SequenceInputStream
-            ByteArrayInputStream
-            StringBufferInputStream
-            ObjectInputStream
-
-    OutputStream:FileOutputStream
-                 FilterOutputStream
-             BufferedOutputStream
-             DataOutputStream
-             PrintStream
-             PipedOutStream
-             ByteArrayOutputStream
-             ObjectOutputStrream
-</code></pre><p>四大抽象：InputStream OutputStream Reader Writer<br>如何看api：<br>1.看继承体系，看接口，看继承。<br>2.看构造器，第一种new，第二种，工具类：类.方法。根据方法返回对象。<br>3.关注方法的形参。</p>
-<p>构建File对象：有三种方式，<br>第一种：file（path）<br>第二种：file（父路径，子路径）</p>
-<p>常用File api：getName() getPath() getAbsolutePath() getParent()<br>              exists()  isFile()  isDirectory()<br>          length()<br>          createNewFile() delete()<br>          mkdir()  mkdirs()  创建目录，如果父目录链不存在一同创建<br>          list()       下级名称<br>          listFiles() 下级路径<br>          listRoots() 根路径</p>
-<p>程序的步骤：<br>选择数据源: 例如 File file = new file();<br>                 byte[] src = “msg”.getBytes();<br>选择流：InputStream file2 = new FileInputStream(file) 可以把图片读到程序<br>        OutputStream os<br>        Reader            = new  FileReader()<br>    Writer            = new  FileWriter()<br>        ByteArrayOutputStream() 把程序到字节数组，方便运输</p>
-<p>操作流：缓冲 char[] flush new char[1024];<br>        读取 while(结束点){ 读数据  }<br>        写入  msg=”输入内容”; os.write(msg); os.append(“内容”);</p>
-<p>关闭流：file2.close<br>以上是字节流。<br>———————————————————————以下是装饰流<br>BufferedInputStream  BufferedOutputStream 字节缓冲流<br>BufferedReader       BufferedWriter       字符缓冲流<br>常用api reader.readerLine()<br>                      常用api newline()</p>
-<p>包装FileInputStream  FileOutputStream</p>
-<p>释放最外层，内层会自动释放。</p>
-<h2 id="性能提升。"><a href="#性能提升。" class="headerlink" title="性能提升。"></a>性能提升。</h2><p>commons.io<br>常用核心类：<br>文件大小：FileUtils.sizeOf(new File(path));<br>列出子孙级：FileUtils.listFile(new File(path),EmptyFileFilter.NOT_EMPTY,DirectoryFileFilter.INSTANCE) 返回是一个容器<br>第一个为父路径，中间那个是非空文件判断，最后那个是过滤操作操作目录，即。如果文件为空则自动忽略。<br>String msg=FlieUtils.readFileToString(new File(path),”UTF-8”)：读取内容<br>逐行读取：FileUtils.readlines(new File(path),”utf-8”)<br>LineIterator it=FileUtils.lineIterator(new File(path),”utf-8”)<br>while(it.hasNext()){  //遍历所有字符<br>}<br>写入：<br>write()<br>writeStringToFile(new File(path),”utf-8”)<br>writeByteArrayToFile(new File(path),”utf-8”)<br>List<string> datas = new ArrayList<string>();<br>datas.add(“”);<br>FileUtils.writeLines(new File(path),datas,连接符,添加为true);<br>复制黏贴<br>FileUtils.copyFile(new File(path),new File(path));<br>复制文件到目录<br>FileUtils.copyFileToDirectory(new File(path),new File(path));<br>复制目录到目录<br>FileUtils.copyDirectoryToDirectory(new File(path),new File(path));<br>复制目录<br>FileUtils.copyDirectory(new File(path),new File(path));<br>拷贝URL内容<br>String url =””<br>FileUtils.copyURLToFile(new URL(“url”),new File(path));</string></string></p>
-<h2 id="IOUtils-toString-new-URL-“网址”-，”utf-8”"><a href="#IOUtils-toString-new-URL-“网址”-，”utf-8”" class="headerlink" title="IOUtils.toString(new URL(“网址”)，”utf-8”)"></a>IOUtils.toString(new URL(“网址”)，”utf-8”)</h2><p>总结：<br>学会commons.io使用就好，之后还有NIO，之后还有Netty。然后再到redis。<br>重点掌握文件拷贝。<br>套路总结：创建源 选择流 操作流 关闭流。<br>字符用byte[] file = new byte(1024);存储<br>然后用while(数据流=file.read=-1){<br>  具体读到那里的操作；(根据项目决定，初学者直接用System.out.println())<br>}<br>写出write<br>.flush<br>.append<br>.readline</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/08/IO流/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-线程池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/05/线程池/">线程池</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/05/线程池/" class="archive-article-date">
-  	<time datetime="2019-03-05T10:54:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#####线程池</p>
-<p>Executor 线程池的顶级接口<br>复写的方法是excute（runnable） 参数runnable 方法是用于处理任务的一个服务方法。调用者提供runnable接口的实现，线程池通过线程这个runnable。服务方法无返回值的。原因是runnable接口中的润方法无返回值。<br>常用方法  void execute（Runnable）<br>作用是：启动线程任务的。</p>
-<p>executorservice<br>executor 接口的子接口。提供了一个新的服务方法，sumbit方法。有返回值。（future类型）。<br>sumbit方法提供了overload方法。其中有参数类型为runnable的不需要提供返回值的。<br>有参数callable，可以提供线程执行后的返回值。<br>    future ，是submit方法的返回值，代表未来，也就是线程执行结束后的i一种结果。</p>
-<p>ExecutorService service = Executors.newFixedThreadPool(5)<br>service.execute(new Runnable(){<br>      public void run(){}<br>})<br>service：线程池状态：running（线程池正在执行中） shutttingDown（优雅关闭） Termited(线程池已经关闭)</p>
-<p>future<br>  未来结果，代表线程任务执行结束后的结果。获取线程执行结果的方式是通过get方法。获取的<br>  get无参，阻塞等待线程执行结束，并得到结果。get有参，阻塞固定时长，等待线程执行结束后的结果，如果在阻塞时长范围内，线程未执行结束，抛出异常。<br>   常用方法：t。get() T.get(long,timeUnit)</p>
-<p>ExecutorService service = Executors.newFixedThreadPool(5)<br>Future<string> future =service.sumbit(new Callable<string>(){<br>      public String call(){</string></string></p>
-<pre><code>}
-</code></pre><p>})<br>future.isDone();<br>future.get();  获取call方法的返回值</p>
-<p>callable<br>可执行接口。类似runnable接口。也是可以启动一个线程的接口。其中定义的方法是call。<br>call方法的作用和runnable中的run方法完全一致。call方法有返回值。</p>
-<p>executors<br>工具类型。为Executor线程池提供工具方法。可以快速提供若干种线程池。如：固定容量的，无限容量的，容量为1等各种线程池。  线程池是一个进程及的重量级资源。默认的生命周期和JVM一致。当开启线程池后，知道JVM关闭为止，是线程池的默认生命周期。如果手工调用shutdown方法，那么线程池执行所有的任务后，自动关闭</p>
-<p>fixedthreadPool</p>
-<p>CachedThreadPool</p>
-<p>ScheduledThreadPool</p>
-<p>SingleThreadExceutor</p>
-<p>ForkJoinPool</p>
-<p>ThreadPoolExecutor</p>
-<p>。如果</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/05/线程池/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-并发容器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/05/并发容器/">并发容器</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/05/并发容器/" class="archive-article-date">
-  	<time datetime="2019-03-05T03:18:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>ThreadLocal ————-&gt; Thread.getCurrentThread()<br>    Map     ————-&gt;  value(线程需要保存的变量)<br>    ThreadLoacal.set(value) —-&gt;map.put(Thread.getCurrentThread(),value)<br>    ThreadLocal.get() ——&gt;map.get(Thread.getCurrentThread());<br>内存问题：在并发量高的时候，可能发生内存溢出。<br>使用ThreadLocal的时候，一定注意回收资源问题，每个线程结束之前，将当前线程保存的线程变量一定要删除。<br>ThreadLoacl。remove(); 在run方法最后写remove操作</p>
-<p>ConcurrentLinkedQueue&lt;&gt;<br>基础链表同步队列</p>
-<p>并发容器 -LinkBlockingQueue&lt;&gt;<br>阻塞容器<br>put &amp; take —自动阻塞<br>put 自动阻塞，队列容量满后，自动阻塞<br>take自动阻塞方法后，队列容量为0后，自动阻塞</p>
-<p>ArrayBlockingQueue&lt;&gt;<br>add方法 容量不满会抛出异常 阻塞<br>put方法 容量不足等待消费 阻塞<br>offer方法 不会阻塞 单参数 不足返回false<br>                   三参数 （offer（value，times，timeunit））参数3为等待时长。</p>
-<p>delayqueue&lt;&gt;<br>定时任务 排序任务<br>排序和getdelay方法配合完成<br>compareto方法 比较大小<br>getdelay 根据参数timeunit来决定，如何返回结果值。<br>定时关机？？？？</p>
-<p>LinkedTransferQueue<br>当用put方法，该数据会等待get或者take使用，才把数据交付。<br>先take 后put  可以 都要try catch<br>开两个线程 可以  都要try catch</p>
-<p>add是往里面放东西，且不做阻塞等待<br>而transfer方法属于空中接力，没有往里面放东西。必须有消费者（take），一般用于处理即时消息</p>
-<p>SynchronusQueue<br>同步队列，是一个容量为0的队列。是一个特殊的transferqueue<br>必须先有消费线程等待，才能使用的队列。<br>add方法，无阻塞。若没有消费线程阻塞等待数据，则抛出异常<br>put方法，有阻塞。若没有消费线程阻塞等待数据，则阻塞。<br>用法同上：例如定时发送信息。</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/05/并发容器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-锁的底层" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/04/锁的底层/">锁的底层</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/04/锁的底层/" class="archive-article-date">
-  	<time datetime="2019-03-04T14:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写在开头：本内容对实际编码没有任何作用。只是对JVM内容的理解及提高面试能力。</p>
-<p>##锁的底层实现</p>
-<p>对象内存简图<br>对内存：<br>对象（包含以下三个）：</p>
-<p>对象头：hashcode 锁信息 GC 粉黛年龄<br>实例变量<br>填充数据<br>数据是记录在对象头中。当执行synchronized同步方法或同步代码块是，会在对象头中记录锁标记，锁标记只想的是monitor对象的起始地址。每个对象都存在着一个monitor与之关联，对象与其monitor之间的关系有存在多种实现方式，如monitor可以与对象一起创建销毁或当线程视图获取对象锁时自动生成，但当一个monitor被某个线程持有后，它便处于锁定状态。</p>
-<p>观察者：<br>monitor对象<br>_EntryList:记录等待队列<br>_WaitSet：记录wait的等待队列</p>
-<h2 id="Owner：线程与堆之间的关系记录者"><a href="#Owner：线程与堆之间的关系记录者" class="headerlink" title="_Owner：线程与堆之间的关系记录者"></a>_Owner：线程与堆之间的关系记录者</h2><p>——</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/03/04/锁的底层/1.jpg" alt="T1"></h2><p>锁的重入  （底层解释）<br>   在java中，同步锁时可以重入的，只有同一线程hhi行同步代码块，对同一个对象加锁时才可重入。<br>   当线程持有锁时，会在monitor的计算器中执行递增计算，若当前线程调用其他同步代码，且同步代码的锁对象同时，monitor中的计数器继续递增，每个同步代码块执行结束，monitor中的计数器都会递减，直至所有同步代码执行结束，monitor中的计数器为0时，释放锁标记，_Owner标记赋值为null。</p>
-<hr>
-<p>4.锁的种类</p>
-<p>偏向锁 自旋锁 轻量级锁 重量级锁。</p>
-<p>锁的使用方式为：先提供偏向锁，如果不满足的时候，升级为轻量级锁，再不满足，升级为重量级锁，自旋锁时一个过度的锁状态，不是一种实际的锁类型。<br>  锁只能升级，不能降级。<br>4.1 重量级锁：请看锁的底层实现。对象内存简图。<br>4.2 偏向锁：是一种编译解释锁。如果代码中不可能出现多线程并发争抢同一个锁的时候，JVM编译代码，解释执行的时候，会自动的放弃同步信息。消除synchronized的同步代码结果。使用锁标记的形式记录锁状态。在monitor中有变量acc_sy  .当变量值使用的时候，代表偏向锁锁定。可以避免锁的争抢he1维护。提高效率。<br>4.3 轻量级锁 过度锁。当偏向锁不满足，也就是有多线程并发访问，锁定同一个对象的时候，先提升为轻量级锁，也是使用标记acc_sy标记记录的。acc_un 标记记录未获取到锁信息的线程。就是只有两个线程争抢锁标记的时候，有限使用轻量级锁。（仅限于两个线程）<br>4.4 自旋锁  是一个过渡锁。是偏向锁和轻量级锁的过渡。</p>
-<pre><code>当获取锁的过程中，未获取到。JVM自动执行若干次空循环，再次申请锁，而不是进入阻塞状态的qi
-</code></pre><hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/04/锁的底层/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="n-高并发编程" class="article article-type-n  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/04/高并发编程/">高并发编程</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/04/高并发编程/" class="archive-article-date">
-  	<time datetime="2019-03-04T04:50:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##高并发编程基础   强烈推荐Java并发编程之美</p>
-<p>1线程安全性</p>
-<p>1.1什么是线程安全性</p>
-<p>1.2原子性<br>整个程序中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。<br>原子性操作：原子性在一个操作是不可中断的，要么全部执行成功要么全部执行失败，有着“同生共死”的感觉。及时在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程所干扰。<br>1.2.1 竞态条件<br>当某个计算的正确性取决于多个线程的交替执行时序时，那么就会发生竟态条件。</p>
-<p>1.3加锁机制<br>1.3.1 内置锁  同步代码块：Synchronized Block<br>包括两个部分：一是锁的对象引用,  二是作为这个锁保护的代码块。<br>Synchronized（lock）{<br>//访问或修改由锁保护的共享状态。<br>}<br>每个java对象都可以用做一个实现同步的锁，这些锁被称为内置锁或监视锁<br>java的内置锁最多只有一个线程能持有这种锁。所以由这个锁保护的线程会以原子性方式执行</p>
-<p>1.3.2重入<br>当某个线程请求一个由其他线程持有的锁时，发出请求的线程就会阻塞。但是内置锁是可以重入，既是某个线程试图获得一个已经由它自己持有的锁，那么这个请求就会成功。</p>
-<p>1.4用锁来保护状态<br>由于锁能使其保护的代码路径以串行形式来访问，因此可以通过锁来构造一些协议以实现对共享状态的独占访问。只要始终遵循这些协议，就能确保状态的一致性。</p>
-<p>1.5活跃性与性能</p>
-<p>2对象的共享</p>
-<p>2.1可见性</p>
-<p>2.2发布与逸出</p>
-<p>2.3线程封闭</p>
-<p>2.4不变性</p>
-<p>2.5安全发布</p>
-<hr>
-<p>Synchronized 关键字<br>synchronized 锁什么？锁对象。<br>可能锁对象包括：（1） this， 当前的方法对象，运行过程中的对象（2）临界资源对象 多个线程多个方法都能找到的对象<br>，（3）Class 类对象 静态同步方法，锁的是当前类型的类对象。<br>原子性：某个代码块执行不被分割。</p>
-<p>同步方法只影响其他线程调用同一个同步方法时的锁问题，不影响其他线程调用非同步方法，或调用其他锁的方法</p>
-<p>脏读：当有复杂的逻辑商业代码执行的时候，发生延迟。使得在读数据得时候发生异常，导致读错数据。</p>
-<p>引出一个问题：同步方法只能保证当前方法得原子性，不能保证多个业务方法之间得互相访问的原子性。<br>注意在商业开发，多方法要求结果访问原子操作，需要多个方法都枷锁，且锁定统一一个资源</p>
-<p>可重入：同一个线程，多次调用同步代码，锁定同一个锁对象。</p>
-<p>继承：子类同步方法覆盖父类同步方法。可以指定调用父类的同步方法 。相当于锁的重入。</p>
-<p>锁与异常：当同步方法中发生异常的时候，自动释放所资源，不会影响其他线程的执行。<br>注意，同步业务逻辑中，如果发生异常处理，请重置回滚。</p>
-<p>锁对象变更问题<br>同步代码一旦加锁后，那么会有一个临时的锁引用执行锁对象，和真实的引用无直接关联。<br>在锁未释放之前，修改锁对象应用，不会影响同步代码的执行</p>
-<p>常量问题<br>在定义同步代码块是，不要使用常量对象作为锁对象</p>
-<hr>
-<p>volatile 关键字<br>可见性：当CPU计算的临时数据存到缓存空间，当硬盘读class对象存到内存中，形式类对象。放给缓存。<br>当发生中断的时候，可能会清空缓存，读cpu数据。<br>volatile改变的是内存特性。告诉cpu/或者os系统，一定要找内存最新的数据值。<br>（前提必须是访问同一对象）。<br>volatile，只能保证可见性，不能保证原子性。加在存在变化的对象！！！！！！！</p>
-<hr>
-<p>wait notify<br>等待会释放锁标记。</p>
-<p>lock</p>
-<p>生产者消费者模式。。。。。<br>简单来说，就是生产者生产到一定数量的东西，放到商品橱柜，生产者停止生产，唤醒消费者开始消费商品橱柜，当商品橱柜里面的东西消费到一定程度的时候，停止消费者，开启生产者。</p>
-<hr>
-<h2 id="Atomic-xxx-类型组-：原子操作。其中的每个方法都是原子操作。可以保证线程安全。"><a href="#Atomic-xxx-类型组-：原子操作。其中的每个方法都是原子操作。可以保证线程安全。" class="headerlink" title="Atomic xxx 类型组 ：原子操作。其中的每个方法都是原子操作。可以保证线程安全。"></a>Atomic xxx 类型组 ：原子操作。其中的每个方法都是原子操作。可以保证线程安全。</h2><p>CountDownLatch 门闩</p>
-<h2 id="可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。"><a href="#可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。" class="headerlink" title="可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。"></a>可以和锁混合使用，或替代锁的使用。在门闩未完全开放之前等待。当门闩完全开放后执行。</h2><p>ReentrantLock<br>重入锁</p>
-<p>类似于同步的方法。<br>lock.lock 加锁<br>lock.unlock  解锁<br>例子：<br>lock.lock<br>业务代码块<br>lock.unlock</p>
-<p>islock=lock.trylock  尝试锁：如果有锁，无法获取锁标记。如果获取锁标记，返回true。<br>例子<br>boolean islock =false;<br>finally{<br>  if（islock）{<br>       lock.unlock;<br>  }<br>}<br>注意：尝试锁在接触锁标记的时候，一定要判断是否获取锁标记.如果当前线程没有获取锁标记，会抛出异常信息。</p>
-<p>islocked =lock.trylock(5,timeunit.seconds)<br>阻塞尝试锁，阻塞参数代表时长，尝试获取锁标记。如果超时，不等待。直接返回。</p>
-<p>lock.lockInterruptibly：尝试打断锁：阻塞等待锁。可以被其他的线程打断阻塞状态（可被打断）<br>打断线程休眠。非正常结束阻塞状态的线程，都会抛异常。<br>相当于人物处理器的结束任务。</p>
-<p>阻塞状态：包括普通阻塞，等待队列，锁池队列</p>
-<p>普通阻塞：sleep()  可被打断<br>等待队列：wait() 可被notify唤醒 无法被打断<br>锁池队列：无法获取锁标记<br>   使用reetrantlock的lock方法，获取锁标记，无法被打断<br>   使用lockInterrupttibly方法，可被打断</p>
-<p>Reentrantlock(true)公平锁：公平锁表示线程获取锁的顺序时按照线程请求所得时间早晚来决定的，也就是最早请求锁的线程将最早获取到锁，而非公平锁则运行时闯入，也就是先来不一定先得。<br>最好不要用，最大长度不超过10。</p>
-<p>lock.newConditionLock()  条件锁</p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/04/高并发编程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sql优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/03/sql优化/">sql优化</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/03/sql优化/" class="archive-article-date">
-  	<time datetime="2019-03-03T13:12:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/03/sql优化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-springData" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/03/springData/">springData</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/03/springData/" class="archive-article-date">
-  	<time datetime="2019-03-03T11:09:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Hibernate</p>
-<p>JPA标准</p>
-<p>Hibernate JPA</p>
-<p>Spring Date</p>
-<p>Spring Date JPA</p>
-<p>Spring Date Reids</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/03/springData/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-springboot" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/02/springboot/">springboot</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/02/springboot/" class="archive-article-date">
-  	<time datetime="2019-03-02T12:05:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id><a href="#" class="headerlink" title></a><img src="/2019/03/02/springboot/1.jpg" alt="t1"></h2><p>springboot初级<br>1  springboot入门<br>1.1 springboot 简介<br>1.2 构建springboot 项目以及启动讲解<br>1.3 springboot入门hellowolrd</p>
-<p>2 springboot整合web开发<br>2.1 整合servlet<br>2.2 整合filter<br>2.3 访问静态资源<br>2.4 文件上传</p>
-<p>3spring boot 视图层技术<br>3.1 整合jsp技术<br>3.2 整合freemarker<br>3.3 整合Thymeleaf</p>
-<p>4springboot整合持久层技术</p>
-<h2 id="4-1-使用spring-boot整合MyBatis"><a href="#4-1-使用spring-boot整合MyBatis" class="headerlink" title="4.1 使用spring boot整合MyBatis"></a>4.1 使用spring boot整合MyBatis</h2><p>##第一章<br>1.使用maven创建<br>创建maven，在pom文件里面输入<br>注意：<br>packaging选jar，<br>groupId——org.springframework.boot<br>artifactId——spring-boot-starter-parent</p>
-<h2 id="version-1-5-10-根据自己定"><a href="#version-1-5-10-根据自己定" class="headerlink" title="version 1.5.10 //根据自己定"></a>version 1.5.10 //根据自己定</h2><p>修改jdk版本</p>
-<p>在pom中<br>加入</p>
-<p><properties>标签 &lt;java.version&gt;1.7鼠标右键  update maven </properties></p>
-<p>注入启动器</p>
-<p><dependencies> </dependencies></p>
-<p><dependency> </dependency></p>
-<p><group> org.springframework.boot </group></p>
-<h2 id="spring-boot-starter-web"><a href="#spring-boot-starter-web" class="headerlink" title="spring-boot-starter-web"></a><artifactid>spring-boot-starter-web</artifactid></h2><p>spring-boot-starter-web包<br>支持全栈式的web开发，包括tomcat和springMvC等jar包<br>spring-boot-starter-jdbc<br>支持spring以jdbc方式操作数据库的jar包的集合<br>spring-boot-starter-redis</p>
-<h2 id="支持redis数据缓存操作"><a href="#支持redis数据缓存操作" class="headerlink" title="支持redis数据缓存操作"></a>支持redis数据缓存操作</h2><p>入门实例<br>其中controller与springMVC没什么不同<br>不过许多包都不用导入————这就是springboot优势</p>
-<p>启动器<br>/**</p>
-<ul>
-<li>SpringBoot 启动类</li>
-<li>@author Administrator<br><em>
-</em>/<br>@SpringBootApplication<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<hr>
-<hr>
-<p>2 springboot整合web开发<br>2.1 整合servlet<br>2.2 整合filter<br>2.3 访问静态资源<br>2.4 文件上传</p>
-<hr>
-<p>/*<em>
-</em>SpringBoot 整合 Servlet 方式一<br><em>
-</em><servlet></servlet></p>
-<ul>
-<li><servlet-name>FirstServlet</servlet-name></li>
-<li><servlet-class>com.bjsxt.servlet.FirstServlet</servlet-class><br><em>
-</em><br>*<servlet-mapping></servlet-mapping></li>
-<li><servlet-name>FirstServlet</servlet-name></li>
-<li><url-pattern>/first</url-pattern><br><em>
-</em><br>*/<br>@WebServlet(name=”FirstServlet”,urlPatterns=”/first”)<br>public class FirstServlet extends HttpServlet {<br>@Override<br>protected void doGet(HttpServletRequest req, HttpServletResponse resp)<br>throws ServletException, IOException {<br>// TODO Auto-generated method stub<br>super.doGet(req, resp);<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>SpringBoot 整合 Servlet 方式一<br><em>
-</em><br>*/<br>@SpringBootApplication<br>@ServletComponentScan //在 springBoot 启动时会扫描@WebServlet，并将该类实例<br>化<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<p>/<strong><br><em>SpringBoot 整合 Servlet 方式二
-</em><br>*/<br>public class SecondServlet extends HttpServlet {<br>@Override<br>protected void doGet(HttpServletRequest req, HttpServletResponse resp)<br>throws ServletException, IOException {<br>System.out.println(“SecondServlet……….”);<br>}<br>}<br>/</strong></p>
-<ul>
-<li>SpringBoot 整合 Servlet 方式二<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App2 {<br>public static void main(String[] args) {<br>SpringApplication.run(App2.class, args);<br>}<br>@Bean<br>public ServletRegistrationBean getServletRegistrationBean(){<br>ServletRegistrationBean bean = new ServletRegistrationBean(new<br>SecondServlet());<br>bean.addUrlMappings(“/second”);<br>return bean;<br>}<br>}</li>
-</ul>
-<p>总结：一个采用注解一个采用实例化。根据需要是否创建复杂</p>
-<hr>
-<p>2.2 整合filter<br>/*<em>
-</em>SpringBoot 整合 Filter 方式一：注解方式<br>*<filter></filter></p>
-<ul>
-<li><filter-name>FirstFilter</filter-name></li>
-<li><filter-class>com.bjsxt.filter.FirstFilter</filter-class><br><em>
-</em><filter-mapping></filter-mapping></li>
-<li><filter-name>FirstFilter</filter-name></li>
-<li><url-pattern>/first</url-pattern><br><em>
-</em>/<br>//@WebFilter(filterName=”FirstFilter”,urlPatterns={“<em>.do”,”</em>.jsp”})</li>
-</ul>
-<p>@WebFilter(filterName=”FirstFilter”,urlPatterns=”/first”)<br>public class FirstFilter implements Filter {<br>@Override<br>public void destroy() {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void doFilter(ServletRequest arg0, ServletResponse arg1,<br>FilterChain arg2)<br>throws IOException, ServletException {<br>System.out.println(“进入 Filter”);<br>arg2.doFilter(arg0, arg1);<br>System.out.println(“离开 Filter”);<br>}<br>@Override<br>public void init(FilterConfig arg0) throws ServletException {<br>// TODO Auto-generated method stub<br>}<br>}<br>/*<em>
-</em>SpringBoot 整合 Filter 方式一<br><em>
-</em>/<br>@SpringBootApplication<br>@ServletComponentScan<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>/*<em>
-</em><br><em>SpringBoot 整合 Filter 方式二
-</em><br>*/<br>public class SecondFilter implements Filter {<br>@Override<br>public void destroy() {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void doFilter(ServletRequest arg0, ServletResponse arg1,<br>FilterChain arg2)<br>throws IOException, ServletException {<br>System.out.println(“进入 SecondFilter”);<br>arg2.doFilter(arg0, arg1);<br>System.out.println(“离开 SecondFilter”);<br>}<br>@Override<br>public void init(FilterConfig arg0) throws ServletException {<br>// TODO Auto-generated method stub<br>}<br>}</p>
-<p>/**</p>
-<ul>
-<li>SpringBoot 整合 Filter 方式二<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App2 {<br>public static void main(String[] args) {<br>SpringApplication.run(App2.class, args);<br>}<br>/**</li>
-<li>注册 Servlet</li>
-<li>@return<br>*/<br>@Bean<br>public ServletRegistrationBean getServletRegistrationBean(){<br>ServletRegistrationBean bean = new ServletRegistrationBean(new<br>SecondServlet());<br>bean.addUrlMappings(“/second”);<br>return bean;<br>}<br>/**</li>
-<li>注册 Filter<br><em>/<br>@Bean<br>public FilterRegistrationBean getFilterRegistrationBean(){<br>FilterRegistrationBean bean = new FilterRegistrationBean(new<br>SecondFilter());<br>//bean.addUrlPatterns(new String[]{“</em>.do”,”*.jsp”});<br>bean.addUrlPatterns(“/second”);<br>return bean;<br>}<br>}</li>
-</ul>
-<hr>
-<hr>
-<p>/**</p>
-<ul>
-<li>springBoot 整合 Listener<br><em>
-</em><listener></listener></li>
-<li><listener-class>com.bjsxt.listener.FirstListener</listener-class><br><em>
-</em>/<br>@WebListener<br>public class FirstListener implements ServletContextListener {<br>@Override<br>public void contextDestroyed(ServletContextEvent arg0) {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void contextInitialized(ServletContextEvent arg0) {<br>System.out.println(“Listener…init……”);<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>springBoot 整合 Listener 方式一<br><em>
-</em><br>*/<br>@SpringBootApplication<br>@ServletComponentScan<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<hr>
-<p>/**</p>
-<ul>
-<li>springBoot 整合 Listener 方式二。<br><em>
-</em><br>*/<br>public class SecondListener implements ServletContextListener {<br>@Override<br>public void contextDestroyed(ServletContextEvent arg0) {<br>// TODO Auto-generated method stub<br>}<br>@Override<br>public void contextInitialized(ServletContextEvent arg0) {<br>System.out.println(“SecondListener..init…..”);<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>SpringBoot 整合 Listener 方式二<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App2 {<br>public static void main(String[] args) {<br>SpringApplication.run(App2.class, args);<br>}<br>/**</li>
-<li>注册 listener<br>*/<br>@Bean<br>public ServletListenerRegistrationBean<secondlistener><br>getServletListenerRegistrationBean(){<br>ServletListenerRegistrationBean<secondlistener> bean= new<br>ServletListenerRegistrationBean<secondlistener>(new SecondListener());<br>return bean;<br>}<br>}</secondlistener></secondlistener></secondlistener></li>
-</ul>
-<hr>
-<hr>
-<p>四，访问静态</p>
-<ol>
-<li><p>SpringBoot 从 classpath/static 的<br>文件再resources下一定要在static文件夹下</p>
-</li>
-<li><p>ServletContext 根目<br>在src/main/webapp 目录名称必须是webapp</p>
-</li>
-</ol>
-<hr>
-<hr>
-<p>五，文件上传</p>
-<p>/**</p>
-<ul>
-<li>SpringBoot 文件上传<br><em>
-</em><br><em>/<br>//@Controller<br>@RestController //表示该类下的方法的返回值会自动做 json 格式的转换<br>public class FileUploadController {<br>/</em></li>
-<li>处理文件上传<br>*/<br>@RequestMapping(“/fileUploadController”)<br>public Map&lt;String, Object&gt; fileUpload(MultipartFile filename)throws<br>Exception{<br>System.out.println(filename.getOriginalFilename());<br>filename.transferTo(new<br>File(“e:/“+filename.getOriginalFilename()));<br>Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();<br>map.put(“msg”, “ok”);<br>return map;<br>}<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>SpringBoot 文件上传<br><em>
-</em><br>*/<br>@SpringBootApplication<br>public class App {<br>public static void main(String[] args) {<br>SpringApplication.run(App.class, args);<br>}<br>}</li>
-</ul>
-<p>设置单个上传文件的大小<br>spring.http.multipart.maxFileSize=200MB<br>设置一次请求上传文件的总容量<br>spring.http.multipart.maxRequestSize=200</p>
-<hr>
-<hr>
-<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><p>整合 jsp<br>整合 freemarker </p>
-<h2 id="整合-Thymeleaf"><a href="#整合-Thymeleaf" class="headerlink" title="整合 Thymeleaf"></a>整合 Thymeleaf</h2><p>要使用jsp项目的时候，必须在pom加入一下配置信息。<br><!-- jstl --></p>
-<p><dependency></dependency></p>
-<p><groupid>javax.servlet</groupid></p>
-<p><artifactid>jstl</artifactid><br><br><!-- jasper --></p>
-<p><dependency></dependency></p>
-<p><groupid>org.apache.tomcat.embed</groupid></p>
-<p><artifactid>tomcat-embed-jasper</artifactid></p>
-<p><scope>provided</scope></p>
-<h2 id="-2"><a href="#-2" class="headerlink" title></a></h2><p>springboot的视图解析器<br>3,创建 springBoot 的全局配置文件，application.properties<br>spring.mvc.view.prefix=/WEB-INF/jsp/spring.mvc.view.suffix=.j</p>
-<p><!-- freemarker 启动器的坐标 --><dependency><groupid>org.springframework.boot</groupid><artifactid>spring-boot-starter-freemarker</artifactid>&lt;/dependenc</dependency></p>
-<hr>
-<p>后面两个待续。。。。。。。。</p>
-<hr>
-<p>Springboot 整合持久层框架</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/02/springboot/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1071,8 +345,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -152,6 +152,179 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-高频面试题系列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/02/高频面试题系列/">高频面试题系列</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/02/高频面试题系列/" class="archive-article-date">
+  	<time datetime="2019-03-02T08:21:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>public static void main(String[] args) {
+
+    int i =1;
+    System.out.println(i);
+    i = i++;
+    System.out.println(i);
+    int j =i++;
+    System.out.println(j);
+    int k =i+ ++i * i++;
+    System.out.println(i);
+    System.out.println(j);
+    System.out.println(k);
+
+}
+</code></pre><hr>
+<p>赋值=，最后计算<br>=右边的从左到右加载值依次压入操作数栈<br>实际先算哪个，看运算符优先级<br>自增 自减做操都是直接修改变量的值，不经过操作数栈<br>最后的赋值之前，临时结果也是存储在操作数栈</p>
+<hr>
+<p>Signleton—-单例设计模式<br>要点：<br>一是某个类只能有一个实例；  构造器私有化<br>二是它必须自行创建这个实例；   含有一个该类的静态变量来保存这个唯一的实例<br>三是它必须自行向整个系统提供这个实例   对外提供获取该实例对象的方式：（1）直接暴露  （2）用静态变量的get方法获取</p>
+<hr>
+<p>饿汉式<br>直接创建实例对象，不管你是否需要这个对象都会创建<br>public static final Singleton1 I = new Singleton1(); //I是常量<br>private Singleton(){}  //构造器私有化<br>枚举：现在<br>public enum Singleton{<br>  I<br>}<br>静态代码块：适合创建复杂对象<br>public static final Singleton1;<br>static{  I = new Singleton1();  }</p>
+<h2 id="publicSingleton"><a href="#publicSingleton" class="headerlink" title="publicSingleton(){}"></a>publicSingleton(){}</h2><p>懒汉式：<br>延迟创建这个实例对象</p>
+<p>（1）构造器私有化<br>（2）用一个静态变量保存这个唯一的实例<br>（3）提供一本静态方法，获取这个实例对象<br>private static singleton I;<br>private Singleton(){}<br>public static Singleton getI(){<br>  if(i==null){<br>   i =new Singleton();<br>  }</p>
+<h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p>安全版<br>private static class inner{<br>private static Singleton i;<br>}<br>private Singleton<br>private static lei geti{<br>  return lei.inner.i;</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>类初始化过程<br>1 一个类要创建实例需要先加载并初始化该类<br>   main方法所在的类需要先加载和初始化<br>2一个子类要初始化需要初始化父类</p>
+<h2 id="3一个类初始化就是执行clinit-方法"><a href="#3一个类初始化就是执行clinit-方法" class="headerlink" title="3一个类初始化就是执行clinit()方法"></a>3一个类初始化就是执行clinit()方法</h2><p>先执行<br>1.静态代码方法<br>2.静态代码块</p>
+<p>实例初始化</p>
+<p><init>()方法<br>它可以重载有多个，有几个构造器就有几个<init>方法、</init></init></p>
+<p><init>()方法由非静态实例变量显示赋值代码和非静态代码块（从上到<br>下按顺序执行）/对应构造器代码组成（最后执行）。<br>super();<br>i = test();<br>子类的非静态代码块<br>子类的无参构造</init></p>
+<p>非静态方法其实有一个默认的对象this<br>this 构造器 </p>
+<hr>
+<p>哪些方法不可以被重写</p>
+<p>对象的多态性</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/02/高频面试题系列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-多线程-后台新增内容-httpclient的综合应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/01/多线程-后台新增内容-httpclient的综合应用/">多线程+后台新增内容+httpclient的综合应用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/01/多线程-后台新增内容-httpclient的综合应用/" class="archive-article-date">
+  	<time datetime="2019-03-01T02:33:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>/**</p>
+<ul>
+<li>新增</li>
+<li>@param item</li>
+<li>@return<br>*/<br>int add(Map&lt;String,Object&gt; map,String desc) throws<br>SolrServerException, IOException;<br>@Override<br>public int add(Map&lt;String,Object&gt; map,String desc)<br>throws SolrServerException, IOException {<br>SolrInputDocument doc = new SolrInputDocument();<br>doc.setField(“id”, map.get(“id”));<br>doc.setField(“item_title”, map.get(“title”));<br>doc.setField(“item_sell_point”,<br>map.get(“sellPoint”));<br>doc.setField(“item_price”, map.get(“price”));<br>doc.setField(“item_image”, map.get(“image”));<br>doc.setField(“item_category_name”,<br>tbItemCatDubboServiceImpl.selById((Integer)map.get(“c<br>id”)).getName());<br>doc.setField(“item_desc”, desc);<br>UpdateResponse response = solrClient.add(doc);<br>solrClient.commit();<br>if(response.getStatus()==0){<br>return 1;<br>}<br>return 0;<br>}</li>
+</ul>
+<hr>
+<p>/**</p>
+<ul>
+<li>新增</li>
+<li>@param tbItem</li>
+<li>@return<br>*/<br>@RequestMapping(“solr/add”)<br>@ResponseBody<br>public int add(@RequestBody Map&lt;String,Object&gt; map){<br>System.out.println(map);<br>System.out.println(map.get(“item”));<br>try {<br>return<br>tbItemServiceImpl.add((LinkedHashMap)map.get(“item”),<br>map.get(“desc”).toString());<br>} catch (Exception e) {<br>e.printStackTrace();<br>}<br>return 0;<br>}</li>
+</ul>
+<hr>
+<h2 id="实现后台同步"><a href="#实现后台同步" class="headerlink" title="实现后台同步"></a>实现后台同步</h2><p>1.引入 httpclient 的依赖<br>2.添加 httpclient 依赖和 HttpClientUtil<br>工具类和在 commons.properties 添加 solr 的 url</p>
+<p>3.<br>3.1 doPostJson()设置请求头中内容类型为 json 把参数以流的<br>形式发送给服务器<br>final TbItem itemFinal = item;<br>final String descFinal = desc;<br>new Thread(){<br>public void run() {<br>Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();<br>map.put(“item”, itemFinal);<br>map.put(“desc”, descFinal);<br>HttpClientUtil.doPostJson(url,<br>JsonUtils.objectToJson(map));<br>//使用 java 代码调用其他项目的控制器<br>};</p>
+<h2 id="start"><a href="#start" class="headerlink" title="}.start();"></a>}.start();</h2><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>我们来一步一步的分析代码<br>1.我们是通过HttpClienrUntil这个工具包来实现两个服务器之间的通信。请参考httpClient的内容。如何发送url请求头，并解析响应体。<br>2.HttpClientUtil.doPostJson(url,JsonUtils.objectToJson(map));<br>这里的url是通过软编码（Value（”solr新增地址url”））private String key，JsonUtils.objectToJson(map))是指要发送的内容，并把内容转换成json格式，以流的形式传递<br>所以，我们在solr的新增controller中，接收请求体时，使用@RequestBody 把接收的流转转换为为对象。跟@ResponseBody 把对象转换为流正好相反。<br>3.由于要传递的参数有多个类，所以这里以hashmap封装。注意在取值时也要以hashmap取。接口也要改。<br>4.因为他这里录入数据库与录入solr是可以异步分开执行的，所以用多线程形式。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/01/多线程-后台新增内容-httpclient的综合应用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-httpclient" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1201,199 +1374,6 @@ public String &quot;业务方法名字&quot;() {
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/02/27/redis缓存技术/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CMS系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/27/CMS系统/">CMS系统</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/27/CMS系统/" class="archive-article-date">
-  	<time datetime="2019-02-27T01:09:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>CMS系统<br>1.需求 内容分类管理<br>2.需求 内容管理</p>
-<hr>
-<p>##第一章 把内容分类管理表中的信息以父节点插入到EasyUitree树状模型中。<br>效果图<br><img src="/2019/02/27/CMS系统/1.jpg" alt="t1"><br>1.显示一个tree。</p>
-<h2 id="List-show"><a href="#List-show" class="headerlink" title="List show();"></a>List<easyuitree> show();</easyuitree></h2><p>public List<easyuitree> showCategory(long id) {<br>        List<easyuitree> listTree = new ArrayList<easyuitree>();<br>        List<tbcontentcategory> list = tbContentCategoryDubboServiceImpl.selByPid(id);<br>        for (TbContentCategory cate : list) {<br>            EasyUiTree tree = new EasyUiTree();</tbcontentcategory></easyuitree></easyuitree></easyuitree></p>
-<pre><code>        tree.setId(cate.getId());
-        tree.setText(cate.getName());
-        tree.setState(cate.getIsParent()?&quot;closed&quot;:&quot;open&quot;);
-
-        listTree.add(tree);
-    }
-    return listTree;
-}
-</code></pre><hr>
-<p>public class TbContentCategoryDubboServiceImpl implements TbContentCategoryDubboService {<br>    @Resource<br>    private TbContentCategoryMapper tbContentCategoryMapper;</p>
-<pre><code>@Override
-public List&lt;TbContentCategory&gt; selByPid(long id) {
-    TbContentCategoryExample example = new TbContentCategoryExample();
-    example.createCriteria().andParentIdEqualTo(id).andStatusEqualTo(1);
-    return tbContentCategoryMapper.selectByExample(example);
-}
-</code></pre><hr>
-<p>需要说明的是<br>getIsParent()?”closed”:”open”为显示状态</p>
-<h2 id><a href="#" class="headerlink" title></a><img src="/2019/02/27/CMS系统/2.jpg" alt="t2"></h2><p>##第二章 新增 重命名 删除<br>前端文件：F12，寻找header，通过url，ctrl+f 查找jsp文件，发现位置<br>要注意：右键菜单事件：onContextMenu：function（e，node）//e事件类型 node节点<br>找到ajax的“success”方法，寻找大Menu方法，通过ctrl+f寻找div位置</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title></a><img src="/2019/02/27/CMS系统/3.jpg" alt="t3"></h2><p>下面是新增内容<br>可以看到，我们后端要传给前端的参数值分别由status id<br>从From Data 可以看出浏览器要传给控制器由parentId 及name<br>查询（同上） 新增（参数 内容分类管理表） 修改功能（参数 内容分类管理表）</p>
-<p>在功能的service上，根据之前，浏览器的信息可知道，我们的参数parentId 及name，也可以封装到对象使用<br>然后在实现类里面补充封装对象属性，再调用dubbo方法。<br>若新增成功，把该新增的节点的父节点赋予父节点属性。就是把右键所中的id更新为父节点。<br>判断当前节点是否已经存在，通过遍历新增节点的名字与当前父节点所有的子节点名称。是否相同。<br>若相同，则返回当前对象<br>若不同，则新增ID<br>再控制器中，返回得到的对象。</p>
-<h2 id="-2"><a href="#-2" class="headerlink" title></a><img src="/2019/02/27/CMS系统/4.jpg" alt="t4"></h2><p>修改内容<br>参数 status </p>
-<p>需求：有同名存在就修改失败，没有同名则成功。<br>创建：通过id查询内容类目所有子类目，返回的内容分类管理表。<br>首先第一步<br>查询当前节点信息 查询当前节点的父节点的所有子节点信息。遍历是否有重名。<br>进行重命名工作。返回前端需要的信息。封装。返回。<br><img src="/2019/02/27/CMS系统/5.jpg" alt="t5"></p>
-<hr>
-<p>删除内容<br>把想要删除的数据的status值变为0，判断当前节点为父节点还是子节点，若当前没有子节点，则当前父节点变为子节点。</p>
-<p>需求：把当前的文件删除。<br>相同套路，都是一样是传递对象。用对象封装浏览器所需要的信息。返回给浏览器。<br>第一步：把内容变为删除状态，再遍历当前节点的所有信息，查询父节点的<br>如果当前的父节点内容为空。（可以通过上述查询的子节点的数组长度判断）<br>新建一个对象，然后把当前父节点的id传递给新对象。新对象没有父节点。<br>若成功，则返回一个前端控制器成功的status。<br>否则返回当前对象。</p>
-<h2 id="-3"><a href="#-3" class="headerlink" title></a><img src="/2019/02/27/CMS系统/6.jpg" alt="t6"></h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/27/CMS系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jsonp使用原理及应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/jsonp使用原理及应用/">jsonp使用原理及应用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/26/jsonp使用原理及应用/" class="archive-article-date">
-  	<time datetime="2019-02-26T15:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##第一章 jsonp原理<br>1.ajax一个服务器访问另外一个服务器的js文件<br>2.但不可以访问json数据及字符串</p>
-<hr>
-<p>##第二章 把控制器返回的结果伪装成js文件<br>前端操作<br>伪装步骤：<br>1.request.setContentType(“application/x-javascript”)<br>然后就可以新建request对象对其注入信息。<br>注意：这里可以参考W3SCHOLL的webbuilding里面的MIME类型<br>MINE是藐视消息内容类型的因特网标准<br>MINE 消息能包含文本图像 音频 视频以及其他应用程序专用的数据。<br>2.直接在ajax的文件中加入datatype：’jsonp’<br>                        jsonCallback:’a’ //a是参数值 回调方法相当于理解success<br>            回调函数名。重点！！！！<br>            jsonp:’b’  //b是参数名     b=a<br>            通常b是’callback’;<br>            function a（data）{} //函数在外面jsoncallback及json必须写—</p>
-<p>重点理解：：函数名（返回数据）</p>
-<hr>
-<p>3.控制器操作：<br>String a =req.getParamater(“callback”)  //获取前端的jsonp：callback，创建函数名<br>request.setContentType(“application/x-javascript”)<br>PrintWriter out =resp.getWriter();<br>out.print(a+”(123);”); //重点：函数名（上传数据），函数名在上述第一行。</p>
-<h2 id="当服务器调用callback-’callback的值’，"><a href="#当服务器调用callback-’callback的值’，" class="headerlink" title="当服务器调用callback=’callback的值’，"></a>当服务器调用callback=’callback的值’，</h2><p>下面我们用一个实例讲解一下如何使用jsonp：<br>@RequsetMapping（）<br>@responsebody<br>public MappingJacksonValue demo(String callback){<br>    people p =new people();<br>    p.set(); p.set();<br>    MappingJacksonValue mjv = new MappingJackValue(p);<br>    mjv.setJsonFunction(callback);<br>    return mjv;<br>// 我们可以看到，我们使用一个MappingJackValue的方法来帮我们简化操作。<br>// 我们只需要把想要回传的数据放入mjv方法，再用mjv调用setJsonFunction（callback）即可<br>// 由此我们可以联想，我们可以把一推数据返回页面。嘻嘻嘻嘻</p>
-<h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p>##最终章<br>实战练习，把商城的商品分类选择页面通过ajax返回。<br>1.确定数据类型（pojo）<br>从前端的文件，看出数据要返回的类型为：u  n  i（）<br>分别是String String List<object>类型<br>2.确定递归方法显示页面（service）<br> 2.1根据父类木id查询所有子类目 比如：通过电器类——电视 冰箱等等<br> 2.2查询类目id查询<br>3.具体实现类</object></p>
-<hr>
-<p>具体实现方法及解析<br>@Service<br>public class TbItemCatServiceImpl implements TbItemCatService {<br>    @Reference<br>    private TbItemCatDubboService tbItemCatDubboServiceImpl;<br>    @Override<br>    public PortalMenu showCatMenu() {<br>        //查询出所有一级菜单<br>        List<tbitemcat> list = tbItemCatDubboServiceImpl.show(0);<br>        PortalMenu pm =new PortalMenu();<br>        pm.setData(selAllMenu(list));<br>        return pm;<br>    }<br>    /**</tbitemcat></p>
-<pre><code> * 最终返回结果所有查询到的结果.
- */
-public List&lt;Object&gt; selAllMenu(List&lt;TbItemCat&gt; list){
-    List&lt;Object&gt; listNode = new ArrayList&lt;&gt;();
-    for (TbItemCat tbItemCat : list) {
-        if(tbItemCat.getIsParent()){
-            PortalMenuNode pmd  = new PortalMenuNode();
-            pmd.setU(&quot;/products/&quot;+tbItemCat.getId()+&quot;.html&quot;);
-            pmd.setN(&quot;&lt;a href=&apos;/products/&quot;+tbItemCat.getId()+&quot;.html&apos;&gt;&quot;+tbItemCat.getName()+&quot;&lt;/a&gt;&quot;);
-            pmd.setI(selAllMenu(tbItemCatDubboServiceImpl.show(tbItemCat.getId())));
-            listNode.add(pmd);
-        }else{
-            listNode.add(&quot;/products/&quot;+tbItemCat.getId()+&quot;.html|&quot;+tbItemCat.getName());
-        }
-    }
-</code></pre><hr>
-<p>控制器写法：<br>@Controller<br>public class TbItemCatController {<br>    @Resource<br>    private TbItemCatService tbItemCatServiceImpl;<br>    /**</p>
-<pre><code> * 返回jsonp数据格式包含所有菜单信息
- * @param callback
- * @return
- */
-@RequestMapping(&quot;rest/itemcat/all&quot;)
-@ResponseBody
-public MappingJacksonValue showMenu(String callback){
-    MappingJacksonValue mjv = new MappingJacksonValue(tbItemCatServiceImpl.showCatMenu());
-    mjv.setJsonpFunction(callback);
-    return mjv;
-}
-</code></pre><h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>最终显示效果:::<br><img src="/2019/02/26/jsonp使用原理及应用/1.jpg" alt="t"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/26/jsonp使用原理及应用/">展开全文 >></a>
         </p>
       
 
